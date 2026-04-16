@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mokri IT Company</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f8fafc;
+      --primary: #0f172a;
+      --accent: #2563eb;
+      --surface: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), #1e3a8a);
+      color: #fff;
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+    }
+
+    h1, h2 { margin-top: 0; }
+
+    .lead {
+      max-width: 720px;
+      margin: 0.75rem auto 0;
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid #dbeafe;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+    }
+
+    .muted { color: var(--muted); }
+
+    .cta {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      padding: 0.7rem 1.2rem;
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 1.5rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Mokri IT Company</h1>
+    <p class="lead">Reliable IT support and technology services designed for small and medium-sized businesses.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>What We Do</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Managed IT Support</h3>
+          <p>Proactive monitoring, maintenance, and troubleshooting to keep your team productive.</p>
+        </article>
+        <article class="card">
+          <h3>Cybersecurity</h3>
+          <p>Security hardening, endpoint protection, and backup strategies tailored for growing companies.</p>
+        </article>
+        <article class="card">
+          <h3>Cloud & Collaboration</h3>
+          <p>Cloud migrations, Microsoft 365/Google Workspace setup, and remote work optimization.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Why Small and Medium Businesses Choose Us</h2>
+      <p class="muted">We provide practical, affordable IT solutions that scale with your business without enterprise-level complexity.</p>
+    </section>
+
+    <section class="cta">
+      <h2>Need IT Support?</h2>
+      <p>Let Mokri become your trusted technology partner.</p>
+      <a class="btn" href="mailto:hello@mokri.example">Contact Us</a>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Mokri IT Company. All rights reserved.
+  </footer>
+</body>
+</html>
