@@ -1,136 +1,781 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ka">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mokri IT Company</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --bg: #f8fafc;
-      --primary: #0f172a;
-      --accent: #2563eb;
-      --surface: #ffffff;
-      --text: #1f2937;
-      --muted: #6b7280;
-    }
+  <meta name="description" content="Mokri — Enterprise IT Solutions for Small & Medium Business" />
+  <title>Mokri — IT Solutions</title>
 
-    * { box-sizing: border-box; }
+  <!-- ===================== FONTS ===================== -->
+  <!-- Syne: geometric display font (Latin + Cyrillic) -->
+  <!-- Figtree: clean body font                        -->
+  <!-- Noto Sans Georgian: Georgian script fallback    -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Noto+Sans+Georgian:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- ===================== TAILWIND CSS ===================== -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink:    { 950: '#03060d', 900: '#060b16', 800: '#0a1020', 700: '#0f1830' },
+            sky:    { 400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb' },
+            silver: { 100: '#f0f4ff', 200: '#d6dff5', 500: '#8898b8' }
+          },
+          fontFamily: {
+            display: ['"Syne"', '"Noto Sans Georgian"', 'sans-serif'],
+            body:    ['"Figtree"', '"Noto Sans Georgian"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- ===================== CUSTOM CSS ===================== -->
+  <style>
+    /* ---------- Base ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      font-family: 'Figtree', 'Noto Sans Georgian', sans-serif;
+      background-color: #060b16;
+      color: #d6dff5;
+      -webkit-font-smoothing: antialiased;
     }
 
-    header {
-      background: linear-gradient(135deg, var(--primary), #1e3a8a);
+    /* ---------- Background Textures ---------- */
+    .dot-grid {
+      background-image: radial-gradient(circle, rgba(96,165,250,0.12) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    .noise-overlay::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    /* ---------- Glowing Orbs (Hero decoration) ---------- */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .orb-a {
+      width: 640px; height: 640px;
+      background: radial-gradient(circle, rgba(59,130,246,0.14) 0%, transparent 65%);
+      top: -120px; right: -160px;
+      animation: drift 9s ease-in-out infinite;
+    }
+    .orb-b {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(99,102,241,0.10) 0%, transparent 65%);
+      bottom: 40px; left: -80px;
+      animation: drift 12s ease-in-out infinite reverse;
+    }
+    @keyframes drift {
+      0%,100% { transform: translateY(0) scale(1); }
+      50%      { transform: translateY(-28px) scale(1.04); }
+    }
+
+    /* ---------- Glass Cards ---------- */
+    .glass-card {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: background 0.35s, border-color 0.35s, transform 0.35s, box-shadow 0.35s;
+    }
+    .glass-card:hover {
+      background: rgba(59,130,246,0.07);
+      border-color: rgba(96,165,250,0.28);
+      transform: translateY(-5px);
+      box-shadow: 0 24px 64px rgba(59,130,246,0.10);
+    }
+
+    /* ---------- Icon Box ---------- */
+    .icon-box {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.18), rgba(37,99,235,0.08));
+      border: 1px solid rgba(96,165,250,0.20);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ---------- Number Badge (Why Us) ---------- */
+    .num-badge {
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(59,130,246,0.14), rgba(37,99,235,0.04));
+      border: 1px solid rgba(96,165,250,0.22);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 17px;
+      color: #60a5fa;
+      flex-shrink: 0;
+    }
+
+    /* ---------- Accent Line ---------- */
+    .accent-line {
+      width: 44px; height: 3px;
+      background: linear-gradient(90deg, #3b82f6, #818cf8);
+      border-radius: 99px;
+    }
+
+    /* ---------- Horizontal Divider ---------- */
+    .h-div {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
+    }
+
+    /* ---------- Primary Button ---------- */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
       color: #fff;
-      padding: 4rem 1.5rem;
-      text-align: center;
-    }
-
-    main {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem 3rem;
-    }
-
-    h1, h2 { margin-top: 0; }
-
-    .lead {
-      max-width: 720px;
-      margin: 0.75rem auto 0;
-      font-size: 1.1rem;
-      opacity: 0.95;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid #dbeafe;
-      border-radius: 10px;
-      padding: 1rem;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
-    }
-
-    .muted { color: var(--muted); }
-
-    .cta {
-      margin-top: 2rem;
-      text-align: center;
-    }
-
-    .btn {
-      display: inline-block;
+      padding: 14px 30px;
+      border-radius: 6px;
+      font-family: 'Figtree', 'Noto Sans Georgian', sans-serif;
+      font-weight: 600; font-size: 15px;
+      letter-spacing: 0.01em;
       text-decoration: none;
-      background: var(--accent);
-      color: #fff;
-      border-radius: 8px;
-      padding: 0.7rem 1.2rem;
-      font-weight: 600;
+      border: none; cursor: pointer;
+      box-shadow: 0 4px 24px rgba(59,130,246,0.28);
+      transition: background 0.3s, box-shadow 0.3s, transform 0.25s;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+      box-shadow: 0 8px 36px rgba(59,130,246,0.45);
+      transform: translateY(-2px);
     }
 
-    footer {
-      text-align: center;
-      color: var(--muted);
-      padding: 1.5rem;
-      font-size: 0.9rem;
+    /* ---------- Navigation Links ---------- */
+    .nav-link {
+      font-size: 14px; font-weight: 500; letter-spacing: 0.01em;
+      color: rgba(214,223,245,0.65);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: #f0f4ff; }
+
+    /* ---------- Language Switcher ---------- */
+    .lang-wrap {
+      display: flex; align-items: center;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .lang-sep { width: 1px; height: 20px; background: rgba(255,255,255,0.10); }
+    .lang-btn {
+      padding: 5px 10px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.08em;
+      color: rgba(214,223,245,0.45);
+      background: none; border: none; cursor: pointer;
+      transition: color 0.2s, background 0.2s;
+      font-family: 'Syne', sans-serif;
+    }
+    .lang-btn:hover { color: #d6dff5; }
+    .lang-btn.active {
+      color: #60a5fa;
+      background: rgba(96,165,250,0.08);
+    }
+
+    /* ---------- Header Scroll State ---------- */
+    #header {
+      transition: background 0.35s, backdrop-filter 0.35s, border-color 0.35s;
+    }
+    #header.scrolled {
+      background: rgba(6,11,22,0.92) !important;
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    /* ---------- Mobile Menu ---------- */
+    #mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    #mobile-menu.open { max-height: 240px; }
+
+    /* ---------- Scroll Reveal ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(.22,.61,.36,1),
+                  transform 0.75s cubic-bezier(.22,.61,.36,1);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* ---------- Scroll Down Arrow ---------- */
+    @keyframes bob {
+      0%,100% { transform: translateY(0); }
+      55%      { transform: translateY(9px); }
+    }
+    .bob { animation: bob 2s ease-in-out infinite; }
+
+    /* ---------- Top beam ---------- */
+    .top-beam {
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent 0%, #3b82f6 35%, #818cf8 65%, transparent 100%);
+    }
+
+    /* ---------- Responsive overrides ---------- */
+    @media (max-width: 767px) {
+      .orb-a { width: 320px; height: 320px; }
+      .orb-b { width: 220px; height: 220px; }
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>Mokri IT Company</h1>
-    <p class="lead">Reliable IT support and technology services designed for small and medium-sized businesses.</p>
-  </header>
 
-  <main>
-    <section>
-      <h2>What We Do</h2>
-      <div class="grid">
-        <article class="card">
-          <h3>Managed IT Support</h3>
-          <p>Proactive monitoring, maintenance, and troubleshooting to keep your team productive.</p>
-        </article>
-        <article class="card">
-          <h3>Cybersecurity</h3>
-          <p>Security hardening, endpoint protection, and backup strategies tailored for growing companies.</p>
-        </article>
-        <article class="card">
-          <h3>Cloud & Collaboration</h3>
-          <p>Cloud migrations, Microsoft 365/Google Workspace setup, and remote work optimization.</p>
-        </article>
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header id="header" class="fixed top-0 left-0 right-0 z-50 py-4">
+  <div class="max-w-6xl mx-auto px-5 flex items-center justify-between gap-6">
+
+    <!-- Logo -->
+    <a href="#" class="font-display shrink-0"
+       style="font-size:1.55rem; font-weight:800; letter-spacing:-0.03em; color:#f0f4ff; text-decoration:none;">
+      MOK<span style="color:#60a5fa;">RI</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="#services"  class="nav-link" data-key="nav_services"></a>
+      <a href="#whyus"     class="nav-link" data-key="nav_advantages"></a>
+      <a href="#contact"   class="nav-link" data-key="nav_contacts"></a>
+    </nav>
+
+    <!-- Right controls -->
+    <div class="flex items-center gap-3">
+
+      <!-- Language switcher -->
+      <div class="lang-wrap" role="group" aria-label="Language selector">
+        <button class="lang-btn active" data-lang="ge" aria-label="Georgian">GE</button>
+        <div class="lang-sep" aria-hidden="true"></div>
+        <button class="lang-btn" data-lang="ru" aria-label="Russian">RU</button>
+        <div class="lang-sep" aria-hidden="true"></div>
+        <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
       </div>
-    </section>
 
-    <section>
-      <h2>Why Small and Medium Businesses Choose Us</h2>
-      <p class="muted">We provide practical, affordable IT solutions that scale with your business without enterprise-level complexity.</p>
-    </section>
+      <!-- Hamburger (mobile) -->
+      <button id="hamburger" class="md:hidden text-white focus:outline-none" aria-label="Toggle menu" aria-expanded="false">
+        <svg id="ham-icon" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="2" y1="5"  x2="20" y2="5"  class="ham-line"/>
+          <line x1="2" y1="11" x2="20" y2="11" class="ham-line"/>
+          <line x1="2" y1="17" x2="20" y2="17" class="ham-line"/>
+        </svg>
+      </button>
+    </div>
+  </div>
 
-    <section class="cta" id="get-started">
-      <h2>Need IT Support?</h2>
-      <p>Let Mokri become your trusted technology partner.</p>
-      <a class="btn" href="#contact">Get Started</a>
-    </section>
+  <!-- Mobile dropdown menu -->
+  <div id="mobile-menu" style="background:rgba(6,11,22,0.98); border-top:1px solid rgba(255,255,255,0.07);">
+    <div class="max-w-6xl mx-auto px-5 py-5 flex flex-col gap-5">
+      <a href="#services"  class="nav-link text-base" data-key="nav_services"></a>
+      <a href="#whyus"     class="nav-link text-base" data-key="nav_advantages"></a>
+      <a href="#contact"   class="nav-link text-base" data-key="nav_contacts"></a>
+    </div>
+  </div>
+</header>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <p class="muted">Tell us about your business needs and we will prepare a support plan for your team.</p>
-    </section>
-  </main>
 
-  <footer>
-    © 2026 Mokri IT Company. All rights reserved.
-  </footer>
+<!-- ============================================================
+     HERO SECTION
+     ============================================================ -->
+<section class="relative min-h-screen dot-grid noise-overlay flex items-center overflow-hidden"
+         style="background-color:#03060d;">
+
+  <div class="top-beam"></div>
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+
+  <!-- Grid accent lines (decorative) -->
+  <div style="position:absolute;top:0;bottom:0;left:50%;width:1px;background:rgba(255,255,255,0.025);pointer-events:none;"></div>
+  <div style="position:absolute;top:0;bottom:0;left:25%;width:1px;background:rgba(255,255,255,0.018);pointer-events:none;"></div>
+  <div style="position:absolute;top:0;bottom:0;left:75%;width:1px;background:rgba(255,255,255,0.018);pointer-events:none;"></div>
+
+  <div class="relative w-full max-w-6xl mx-auto px-5 pt-36 pb-28">
+    <div class="max-w-3xl">
+
+      <!-- Eyebrow label -->
+      <div class="reveal flex items-center gap-3 mb-8" style="transition-delay:0.05s;">
+        <div style="width:30px;height:1px;background:#3b82f6;"></div>
+        <span style="font-size:11px;font-weight:700;letter-spacing:0.14em;color:#60a5fa;text-transform:uppercase;"
+              data-key="hero_tag"></span>
+      </div>
+
+      <!-- Main heading -->
+      <h1 class="reveal font-display mb-7"
+          style="font-size:clamp(2.2rem,5.5vw,4.2rem);font-weight:800;line-height:1.08;letter-spacing:-0.025em;color:#f0f4ff;transition-delay:0.15s;"
+          data-key="hero_title"></h1>
+
+      <!-- Subtitle -->
+      <p class="reveal mb-11"
+         style="font-size:clamp(0.97rem,1.8vw,1.13rem);line-height:1.8;color:rgba(214,223,245,0.58);max-width:540px;transition-delay:0.28s;"
+         data-key="hero_subtitle"></p>
+
+      <!-- CTA Button -->
+      <div class="reveal" style="transition-delay:0.42s;">
+        <a href="#contact" class="btn-primary" data-key="hero_cta">
+          <span data-key="hero_cta"></span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="3" y1="8" x2="13" y2="8"/>
+            <polyline points="9,4 13,8 9,12"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="bob absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1"
+         style="color:rgba(214,223,245,0.22);">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <line x1="9" y1="2" x2="9" y2="14"/>
+        <polyline points="5,10 9,14 13,10"/>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SERVICES SECTION
+     ============================================================ -->
+<section id="services" class="py-28" style="background-color:#060b16;">
+  <div class="max-w-6xl mx-auto px-5">
+
+    <!-- Section header -->
+    <div class="reveal mb-16">
+      <div class="accent-line mb-5"></div>
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-3" data-key="services_title"></h2>
+      <p class="text-sm md:text-base" style="color:rgba(214,223,245,0.45);" data-key="services_subtitle"></p>
+    </div>
+
+    <!-- 2×2 Grid -->
+    <div class="grid sm:grid-cols-2 gap-5">
+
+      <!-- Card 1 — Server Infrastructure -->
+      <article class="reveal glass-card rounded-2xl p-8" style="transition-delay:0.08s;">
+        <div class="icon-box mb-6">
+          <!-- Server icon -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="8" rx="2"/>
+            <rect x="2" y="14" width="20" height="8" rx="2"/>
+            <circle cx="6" cy="6" r="1" fill="#60a5fa" stroke="none"/>
+            <circle cx="6" cy="18" r="1" fill="#60a5fa" stroke="none"/>
+          </svg>
+        </div>
+        <h3 class="font-display text-lg text-white mb-3" style="font-weight:700;" data-key="s1_title"></h3>
+        <p class="text-sm leading-relaxed" style="color:rgba(214,223,245,0.55);" data-key="s1_desc"></p>
+      </article>
+
+      <!-- Card 2 — Backup & Recovery -->
+      <article class="reveal glass-card rounded-2xl p-8" style="transition-delay:0.18s;">
+        <div class="icon-box mb-6">
+          <!-- Cloud upload icon -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 16 12 12 8 16"/>
+            <line x1="12" y1="12" x2="12" y2="21"/>
+            <path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/>
+          </svg>
+        </div>
+        <h3 class="font-display text-lg text-white mb-3" style="font-weight:700;" data-key="s2_title"></h3>
+        <p class="text-sm leading-relaxed" style="color:rgba(214,223,245,0.55);" data-key="s2_desc"></p>
+      </article>
+
+      <!-- Card 3 — Information Security -->
+      <article class="reveal glass-card rounded-2xl p-8" style="transition-delay:0.28s;">
+        <div class="icon-box mb-6">
+          <!-- Shield icon -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <polyline points="9 12 11 14 15 10"/>
+          </svg>
+        </div>
+        <h3 class="font-display text-lg text-white mb-3" style="font-weight:700;" data-key="s3_title"></h3>
+        <p class="text-sm leading-relaxed" style="color:rgba(214,223,245,0.55);" data-key="s3_desc"></p>
+      </article>
+
+      <!-- Card 4 — IT Outsourcing -->
+      <article class="reveal glass-card rounded-2xl p-8" style="transition-delay:0.38s;">
+        <div class="icon-box mb-6">
+          <!-- Monitor / support icon -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="13" rx="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="16" x2="12" y2="21"/>
+          </svg>
+        </div>
+        <h3 class="font-display text-lg text-white mb-3" style="font-weight:700;" data-key="s4_title"></h3>
+        <p class="text-sm leading-relaxed" style="color:rgba(214,223,245,0.55);" data-key="s4_desc"></p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<div class="h-div"></div>
+
+
+<!-- ============================================================
+     WHY US SECTION
+     ============================================================ -->
+<section id="whyus" class="py-28 dot-grid" style="background-color:#04080f;">
+  <div class="max-w-6xl mx-auto px-5">
+
+    <!-- Section header -->
+    <div class="reveal mb-16">
+      <div class="accent-line mb-5"></div>
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-3" data-key="why_title"></h2>
+      <p class="text-sm md:text-base" style="color:rgba(214,223,245,0.45);" data-key="why_subtitle"></p>
+    </div>
+
+    <!-- Three columns -->
+    <div class="grid md:grid-cols-3 gap-10">
+
+      <div class="reveal flex flex-col gap-5" style="transition-delay:0.08s;">
+        <div class="num-badge">01</div>
+        <div>
+          <h3 class="font-display text-lg font-bold text-white mb-3" data-key="w1_title"></h3>
+          <p class="text-sm leading-relaxed" style="color:rgba(214,223,245,0.52);" data-key="w1_desc"></p>
+        </div>
+      </div>
+
+      <div class="reveal flex flex-col gap-5" style="transition-delay:0.20s;">
+        <!-- Thin vertical separator on desktop -->
+        <div class="num-badge">02</div>
+        <div>
+          <h3 class="font-display text-lg font-bold text-white mb-3" data-key="w2_title"></h3>
+          <p class="text-sm leading-relaxed" style="color:rgba(214,223,245,0.52);" data-key="w2_desc"></p>
+        </div>
+      </div>
+
+      <div class="reveal flex flex-col gap-5" style="transition-delay:0.32s;">
+        <div class="num-badge">03</div>
+        <div>
+          <h3 class="font-display text-lg font-bold text-white mb-3" data-key="w3_title"></h3>
+          <p class="text-sm leading-relaxed" style="color:rgba(214,223,245,0.52);" data-key="w3_desc"></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<div class="h-div"></div>
+
+
+<!-- ============================================================
+     CTA BAND + FOOTER
+     ============================================================ -->
+<footer id="contact" style="background-color:#060b16;">
+
+  <!-- CTA Band -->
+  <div class="relative overflow-hidden py-24"
+       style="background:linear-gradient(135deg,#0a1020 0%,#0f1830 100%);">
+    <div class="absolute inset-0 dot-grid opacity-40"></div>
+
+    <!-- Decorative circle glow -->
+    <div style="position:absolute;width:600px;height:600px;border-radius:50%;
+                background:radial-gradient(circle,rgba(59,130,246,0.10) 0%,transparent 60%);
+                top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;"></div>
+
+    <div class="relative max-w-2xl mx-auto px-5 text-center">
+      <div class="reveal">
+
+        <div class="inline-flex items-center gap-2 mb-7 px-4 py-2 rounded-full"
+             style="background:rgba(59,130,246,0.10);border:1px solid rgba(96,165,250,0.20);">
+          <div style="width:7px;height:7px;border-radius:50%;background:#3b82f6;
+                      box-shadow:0 0 8px rgba(59,130,246,0.8);animation:pulse 2s ease-in-out infinite;"></div>
+          <span style="font-size:12px;font-weight:600;letter-spacing:0.08em;color:#60a5fa;" data-key="cta_badge"></span>
+        </div>
+
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-5"
+            data-key="cta_title"></h2>
+        <p class="text-base mb-9" style="color:rgba(214,223,245,0.55);"
+           data-key="cta_subtitle"></p>
+        <a href="mailto:info@mokri.ge" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          info@mokri.ge
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer bottom bar -->
+  <div class="py-7" style="border-top:1px solid rgba(255,255,255,0.06);">
+    <div class="max-w-6xl mx-auto px-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+
+      <!-- Logo -->
+      <a href="#" class="font-display"
+         style="font-size:1.35rem;font-weight:800;letter-spacing:-0.03em;color:#f0f4ff;text-decoration:none;">
+        MOK<span style="color:#60a5fa;">RI</span>
+      </a>
+
+      <!-- Copyright -->
+      <p class="text-xs order-last sm:order-none" style="color:rgba(214,223,245,0.30);"
+         data-key="footer_copy"></p>
+
+      <!-- Email -->
+      <a href="mailto:info@mokri.ge" class="text-sm"
+         style="color:rgba(214,223,245,0.42);transition:color 0.2s;text-decoration:none;"
+         onmouseover="this.style.color='#60a5fa'" onmouseout="this.style.color='rgba(214,223,245,0.42)'">
+        info@mokri.ge
+      </a>
+
+    </div>
+  </div>
+</footer>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+/* ----------------------------------------------------------
+   1. TRANSLATIONS DICTIONARY
+   All texts in Georgian (GE), Russian (RU), English (EN).
+   ---------------------------------------------------------- */
+const DICT = {
+  ge: {
+    // Header navigation
+    nav_services:    'სერვისები',
+    nav_advantages:  'უპირატესობები',
+    nav_contacts:    'კონტაქტი',
+
+    // Hero
+    hero_tag:      'Enterprise IT გადაწყვეტილებები',
+    hero_title:    'საიმედო IT ინფრასტრუქტურა<br><span style="color:#60a5fa;">თქვენი ბიზნესისთვის</span>',
+    hero_subtitle: 'პროფესიონალური ადმინისტრირება, უსაფრთხოება და მხარდაჭერა მცირე და საშუალო კომპანიებისთვის. ვმუშაობთ ისე, რომ თქვენ ტექნიკური პრობლემები დაგავიწყდეთ.',
+    hero_cta:      'კონსულტაციის მიღება',
+
+    // Services section
+    services_title:    'ჩვენი სერვისები',
+    services_subtitle: 'Enterprise-დონის გადაწყვეტილებები ხელმისაწვდომ ფასად',
+    s1_title: 'სერვერული ინფრასტრუქტურა',
+    s1_desc:  'სერვერების კონფიგურაცია და მხარდაჭერა, ვირტუალიზაცია (Proxmox, VMware ESXi).',
+    s2_title: 'სარეზერვო კოპირება და აღდგენა',
+    s2_desc:  'მონაცემების საიმედო დაცვა დანაკარგებისა და დაშიფვრის პროგრამებისგან (Veeam Backup & Replication).',
+    s3_title: 'ინფორმაციული უსაფრთხოება',
+    s3_desc:  'Zero-Knowledge არქიტექტურის დანერგვა, კორპორატიული მონაცემების დაცვა, მკაცრი ავთენტიფიკაციის კონფიგურაცია — მათ შორის აპარატული გასაღებები.',
+    s4_title: 'IT-აუთსორსინგი',
+    s4_desc:  'თქვენი ოფისისა და კორპორატიული ფოსტის სრული ტექნიკური მხარდაჭერა.',
+
+    // Why Us section
+    why_title:    'რატომ ჩვენ',
+    why_subtitle: 'სამი მიზეზი, რის გამოც ჩვენი კლიენტები გვენდობიან',
+    w1_title: 'Enterprise სტანდარტები მცირე ბიზნესისთვის',
+    w1_desc:  'ვნერგავთ ტექნოლოგიებსა და პრაქტიკებს, რომლებსაც დიდი კორპორაციები იყენებენ — თქვენი ბიუჯეტის ფარგლებში.',
+    w2_title: 'გამჭვირვალობა და სრული კონფიდენციალობა',
+    w2_desc:  'თქვენი მონაცემები მხოლოდ თქვენია. ვაშენებთ სისტემებს ისე, რომ წვდომა ჰქონდეს მხოლოდ ავტორიზებულ პირებს.',
+    w3_title: 'ინდივიდუალური არქიტექტურა',
+    w3_desc:  'ჩვენ არ ვყიდით შაბლონებს. თითოეული კლიენტი იღებს გადაწყვეტილებას, რომელიც სპეციალურად მისი საჭიროებებისთვის შემუშავებულია.',
+
+    // CTA & Footer
+    cta_badge:    'გამართულია მუშაობა',
+    cta_title:    'მზად ხართ ინფრასტრუქტურის გასაუმჯობესებლად?',
+    cta_subtitle: 'დაგვიკავშირდით — ჩვენი სპეციალისტი შეაფასებს თქვენს სიტუაციას სრულიად უფასოდ.',
+    footer_copy:  '© 2026 Mokri. All rights reserved.',
+  },
+
+  ru: {
+    nav_services:    'Услуги',
+    nav_advantages:  'Преимущества',
+    nav_contacts:    'Контакты',
+
+    hero_tag:      'Enterprise IT Решения',
+    hero_title:    'Надёжная ИТ-инфраструктура<br><span style="color:#60a5fa;">для вашего бизнеса</span>',
+    hero_subtitle: 'Профессиональное администрирование, безопасность и поддержка малых и средних компаний. Работаем так, чтобы вы забыли о технических проблемах.',
+    hero_cta:      'Получить консультацию',
+
+    services_title:    'Наши услуги',
+    services_subtitle: 'Решения уровня Enterprise по доступной цене',
+    s1_title: 'Серверная инфраструктура',
+    s1_desc:  'Настройка и поддержка серверов, виртуализация (Proxmox, VMware ESXi).',
+    s2_title: 'Резервное копирование и восстановление',
+    s2_desc:  'Надёжная защита данных от потерь и шифровальщиков (Veeam Backup & Replication).',
+    s3_title: 'Информационная безопасность',
+    s3_desc:  'Внедрение Zero-Knowledge архитектуры, защита корпоративных данных, настройка строгой аутентификации — включая аппаратные ключи.',
+    s4_title: 'ИТ-аутсорсинг',
+    s4_desc:  'Полное техническое сопровождение вашего офиса и корпоративной почты.',
+
+    why_title:    'Почему мы',
+    why_subtitle: 'Три причины, по которым нам доверяют',
+    w1_title: 'Enterprise-стандарты для малого бизнеса',
+    w1_desc:  'Внедряем технологии и практики крупных корпораций — в рамках вашего бюджета.',
+    w2_title: 'Прозрачность и полная конфиденциальность',
+    w2_desc:  'Ваши данные — только ваши. Строим системы так, что доступ имеют исключительно авторизованные лица.',
+    w3_title: 'Индивидуальная архитектура',
+    w3_desc:  'Мы не продаём шаблоны. Каждый клиент получает решение, разработанное специально под его потребности.',
+
+    cta_badge:    'Принимаем заявки',
+    cta_title:    'Готовы улучшить вашу инфраструктуру?',
+    cta_subtitle: 'Свяжитесь с нами — наш специалист оценит вашу ситуацию совершенно бесплатно.',
+    footer_copy:  '© 2026 Mokri. All rights reserved.',
+  },
+
+  en: {
+    nav_services:    'Services',
+    nav_advantages:  'Advantages',
+    nav_contacts:    'Contact',
+
+    hero_tag:      'Enterprise IT Solutions',
+    hero_title:    'Reliable IT Infrastructure<br><span style="color:#60a5fa;">for Your Business</span>',
+    hero_subtitle: 'Professional administration, security, and support for small and medium-sized companies. We work so you can forget about technical problems.',
+    hero_cta:      'Get a Consultation',
+
+    services_title:    'Our Services',
+    services_subtitle: 'Enterprise-grade solutions at an accessible price',
+    s1_title: 'Server Infrastructure',
+    s1_desc:  'Server configuration and support, virtualization (Proxmox, VMware ESXi).',
+    s2_title: 'Backup & Recovery',
+    s2_desc:  'Reliable data protection against loss and ransomware (Veeam Backup & Replication).',
+    s3_title: 'Information Security',
+    s3_desc:  'Zero-Knowledge architecture implementation, corporate data protection, strong authentication setup — including hardware security keys.',
+    s4_title: 'IT Outsourcing',
+    s4_desc:  'Full technical support for your office and corporate email.',
+
+    why_title:    'Why Us',
+    why_subtitle: 'Three reasons our clients trust us',
+    w1_title: 'Enterprise Standards for Small Business',
+    w1_desc:  'We implement technologies and practices used by large corporations — within your budget.',
+    w2_title: 'Transparency & Full Confidentiality',
+    w2_desc:  'Your data belongs only to you. We build systems so that only authorized parties have access.',
+    w3_title: 'Individual Architecture',
+    w3_desc:  "We don't sell templates. Every client receives a solution developed specifically for their needs.",
+
+    cta_badge:    'Now accepting inquiries',
+    cta_title:    'Ready to Improve Your Infrastructure?',
+    cta_subtitle: 'Contact us and our specialist will assess your situation completely free of charge.',
+    footer_copy:  '© 2026 Mokri. All rights reserved.',
+  }
+};
+
+
+/* ----------------------------------------------------------
+   2. APPLY LANGUAGE — updates all [data-key] elements
+   ---------------------------------------------------------- */
+const HTML_LANG_MAP = { ge: 'ka', ru: 'ru', en: 'en' };
+let activeLang = 'ge';
+
+function applyLang(lang) {
+  activeLang = lang;
+  const dict = DICT[lang];
+
+  // Update text / innerHTML for every tagged element
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.getAttribute('data-key');
+    if (dict[key] !== undefined) {
+      el.innerHTML = dict[key];
+    }
+  });
+
+  // Sync lang-btn active states
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+
+  // Update <html lang="...">
+  document.documentElement.lang = HTML_LANG_MAP[lang] || lang;
+}
+
+// Attach click handlers to language buttons
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+});
+
+// Set default language on page load (Georgian)
+applyLang('ge');
+
+
+/* ----------------------------------------------------------
+   3. HEADER — background change on scroll
+   ---------------------------------------------------------- */
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 64);
+}, { passive: true });
+
+
+/* ----------------------------------------------------------
+   4. SCROLL REVEAL — IntersectionObserver
+   ---------------------------------------------------------- */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      // Once revealed, stop observing to save resources
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.12,
+  rootMargin: '0px 0px -50px 0px'
+});
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+
+/* ----------------------------------------------------------
+   5. MOBILE HAMBURGER MENU
+   ---------------------------------------------------------- */
+const hamburger   = document.getElementById('hamburger');
+const mobileMenu  = document.getElementById('mobile-menu');
+
+hamburger.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded', isOpen);
+});
+
+// Close on nav-link click
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  });
+});
+
+// Close when clicking outside header
+document.addEventListener('click', e => {
+  if (!header.contains(e.target)) {
+    mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+});
+
+
+/* ----------------------------------------------------------
+   6. PULSE ANIMATION for CTA badge dot (CSS keyframe in JS)
+   ---------------------------------------------------------- */
+const pulseStyle = document.createElement('style');
+pulseStyle.textContent = `
+  @keyframes pulse {
+    0%,100% { opacity:1; box-shadow:0 0 8px rgba(59,130,246,0.8); }
+    50%      { opacity:0.6; box-shadow:0 0 16px rgba(59,130,246,0.5); }
+  }
+`;
+document.head.appendChild(pulseStyle);
+</script>
+
 </body>
 </html>
