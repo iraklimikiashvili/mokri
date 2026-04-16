@@ -1,6 +1,6 @@
 # mokri
 
-Simple static website for **Mokri IT Company**, focused on IT support services for small and medium-sized businesses.
+Simple static **To-Do List** web app built with pure HTML, CSS and vanilla JavaScript.
 
 ## Run locally
 
