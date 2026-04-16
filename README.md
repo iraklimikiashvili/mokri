@@ -4,4 +4,4 @@ Simple static website for **Mokri IT Company**, focused on IT support services f
 
 ## Run locally
 
-Open `/home/runner/work/mokri/mokri/index.html` in a browser.
+Open `index.html` in a browser.
