@@ -230,6 +230,14 @@
     }
 
     /* ---------- Logo ---------- */
+    :root {
+      --logo-header-size-min: 54px;
+      --logo-header-size-fluid: 8vw;
+      --logo-header-size-max: 76px;
+      --logo-footer-size-min: 46px;
+      --logo-footer-size-fluid: 6vw;
+      --logo-footer-size-max: 60px;
+    }
     .site-logo-link {
       display: inline-flex;
       align-items: center;
@@ -244,8 +252,8 @@
       max-width: 100%;
       object-fit: contain;
     }
-    .site-logo--header { height: clamp(54px, 8vw, 76px); }
-    .site-logo--footer { height: clamp(46px, 6vw, 60px); }
+    .site-logo--header { height: clamp(var(--logo-header-size-min), var(--logo-header-size-fluid), var(--logo-header-size-max)); }
+    .site-logo--footer { height: clamp(var(--logo-footer-size-min), var(--logo-footer-size-fluid), var(--logo-footer-size-max)); }
 
     /* ---------- Responsive overrides ---------- */
     @media (max-width: 767px) {
