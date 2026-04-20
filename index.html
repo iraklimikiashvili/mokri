@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Mokri - IT Outsourcing for Small & Medium Business" />
   <title>Mokri - IT Outsourcing</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect x='1' y='1' width='30' height='30' rx='8' fill='%230a1020'/%3E%3Cpath d='M16 2l10 4v8c0 7-4 12-10 16C10 26 6 21 6 14V6l10-4z' fill='%23fff'/%3E%3Cpath d='M12 10h6v2h-6zM18 10h2v8h-2zM10 18h8v2h-8zM8 14h4v2H8zM18 20h6v2h-6z' fill='%233b82f6'/%3E%3Ccircle cx='10' cy='15' r='1.2' fill='%233b82f6'/%3E%3Ccircle cx='19' cy='11' r='1.2' fill='%233b82f6'/%3E%3Ccircle cx='19' cy='21' r='1.2' fill='%233b82f6'/%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo-icon.svg" />
 
   <!-- ===================== FONTS ===================== -->
   <!-- Syne: geometric display font (Latin + Cyrillic) -->
@@ -229,6 +229,24 @@
       background: linear-gradient(90deg, transparent 0%, #3b82f6 35%, #818cf8 65%, transparent 100%);
     }
 
+    /* ---------- Logo ---------- */
+    .site-logo-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      line-height: 0;
+    }
+    .site-logo {
+      display: block;
+      height: 100%;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+    }
+    .site-logo--header { height: clamp(54px, 8vw, 76px); }
+    .site-logo--footer { height: clamp(46px, 6vw, 60px); }
+
     /* ---------- Responsive overrides ---------- */
     @media (max-width: 767px) {
       .orb-a { width: 320px; height: 320px; }
@@ -246,9 +264,14 @@
   <div class="max-w-6xl mx-auto px-5 flex items-center justify-between gap-6">
 
     <!-- Logo -->
-    <a href="#" class="font-display shrink-0"
-       style="font-size:1.55rem; font-weight:800; letter-spacing:-0.03em; color:#f0f4ff; text-decoration:none;">
-      MOK<span style="color:#60a5fa;">RI</span>
+    <a href="#" class="site-logo-link shrink-0" aria-label="Mokri home">
+      <img
+        src="assets/images/logo.svg"
+        alt="Mokri"
+        class="site-logo site-logo--header"
+        decoding="async"
+        fetchpriority="high"
+      />
     </a>
 
     <!-- Desktop nav -->
@@ -530,9 +553,13 @@
     <div class="max-w-6xl mx-auto px-5 flex flex-col sm:flex-row items-center justify-between gap-4">
 
       <!-- Logo -->
-      <a href="#" class="font-display"
-         style="font-size:1.35rem;font-weight:800;letter-spacing:-0.03em;color:#f0f4ff;text-decoration:none;">
-        MOK<span style="color:#60a5fa;">RI</span>
+      <a href="#" class="site-logo-link" aria-label="Mokri home">
+        <img
+          src="assets/images/logo.svg"
+          alt="Mokri"
+          class="site-logo site-logo--footer"
+          decoding="async"
+        />
       </a>
 
       <!-- Copyright -->
