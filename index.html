@@ -68,6 +68,33 @@
   }
   .lang-bar-logo span { color: var(--blue); }
 
+  .top-audience-links {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .top-audience-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: 'Noto Sans Georgian', 'EB Garamond', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--white-dim);
+    text-decoration: none;
+    transition: all 0.25s;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .top-audience-btn:hover {
+    border-color: var(--blue);
+    color: var(--white);
+  }
+
   .lang-switcher {
     display: flex;
     gap: 4px;
@@ -329,6 +356,14 @@
   }
   .stat-item:last-child { border-right: none; }
 
+  .stat-item-highlight {
+    border: 1px solid var(--blue);
+    border-radius: 10px;
+    padding: 20px;
+    background: rgba(77,155,253,0.08);
+    box-shadow: 0 0 24px rgba(77,155,253,0.15);
+  }
+
   .stat-num {
     font-family: 'Orbitron', sans-serif;
     font-weight: 900;
@@ -342,6 +377,14 @@
     font-size: 13px;
     color: var(--white-dim);
     letter-spacing: 1px;
+  }
+
+  .stat-note {
+    display: block;
+    margin-top: 6px;
+    font-size: 11px;
+    opacity: 0.8;
+    letter-spacing: 0.2px;
   }
 
   /* ——— SERVICES ——— */
@@ -678,6 +721,38 @@
     text-align: center;
   }
 
+  .shop-links-card {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .shop-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .shop-link-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    min-width: 200px;
+    border-radius: 8px;
+    border: 1px solid var(--blue);
+    text-decoration: none;
+    color: var(--white);
+    font-family: 'Noto Sans Georgian', 'EB Garamond', sans-serif;
+    font-weight: 600;
+    background: rgba(77,155,253,0.08);
+    transition: all 0.25s;
+  }
+
+  .shop-link-btn:hover {
+    background: var(--blue);
+    color: var(--bg);
+  }
+
   /* ——— TEAM ——— */
   .team { background: var(--bg2); }
 
@@ -906,6 +981,7 @@
     .services-grid { grid-template-columns: 1fr; }
     .team-grid { grid-template-columns: 1fr; }
     .lang-bar { padding: 0 20px; }
+    .top-audience-links { display: none; }
     .section-inner { padding: 70px 24px; }
     .shop-card { padding: 36px 24px; }
   }
@@ -942,6 +1018,18 @@
 <!-- ——— LANGUAGE BAR ——— -->
 <header class="lang-bar">
   <a href="#" class="lang-bar-logo">MOK<span>RI</span></a>
+  <div class="top-audience-links">
+    <button type="button" class="top-audience-btn" onclick="openBusinessTab(event)" aria-label="Navigate to business services section">
+      <span data-lang="ka" class="active">იურიდიული პირები</span>
+      <span data-lang="en">Legal Entities</span>
+      <span data-lang="ru">Юридические Лица</span>
+    </button>
+    <a href="https://shop.mokri.ge/?audience=personal" target="_blank" rel="noopener noreferrer" class="top-audience-btn">
+      <span data-lang="ka" class="active">ფიზიკური პირები</span>
+      <span data-lang="en">Individuals</span>
+      <span data-lang="ru">Частные Лица</span>
+    </a>
+  </div>
   <nav class="lang-switcher">
     <button class="lang-btn active" onclick="setLang('ka')">ქარ</button>
     <button class="lang-btn" onclick="setLang('en')">ENG</button>
@@ -961,10 +1049,9 @@
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
 
-  <!-- Logo SVG (inline, simplified) -->
+  <!-- Logo SVG (inline icon) -->
   <div class="hero-logo">
     <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
-      <rect width="280" height="280" fill="#0A1728" rx="40"/>
       <!-- Icon shape from brand -->
       <path fill="#FEFEFE" d="M152 94c1.7.4 4.7 1.4 6.4 2.1 4.6 1.8 9.3 3.6 14.1 5.3-1.7 5-3.1 10.6-4.5 15.9l-7.6-.2c.6-3.1 2.1-8 2.9-11.5l-12.4-4.6c.4-2.2 1.2-5.2 1.1-7z"/>
       <path fill="#FEFEFE" d="M128 93.9h.1c.5.4 1.5 5.8 1.7 6.8l-12 4.6c.8 3.5 2 6.8 2.6 10.3l-7.6.1-.4-.1c-.7-1.2-3.6-13.2-4.1-15.9 6.3-2.9 13.5-5.5 19.7-5.8z"/>
@@ -1025,7 +1112,7 @@
 <div class="stats-bar">
   <div class="stats-inner">
     <div class="stat-item">
-      <div class="stat-num">≤1h</div>
+      <div class="stat-num" aria-label="Response time: 30 minutes or less">&le;30 min</div>
       <div class="stat-label">
         <span data-lang="ka" class="active">სწრაფი პასუხი</span>
         <span data-lang="en">Fast Response</span>
@@ -1040,12 +1127,17 @@
         <span data-lang="ru">Фокус на Бизнесе</span>
       </div>
     </div>
-    <div class="stat-item">
+    <div class="stat-item stat-item-highlight">
       <div class="stat-num">100%</div>
       <div class="stat-label">
         <span data-lang="ka" class="active">დისტანციურად</span>
         <span data-lang="en">Remote Work</span>
         <span data-lang="ru">Удалённо</span>
+        <small class="stat-note">
+          <span data-lang="ka" class="active">საჭიროების შემთხვევაში ბუნებრივია ადგილზე გამოვცხადდებით</span>
+          <span data-lang="en">When needed, of course, we will come on-site.</span>
+          <span data-lang="ru">При необходимости, конечно, мы выезжаем на место.</span>
+        </small>
       </div>
     </div>
     <div class="stat-item">
@@ -1075,20 +1167,20 @@
 
     <!-- TABS -->
     <div class="services-tabs">
-      <button class="tab-btn active" onclick="showTab('business', this)">
-        <span data-lang="ka" class="active">ბიზნესისთვის</span>
-        <span data-lang="en">For Business</span>
-        <span data-lang="ru">Для Бизнеса</span>
-      </button>
-      <button class="tab-btn" onclick="showTab('personal', this)">
+      <button id="tab-personal-btn" class="tab-btn active" onclick="showTab('personal', this)">
         <span data-lang="ka" class="active">ფიზიკური პირებისთვის</span>
         <span data-lang="en">For Individuals</span>
         <span data-lang="ru">Для Частных Лиц</span>
       </button>
+      <button id="tab-business-btn" class="tab-btn" onclick="showTab('business', this)">
+        <span data-lang="ka" class="active">ბიზნესისთვის</span>
+        <span data-lang="en">For Business</span>
+        <span data-lang="ru">Для Бизнеса</span>
+      </button>
     </div>
 
     <!-- BUSINESS SERVICES -->
-    <div id="tab-business" class="services-grid">
+    <div id="tab-business" class="services-grid" style="display:none">
       <div class="service-card">
         <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zm-8 8a2 2 0 110-4 2 2 0 010 4z"/></svg></div>
         <div class="service-title">
@@ -1170,7 +1262,7 @@
     </div>
 
     <!-- PERSONAL SERVICES -->
-    <div id="tab-personal" class="services-grid" style="display:none">
+    <div id="tab-personal" class="services-grid">
       <div class="service-card">
         <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
         <div class="service-title">
@@ -1314,40 +1406,31 @@
 <!-- ═══════════════════════ SHOP ═══════════════════════ -->
 <section class="shop" id="shop">
   <div class="section-inner">
-    <div class="shop-card">
+    <div class="shop-card shop-links-card">
       <div>
-        <div class="shop-badge">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-          <span data-lang="ka" class="active">მალე</span>
-          <span data-lang="en">COMING SOON</span>
-          <span data-lang="ru">СКОРО</span>
-        </div>
         <div class="shop-title">
-          <span data-lang="ka" class="active">Mokri Online მაღაზია</span>
-          <span data-lang="en">Mokri Online Store</span>
-          <span data-lang="ru">Интернет-магазин Mokri</span>
+          <span data-lang="ka" class="active">ონლაინ მაღაზია</span>
+          <span data-lang="en">Online Shop</span>
+          <span data-lang="ru">Онлайн-магазин</span>
         </div>
         <div class="shop-url">shop.mokri.ge</div>
         <p class="shop-desc">
-          <span data-lang="ka" class="active">IT ტექნიკა, პერიფერია, კამერები, ქსელის მოწყობილობები და სხვა — ყველაფერი ერთ ადგილას, Mokri-ის ხარისხის გარანტიით. სერვისი და პროდუქტი ერთი ბრენდიდან.</span>
-          <span data-lang="en">IT hardware, peripherals, cameras, networking equipment and more — all in one place, backed by Mokri's quality guarantee. Service and product from a single trusted brand.</span>
-          <span data-lang="ru">IT-оборудование, периферия, камеры, сетевые устройства и многое другое — всё в одном месте с гарантией качества Mokri. Сервис и продукт от одного бренда.</span>
+          <span data-lang="ka" class="active">აირჩიეთ თქვენთვის შესაბამისი მიმართულება და პირდაპირ გადადით ონლაინ მაღაზიაში.</span>
+          <span data-lang="en">Choose your audience path and continue directly to the online shop.</span>
+          <span data-lang="ru">Выберите подходящее направление и сразу переходите в онлайн-магазин.</span>
         </p>
-      </div>
-      <div class="shop-visual">
-        <div class="shop-icon-box">
-          <svg viewBox="0 0 24 24"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>
+        <div class="shop-links">
+          <a href="https://shop.mokri.ge/?audience=business" target="_blank" rel="noopener noreferrer" class="shop-link-btn">
+            <span data-lang="ka" class="active">იურიდიული პირები</span>
+            <span data-lang="en">Legal Entities</span>
+            <span data-lang="ru">Юридические Лица</span>
+          </a>
+          <a href="https://shop.mokri.ge/?audience=personal" target="_blank" rel="noopener noreferrer" class="shop-link-btn">
+            <span data-lang="ka" class="active">ფიზიკური პირები</span>
+            <span data-lang="en">Individuals</span>
+            <span data-lang="ru">Частные Лица</span>
+          </a>
         </div>
-        <div class="shop-notify">
-          <span data-lang="ka" class="active">გამოგვიგზავნეთ შეტყობინება<br>გახსნისას</span>
-          <span data-lang="en">Notify me when live</span>
-          <span data-lang="ru">Уведомить об открытии</span>
-        </div>
-        <a href="https://wa.me/995555555555?text=shop.mokri.ge%20-%20%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%AA%E1%83%A3%E1%83%93%E1%83%94%E1%83%91%E1%83%98%E1%83%A1%E1%83%90%E1%83%A1%20%E1%83%A8%E1%83%94%E1%83%9B%E1%83%90%E1%83%A2%E1%83%98%E1%83%A7%E1%83%95%E1%83%9C%E1%83%94%E1%83%91%E1%83%98%E1%83%97%20%E1%83%9B%E1%83%90%E1%83%AA%E1%83%9C%E1%83%9D%E1%83%91%E1%83%90" target="_blank" class="btn-outline" style="font-size:10px;padding:10px 20px;margin-top:8px">
-          <span data-lang="ka" class="active">შეგვატყობინე</span>
-          <span data-lang="en">Notify Me</span>
-          <span data-lang="ru">Уведомить</span>
-        </a>
       </div>
     </div>
   </div>
@@ -1589,6 +1672,14 @@
     document.getElementById('tab-personal').style.display = tab === 'personal' ? 'grid' : 'none';
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
+  }
+
+  function openBusinessTab(event) {
+    if (event) event.preventDefault();
+    const businessBtn = document.getElementById('tab-business-btn');
+    if (businessBtn) showTab('business', businessBtn);
+    const servicesSection = document.getElementById('services');
+    if (servicesSection) servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function submitForm(btn) {
