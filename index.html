@@ -1019,7 +1019,7 @@
 <header class="lang-bar">
   <a href="#" class="lang-bar-logo">MOK<span>RI</span></a>
   <div class="top-audience-links">
-    <a href="#services" class="top-audience-btn" onclick="openBusinessTab()">
+    <a href="#services" class="top-audience-btn" onclick="openBusinessTab(event)">
       <span data-lang="ka" class="active">იურიდიული პირები</span>
       <span data-lang="en">Legal Entities</span>
       <span data-lang="ru">Юридические Лица</span>
@@ -1408,7 +1408,11 @@
   <div class="section-inner">
     <div class="shop-card shop-links-card">
       <div>
-        <div class="shop-title">shop.mokri.ge</div>
+        <div class="shop-title">
+          <span data-lang="ka" class="active">ონლაინ მაღაზია</span>
+          <span data-lang="en">Online Shop</span>
+          <span data-lang="ru">Онлайн-магазин</span>
+        </div>
         <div class="shop-url">shop.mokri.ge</div>
         <p class="shop-desc">
           <span data-lang="ka" class="active">აირჩიეთ თქვენთვის შესაბამისი მიმართულება და პირდაპირ გადადით ონლაინ მაღაზიაში.</span>
@@ -1670,9 +1674,12 @@
     btn.classList.add('active');
   }
 
-  function openBusinessTab() {
+  function openBusinessTab(event) {
+    if (event) event.preventDefault();
     const businessBtn = document.getElementById('tab-business-btn');
     if (businessBtn) showTab('business', businessBtn);
+    const servicesSection = document.getElementById('services');
+    if (servicesSection) servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function submitForm(btn) {
