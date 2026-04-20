@@ -23,7 +23,7 @@
         extend: {
           colors: {
             ink:    { 950: '#060f1d', 900: '#081223', 800: '#0d1f36', 700: '#122b4c' },
-            sky:    { 400: '#4d9bfd', 500: '#4d9bfd', 600: '#1a3b6c' },
+            sky:    { 400: '#7fb9ff', 500: '#4d9bfd', 600: '#1a3b6c' },
             silver: { 100: '#fefefe', 200: '#d3e1f8', 500: '#8898b8' }
           },
           fontFamily: {
@@ -43,6 +43,8 @@
     :root {
       /* Sampled from assets/images/logo.svg: #0A1728, #1A3B6C, #4D9BFD, #FEFEFE */
       --color-primary: #1a3b6c;
+      --color-primary-dark: #0a1728;
+      --color-primary-hover: #24508f;
       --color-secondary: #4d9bfd;
       --color-accent: #7fb9ff;
       --color-background: #081223;
@@ -52,7 +54,7 @@
       --color-text: #fefefe;
       --color-muted: #d3e1f8;
       --color-border: rgba(77,155,253,0.28);
-      --color-secondary-rgb: 77,155,253;
+      --color-secondary-rgb: 77,155,253; /* keep in sync with --color-secondary */
       --logo-header-size-min: 54px;
       --logo-header-size-fluid: 8vw;
       --logo-header-size-max: 76px;
@@ -71,7 +73,7 @@
 
     /* ---------- Background Textures ---------- */
     .dot-grid {
-      background-image: radial-gradient(circle, rgba(var(--color-secondary-rgb),0.12) 1px, transparent 1px);
+      background-image: radial-gradient(circle, rgb(var(--color-secondary-rgb) / 0.12) 1px, transparent 1px);
       background-size: 28px 28px;
     }
 
@@ -111,24 +113,25 @@
     /* ---------- Glass Cards ---------- */
     .glass-card {
       background: rgba(10,23,40,0.6);
-      border: 1px solid rgba(var(--color-secondary-rgb),0.20);
+      border: 1px solid rgb(var(--color-secondary-rgb) / 0.20);
       transition: background 0.35s, border-color 0.35s, transform 0.35s, box-shadow 0.35s;
     }
     .glass-card:hover {
-      background: rgba(var(--color-secondary-rgb),0.10);
+      background: rgb(var(--color-secondary-rgb) / 0.10);
       border-color: var(--color-border);
       transform: translateY(-5px);
-      box-shadow: 0 24px 64px rgba(var(--color-secondary-rgb),0.16);
+      box-shadow: 0 24px 64px rgb(var(--color-secondary-rgb) / 0.16);
     }
 
     /* ---------- Icon Box ---------- */
     .icon-box {
       width: 52px; height: 52px;
       border-radius: 14px;
-      background: linear-gradient(135deg, rgba(var(--color-secondary-rgb),0.20), rgba(26,59,108,0.16));
-      border: 1px solid rgba(var(--color-secondary-rgb),0.28);
+      background: linear-gradient(135deg, rgb(var(--color-secondary-rgb) / 0.20), rgba(26,59,108,0.16));
+      border: 1px solid rgb(var(--color-secondary-rgb) / 0.28);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
+      color: var(--color-secondary);
     }
 
     /* ---------- Number Badge (Why Us) ---------- */
@@ -154,13 +157,13 @@
     /* ---------- Horizontal Divider ---------- */
     .h-div {
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(var(--color-secondary-rgb),0.28), transparent);
+      background: linear-gradient(90deg, transparent, rgb(var(--color-secondary-rgb) / 0.28), transparent);
     }
 
     /* ---------- Primary Button ---------- */
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
-      background: linear-gradient(135deg, var(--color-primary) 0%, #0a1728 100%);
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
       color: var(--color-text);
       padding: 14px 30px;
       border-radius: 10px;
@@ -168,12 +171,12 @@
       font-weight: 600; font-size: 15px;
       letter-spacing: 0.01em;
       text-decoration: none;
-      border: 1px solid rgba(var(--color-secondary-rgb),0.35); cursor: pointer;
+      border: 1px solid rgb(var(--color-secondary-rgb) / 0.35); cursor: pointer;
       box-shadow: 0 10px 30px rgba(10,23,40,0.55);
       transition: background 0.3s, box-shadow 0.3s, transform 0.25s;
     }
     .btn-primary:hover {
-      background: linear-gradient(135deg, #24508f 0%, var(--color-primary) 100%);
+      background: linear-gradient(135deg, var(--color-primary-hover) 0%, var(--color-primary) 100%);
       box-shadow: 0 16px 36px rgba(10,23,40,0.68);
       transform: translateY(-2px);
     }
@@ -190,11 +193,11 @@
     /* ---------- Language Switcher ---------- */
     .lang-wrap {
       display: flex; align-items: center;
-      border: 1px solid rgba(var(--color-secondary-rgb),0.32);
+      border: 1px solid rgb(var(--color-secondary-rgb) / 0.32);
       border-radius: 6px;
       overflow: hidden;
     }
-    .lang-sep { width: 1px; height: 20px; background: rgba(var(--color-secondary-rgb),0.26); }
+    .lang-sep { width: 1px; height: 20px; background: rgb(var(--color-secondary-rgb) / 0.26); }
     .lang-btn {
       padding: 5px 10px;
       font-size: 11px; font-weight: 700;
@@ -207,7 +210,7 @@
     .lang-btn:hover { color: var(--color-text); }
     .lang-btn.active {
       color: var(--color-secondary);
-      background: rgba(var(--color-secondary-rgb),0.14);
+      background: rgb(var(--color-secondary-rgb) / 0.14);
     }
 
     /* ---------- Header Scroll State ---------- */
@@ -217,7 +220,7 @@
     #header.scrolled {
       background: rgba(8,18,35,0.96) !important;
       backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(var(--color-secondary-rgb),0.30);
+      border-bottom: 1px solid rgb(var(--color-secondary-rgb) / 0.30);
     }
 
     /* ---------- Mobile Menu ---------- */
@@ -253,7 +256,15 @@
     a:focus-visible, button:focus-visible {
       outline: 2px solid var(--color-secondary);
       outline-offset: 3px;
-      border-radius: 10px;
+    }
+    .footer-email {
+      color: rgba(211,225,248,0.42);
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+    .footer-email:hover,
+    .footer-email:focus-visible {
+      color: var(--color-secondary);
     }
     .site-logo-link {
       display: inline-flex;
@@ -331,7 +342,7 @@
   </div>
 
   <!-- Mobile dropdown menu -->
-  <div id="mobile-menu" style="background:rgba(8,18,35,0.98); border-top:1px solid rgba(var(--color-secondary-rgb),0.26);">
+  <div id="mobile-menu" style="background:rgba(8,18,35,0.98); border-top:1px solid rgb(var(--color-secondary-rgb) / 0.26);">
     <div class="max-w-6xl mx-auto px-5 py-5 flex flex-col gap-5">
       <a href="#services"  class="nav-link text-base" data-key="nav_services"></a>
       <a href="#whyus"     class="nav-link text-base" data-key="nav_advantages"></a>
@@ -362,14 +373,14 @@
 
       <!-- Eyebrow label -->
       <div class="reveal flex items-center gap-3 mb-8" style="transition-delay:0.05s;">
-        <div style="width:30px;height:1px;background:#4d9bfd;"></div>
-        <span style="font-size:11px;font-weight:700;letter-spacing:0.14em;color:#4d9bfd;text-transform:uppercase;"
+        <div style="width:30px;height:1px;background:var(--color-secondary);"></div>
+        <span style="font-size:11px;font-weight:700;letter-spacing:0.14em;color:var(--color-secondary);text-transform:uppercase;"
               data-key="hero_tag"></span>
       </div>
 
       <!-- Main heading -->
       <h1 class="reveal font-display mb-7"
-          style="font-size:clamp(2.2rem,5.5vw,4.2rem);font-weight:800;line-height:1.08;letter-spacing:-0.025em;color:#fefefe;transition-delay:0.15s;"
+          style="font-size:clamp(2.2rem,5.5vw,4.2rem);font-weight:800;line-height:1.08;letter-spacing:-0.025em;color:var(--color-text);transition-delay:0.15s;"
           data-key="hero_title"></h1>
 
       <!-- Subtitle -->
@@ -423,11 +434,11 @@
       <article class="reveal glass-card rounded-2xl p-8" style="transition-delay:0.08s;">
         <div class="icon-box mb-6">
           <!-- Server icon -->
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4d9bfd" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="2" width="20" height="8" rx="2"/>
             <rect x="2" y="14" width="20" height="8" rx="2"/>
-            <circle cx="6" cy="6" r="1" fill="#4d9bfd" stroke="none"/>
-            <circle cx="6" cy="18" r="1" fill="#4d9bfd" stroke="none"/>
+            <circle cx="6" cy="6" r="1" fill="currentColor" stroke="none"/>
+            <circle cx="6" cy="18" r="1" fill="currentColor" stroke="none"/>
           </svg>
         </div>
         <h3 class="font-display text-lg text-white mb-3" style="font-weight:700;" data-key="s1_title"></h3>
@@ -438,7 +449,7 @@
       <article class="reveal glass-card rounded-2xl p-8" style="transition-delay:0.18s;">
         <div class="icon-box mb-6">
           <!-- Cloud upload icon -->
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4d9bfd" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="16 16 12 12 8 16"/>
             <line x1="12" y1="12" x2="12" y2="21"/>
             <path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/>
@@ -452,7 +463,7 @@
       <article class="reveal glass-card rounded-2xl p-8" style="transition-delay:0.28s;">
         <div class="icon-box mb-6">
           <!-- Shield icon -->
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4d9bfd" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             <polyline points="9 12 11 14 15 10"/>
           </svg>
@@ -465,7 +476,7 @@
       <article class="reveal glass-card rounded-2xl p-8" style="transition-delay:0.38s;">
         <div class="icon-box mb-6">
           <!-- Monitor / support icon -->
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4d9bfd" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="3" width="20" height="13" rx="2"/>
             <line x1="8" y1="21" x2="16" y2="21"/>
             <line x1="12" y1="16" x2="12" y2="21"/>
@@ -552,9 +563,9 @@
 
         <div class="inline-flex items-center gap-2 mb-7 px-4 py-2 rounded-full"
              style="background:rgba(77,155,253,0.10);border:1px solid rgba(77,155,253,0.20);">
-          <div style="width:7px;height:7px;border-radius:50%;background:#4d9bfd;
-                      box-shadow:0 0 8px rgba(77,155,253,0.8);animation:pulse 2s ease-in-out infinite;"></div>
-          <span style="font-size:12px;font-weight:600;letter-spacing:0.08em;color:#4d9bfd;" data-key="cta_badge"></span>
+          <div style="width:7px;height:7px;border-radius:50%;background:var(--color-secondary);
+                      box-shadow:0 0 8px rgb(var(--color-secondary-rgb) / 0.8);animation:pulse 2s ease-in-out infinite;"></div>
+          <span style="font-size:12px;font-weight:600;letter-spacing:0.08em;color:var(--color-secondary);" data-key="cta_badge"></span>
         </div>
 
         <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-5"
@@ -592,9 +603,7 @@
          data-key="footer_copy"></p>
 
       <!-- Email -->
-      <a href="mailto:info@mokri.ge" class="text-sm"
-         style="color:rgba(211,225,248,0.42);transition:color 0.2s;text-decoration:none;"
-         onmouseover="this.style.color='#4d9bfd'" onmouseout="this.style.color='rgba(211,225,248,0.42)'">
+      <a href="mailto:info@mokri.ge" class="text-sm footer-email">
         info@mokri.ge
       </a>
 
@@ -621,7 +630,7 @@ const DICT = {
 
     // Hero
     hero_tag:      'Enterprise IT გადაწყვეტილებები',
-    hero_title:    'საიმედო IT ინფრასტრუქტურა<br><span style="color:#4d9bfd;">თქვენი ბიზნესისთვის</span>',
+    hero_title:    'საიმედო IT ინფრასტრუქტურა<br><span style="color:var(--color-secondary);">თქვენი ბიზნესისთვის</span>',
     hero_subtitle: 'პროფესიონალური ადმინისტრირება, უსაფრთხოება და მხარდაჭერა მცირე და საშუალო კომპანიებისთვის. ვმუშაობთ ისე, რომ თქვენ ტექნიკური პრობლემები დაგავიწყდეთ.',
     hero_cta:      'კონსულტაციის მიღება',
 
@@ -661,7 +670,7 @@ const DICT = {
     nav_shop:        'Наш онлайн магазин',
 
     hero_tag:      'Enterprise IT Решения',
-    hero_title:    'Надёжная ИТ-инфраструктура<br><span style="color:#4d9bfd;">для вашего бизнеса</span>',
+    hero_title:    'Надёжная ИТ-инфраструктура<br><span style="color:var(--color-secondary);">для вашего бизнеса</span>',
     hero_subtitle: 'Профессиональное администрирование, безопасность и поддержка малых и средних компаний. Работаем так, чтобы вы забыли о технических проблемах.',
     hero_cta:      'Получить консультацию',
 
@@ -698,7 +707,7 @@ const DICT = {
     nav_shop:        'Our Online Shop',
 
     hero_tag:      'Enterprise IT Solutions',
-    hero_title:    'Reliable IT Infrastructure<br><span style="color:#4d9bfd;">for Your Business</span>',
+    hero_title:    'Reliable IT Infrastructure<br><span style="color:var(--color-secondary);">for Your Business</span>',
     hero_subtitle: 'Professional administration, security, and support for small and medium-sized companies. We work so you can forget about technical problems.',
     hero_cta:      'Get a Consultation',
 
@@ -828,8 +837,8 @@ document.addEventListener('click', e => {
 const pulseStyle = document.createElement('style');
 pulseStyle.textContent = `
   @keyframes pulse {
-    0%,100% { opacity:1; box-shadow:0 0 8px rgba(var(--color-secondary-rgb),0.8); }
-    50%      { opacity:0.6; box-shadow:0 0 16px rgba(var(--color-secondary-rgb),0.5); }
+    0%,100% { opacity:1; box-shadow:0 0 8px rgb(var(--color-secondary-rgb) / 0.8); }
+    50%      { opacity:0.6; box-shadow:0 0 16px rgb(var(--color-secondary-rgb) / 0.5); }
   }
 `;
 document.head.appendChild(pulseStyle);
