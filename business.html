@@ -9,9 +9,9 @@
 :root{--bg:#0A1728;--bg2:#0d1e35;--blue:#4D9BFD;--white:#FEFEFE;--dim:rgba(254,254,254,.72);--border:rgba(77,155,253,.24)}*{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{font-family:'Noto Sans Georgian',sans-serif;background:linear-gradient(165deg,var(--bg),var(--bg2));color:var(--white);min-height:100vh}
-.header{position:sticky;top:0;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:14px;padding:14px 20px;background:rgba(10,23,40,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
-.brand{font-family:'Orbitron',sans-serif;font-weight:900;letter-spacing:3px;color:var(--white);text-decoration:none}.brand span{color:var(--blue)}
-.nav{display:flex;flex-wrap:nowrap;gap:8px;min-width:0;overflow-x:auto;padding-bottom:2px}.nav a{color:var(--dim);text-decoration:none;padding:8px 12px;border-radius:999px;border:1px solid transparent;white-space:nowrap;flex:0 0 auto;touch-action:manipulation}.nav a.active,.nav a:hover{border-color:var(--border);background:rgba(77,155,253,.14);color:var(--white)}
+.header{position:sticky;top:0;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:14px;padding:0 20px;height:64px;background:rgba(10,23,40,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.brand{font-family:'Orbitron',sans-serif;font-weight:900;font-size:18px;letter-spacing:3px;color:var(--white);text-decoration:none}.brand span{color:var(--blue)}
+.nav{display:flex;flex-wrap:nowrap;gap:8px;min-width:0;overflow-x:auto;padding-bottom:2px}.nav a{color:var(--dim);text-decoration:none;padding:8px 12px;min-height:36px;border-radius:999px;border:1px solid transparent;white-space:nowrap;flex:0 0 auto;font-size:13px;font-weight:600;line-height:1.2;touch-action:manipulation}.nav a.active,.nav a:hover{border-color:var(--border);background:rgba(77,155,253,.14);color:var(--white)}
 .wrap{max-width:1000px;margin:0 auto;padding:52px 20px}
 .h1{font-family:'Orbitron',sans-serif;font-size:clamp(30px,5vw,52px);margin-bottom:14px}.h1 span{color:var(--blue)}
 .lead{color:var(--dim);font-size:18px;margin-bottom:28px}
@@ -19,6 +19,7 @@ body{font-family:'Noto Sans Georgian',sans-serif;background:linear-gradient(165d
 .item{padding:16px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.05)}
 .item h3{font-size:16px;margin-bottom:8px}.item p{font-size:14px;line-height:1.6;color:var(--dim)}
 .cta{margin-top:24px;display:inline-block;text-decoration:none;padding:12px 18px;border-radius:8px;border:1px solid var(--blue);background:var(--blue);color:var(--bg);font-weight:700}
+@media (max-width:600px){.header{padding:8px 12px;column-gap:10px}.nav a{font-size:12px;padding:7px 10px;min-height:34px}}
 </style>
 </head>
 <body>
