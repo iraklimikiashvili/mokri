@@ -51,6 +51,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: nowrap;
     gap: 16px;
     padding: 0 40px;
     height: 64px;
@@ -66,6 +67,7 @@
     letter-spacing: 4px;
     color: var(--white);
     text-decoration: none;
+    flex: 0 0 auto;
   }
   .lang-bar-logo span { color: var(--blue); }
 
@@ -73,14 +75,19 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    justify-content: center;
-    flex: 1;
+    justify-content: flex-start;
+    flex: 1 1 auto;
+    flex-wrap: nowrap;
+    min-width: 0;
+    overflow-x: auto;
+    padding-bottom: 2px;
   }
 
   .menu-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex: 0 0 auto;
     padding: 8px 12px;
     min-height: 36px;
     border-radius: 999px;
@@ -115,6 +122,7 @@
     border: 1px solid var(--border);
     border-radius: 6px;
     padding: 3px;
+    flex: 0 0 auto;
   }
 
   .lang-btn {
@@ -862,20 +870,21 @@
     .services-grid { grid-template-columns: 1fr; }
     .team-grid { grid-template-columns: 1fr; }
     .lang-bar {
-      padding: 10px 16px;
-      height: auto;
+      padding: 0 12px;
+      height: 64px;
       min-height: 64px;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      gap: 10px;
     }
     .header-menu {
-      order: 3;
-      width: 100%;
+      order: 0;
+      width: auto;
       justify-content: flex-start;
       overflow-x: auto;
-      padding-bottom: 2px;
+      padding-bottom: 0;
     }
-    .menu-link { font-size: 12px; }
+    .menu-link { font-size: 11px; padding: 7px 10px; min-height: 34px; }
     .section-inner { padding: 70px 24px; }
   }
 
