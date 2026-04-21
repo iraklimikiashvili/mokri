@@ -176,13 +176,13 @@
 
   .hero-logo {
     position: relative;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     animation: fadeUp 0.9s ease both;
   }
 
   .hero-logo svg {
-    width: 164px;
-    height: 164px;
+    width: clamp(210px, 24vw, 280px);
+    height: auto;
     display: block;
     margin: 0 auto;
     filter: drop-shadow(0 0 30px rgba(77,155,253,0.5));
@@ -972,8 +972,6 @@
       <path fill="#4D9BFD" d="M137.3 93.4c1.6-2.9 3.9-2.4 5.9-.2-.1 1.4-.2 2.1-1.1 3.2l-.6.6c-1.2.1-1.4.1-2.6-.1l-.2-.3c-1.2-1.3-1.4-1.5-1.4-3.2z"/>
       <path fill="#1A3B6C" d="M143.2 93.2c2.1 1.2 4.3 2.4 6.2 3.6-.2 1-.5 2.3-.7 3.2-2.2-1.2-4.5-2.5-6.6-3.6 1-1.1 1-1.8 1.1-3.2z"/>
       <path fill="#1A3B6C" d="M131 97c1.8-1.1 4.1-2.8 5.7-3.7 0 1.7.2 1.9 1.4 3.2-2 .9-4.2 2.5-6.3 3.5-.3-1-.6-2-.8-3z"/>
-      <!-- Text MOKRI -->
-      <text x="50" y="228" font-family="Orbitron" font-weight="900" font-size="40" letter-spacing="5" fill="#FEFEFE">MOK<tspan fill="#4D9BFD">RI</tspan></text>
     </svg>
   </div>
 
@@ -998,10 +996,10 @@
       <span data-lang="en">Chat on WhatsApp</span>
       <span data-lang="ru">Написать в WhatsApp</span>
     </a>
-    <a href="#services" class="btn-outline">
-      <span data-lang="ka" class="active">სერვისები</span>
-      <span data-lang="en">Our Services</span>
-      <span data-lang="ru">Наши Услуги</span>
+    <a href="individuals.html" class="btn-outline">
+      <span data-lang="ka" class="active">ფიზიკური პირები</span>
+      <span data-lang="en">For Individuals</span>
+      <span data-lang="ru">Частные Лица</span>
     </a>
   </div>
 
@@ -1057,258 +1055,6 @@
     </div>
   </div>
 </div>
-
-<!-- ═══════════════════════ SERVICES ═══════════════════════ -->
-<section class="services" id="services">
-  <div class="section-inner">
-    <div class="section-label">
-      <span data-lang="ka" class="active">სერვისები</span>
-      <span data-lang="en">Services</span>
-      <span data-lang="ru">Услуги</span>
-    </div>
-    <h2 class="section-title">
-      <span data-lang="ka" class="active">ყოვლისმომცველი <span>IT სერვისები</span></span>
-      <span data-lang="en">Comprehensive <span>IT Services</span></span>
-      <span data-lang="ru">Комплексные <span>IT Услуги</span></span>
-    </h2>
-
-    <!-- TABS -->
-    <div class="services-tabs">
-      <button class="tab-btn active" onclick="showTab('business', this)">
-        <span data-lang="ka" class="active">ბიზნესისთვის</span>
-        <span data-lang="en">For Business</span>
-        <span data-lang="ru">Для Бизнеса</span>
-      </button>
-      <button class="tab-btn" onclick="showTab('personal', this)">
-        <span data-lang="ka" class="active">ფიზიკური პირებისთვის</span>
-        <span data-lang="en">For Individuals</span>
-        <span data-lang="ru">Для Частных Лиц</span>
-      </button>
-    </div>
-
-    <!-- BUSINESS SERVICES -->
-    <div id="tab-business" class="services-grid">
-      <div class="service-card">
-        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zm-8 8a2 2 0 110-4 2 2 0 010 4z"/></svg></div>
-        <div class="service-title">
-          <span data-lang="ka" class="active">სისტემური ადმინისტრირება</span>
-          <span data-lang="en">System Administration</span>
-          <span data-lang="ru">Системное Администрирование</span>
-        </div>
-        <p class="service-desc">
-          <span data-lang="ka" class="active">სერვერების კონფიგურაცია, ოპერაციული სისტემების მართვა, განახლებები, სარეზერვო ასლები და სტაბილური ინფრასტრუქტურის უზრუნველყოფა.</span>
-          <span data-lang="en">Server configuration, OS management, updates, backups and ensuring a stable infrastructure for your business operations.</span>
-          <span data-lang="ru">Настройка серверов, управление ОС, обновления, резервное копирование и обеспечение стабильной инфраструктуры.</span>
-        </p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-        <div class="service-title">
-          <span data-lang="ka" class="active">ქსელის ადმინისტრირება</span>
-          <span data-lang="en">Network Administration</span>
-          <span data-lang="ru">Сетевое Администрирование</span>
-        </div>
-        <p class="service-desc">
-          <span data-lang="ka" class="active">ქსელის არქიტექტურის დაგეგმვა, კომუტატორების, მარშრუტიზატორების კონფიგურაცია, VPN, Firewall და ქსელის მონიტორინგი.</span>
-          <span data-lang="en">Network architecture planning, switch and router configuration, VPN, firewall setup and continuous network monitoring.</span>
-          <span data-lang="ru">Проектирование сети, настройка коммутаторов и маршрутизаторов, VPN, Firewall и мониторинг сети.</span>
-        </p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0121 8.845v6.31a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg></div>
-        <div class="service-title">
-          <span data-lang="ka" class="active">სამეთვალყურეო კამერები</span>
-          <span data-lang="en">CCTV & Security Systems</span>
-          <span data-lang="ru">Видеонаблюдение и Безопасность</span>
-        </div>
-        <p class="service-desc">
-          <span data-lang="ka" class="active">IP კამერების დაგეგმვა, დამონტაჟება, კონფიგურაცია და ტექნიკური მომსახურება. დისტანციური წვდომა და ჩანაწერების მართვა.</span>
-          <span data-lang="en">IP camera planning, installation, configuration and maintenance. Remote access and recording management for your business security.</span>
-          <span data-lang="ru">Проектирование, монтаж, настройка и обслуживание IP-камер. Удалённый доступ и управление записями.</span>
-        </p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg></div>
-        <div class="service-title">
-          <span data-lang="ka" class="active">IT Helpdesk & საპორტო სერვისი</span>
-          <span data-lang="en">IT Helpdesk & Support</span>
-          <span data-lang="ru">IT Helpdesk и Поддержка</span>
-        </div>
-        <p class="service-desc">
-          <span data-lang="ka" class="active">თქვენი გუნდის ოპერატიული ტექნიკური მხარდაჭერა. პრობლემების სწრაფი დიაგნოსტიკა და გადაჭრა დისტანციურად.</span>
-          <span data-lang="en">Prompt technical support for your team. Fast problem diagnosis and resolution remotely, minimizing downtime.</span>
-          <span data-lang="ru">Оперативная техподдержка для вашей команды. Быстрая диагностика и устранение проблем удалённо.</span>
-        </p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div>
-        <div class="service-title">
-          <span data-lang="ka" class="active">IT ინფრასტრუქტურის დანერგვა</span>
-          <span data-lang="en">IT Infrastructure Deployment</span>
-          <span data-lang="ru">Внедрение IT Инфраструктуры</span>
-        </div>
-        <p class="service-desc">
-          <span data-lang="ka" class="active">კომპლექსური IT ინფრასტრუქტურის დიზაინი და განხორციელება. კვანძების, სერვერებისა და ღრუბლოვანი გარემოების ინტეგრაცია.</span>
-          <span data-lang="en">Complete IT infrastructure design and implementation. Workstation, server and cloud environment integration tailored to your business.</span>
-          <span data-lang="ru">Проектирование и реализация комплексной IT инфраструктуры. Интеграция рабочих станций, серверов и облачных сред.</span>
-        </p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></div>
-        <div class="service-title">
-          <span data-lang="ka" class="active">კიბერუსაფრთხოება</span>
-          <span data-lang="en">Cybersecurity</span>
-          <span data-lang="ru">Кибербезопасность</span>
-        </div>
-        <p class="service-desc">
-          <span data-lang="ka" class="active">თქვენი ბიზნეს მონაცემების დაცვა. Antivirus, Firewall, VPN, წვდომის მართვა და კიბერ საფრთხეებისგან დაცვის კომპლექსური გადაწყვეტა.</span>
-          <span data-lang="en">Protecting your business data. Antivirus, Firewall, VPN, access management and comprehensive cyber threat protection solutions.</span>
-          <span data-lang="ru">Защита бизнес-данных. Антивирус, Firewall, VPN, управление доступом и комплексная защита от киберугроз.</span>
-        </p>
-      </div>
-    </div>
-
-    <!-- PERSONAL SERVICES -->
-    <div id="tab-personal" class="services-grid" style="display:none">
-      <div class="service-card">
-        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
-        <div class="service-title">
-          <span data-lang="ka" class="active">პროგრამული უზრუნველყოფის ინსტალაცია</span>
-          <span data-lang="en">Software Installation</span>
-          <span data-lang="ru">Установка Программ</span>
-        </div>
-        <p class="service-desc">
-          <span data-lang="ka" class="active">Microsoft Office, Adobe, macOS/Windows პროგრამები, Antivirus — ნებისმიერი პროგრამის ინსტალაცია და კონფიგურაცია თქვენი კომპიუტერისთვის.</span>
-          <span data-lang="en">Microsoft Office, Adobe, macOS/Windows programs, Antivirus — installation and configuration of any software for your computer or device.</span>
-          <span data-lang="ru">Microsoft Office, Adobe, программы macOS/Windows, Антивирус — установка и настройка любых программ на вашем компьютере.</span>
-        </p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
-        <div class="service-title">
-          <span data-lang="ka" class="active">მოწყობილობის დაყენება</span>
-          <span data-lang="en">Device Setup & Configuration</span>
-          <span data-lang="ru">Настройка Устройств</span>
-        </div>
-        <p class="service-desc">
-          <span data-lang="ka" class="active">ახალი კომპიუტერის, ლეპტოპის, სმარტფონის ან ტაბლეტის სრული კონფიგურაცია. Wi-Fi, ელ-ფოსტა, ღრუბლოვანი სერვისები და მეტი.</span>
-          <span data-lang="en">Complete setup of new computers, laptops, smartphones or tablets. Wi-Fi, email, cloud services and everything you need to get started.</span>
-          <span data-lang="ru">Полная настройка нового компьютера, ноутбука, смартфона или планшета. Wi-Fi, почта, облачные сервисы и многое другое.</span>
-        </p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg></div>
-        <div class="service-title">
-          <span data-lang="ka" class="active">დიაგნოსტიკა და შეკეთება</span>
-          <span data-lang="en">Diagnostics & Repair</span>
-          <span data-lang="ru">Диагностика и Ремонт</span>
-        </div>
-        <p class="service-desc">
-          <span data-lang="ka" class="active">კომპიუტერი ნელა მუშაობს? ვირუსები? გაყინვა? პრობლემის სწრაფი დიაგნოსტიკა, გასუფთავება, ოპტიმიზაცია და გამართვა.</span>
-          <span data-lang="en">Is your computer slow, infected or freezing? Fast diagnostics, cleaning, optimization and problem resolution for all devices.</span>
-          <span data-lang="ru">Компьютер тормозит, вирусы или зависания? Быстрая диагностика, очистка, оптимизация и устранение неполадок.</span>
-        </p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg></div>
-        <div class="service-title">
-          <span data-lang="ka" class="active">მონაცემების აღდგენა</span>
-          <span data-lang="en">Data Recovery & Backup</span>
-          <span data-lang="ru">Восстановление Данных</span>
-        </div>
-        <p class="service-desc">
-          <span data-lang="ka" class="active">შემთხვევით წაშლილი ფაილების, ფოტოების, დოკუმენტების აღდგენა. სარეზერვო ასლის სისტემის შექმნა, რათა ამ სიტუაცია აღარ განმეოროდეს.</span>
-          <span data-lang="en">Recovery of accidentally deleted files, photos and documents. Setting up a proper backup system to prevent future data loss.</span>
-          <span data-lang="ru">Восстановление случайно удалённых файлов, фото и документов. Настройка резервного копирования для предотвращения потерь.</span>
-        </p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/></svg></div>
-        <div class="service-title">
-          <span data-lang="ka" class="active">Wi-Fi და ქსელის დაყენება</span>
-          <span data-lang="en">Wi-Fi & Home Network Setup</span>
-          <span data-lang="ru">Настройка Wi-Fi и Домашней Сети</span>
-        </div>
-        <p class="service-desc">
-          <span data-lang="ka" class="active">სახლის ან ოფისის ქსელის ოპტიმიზაცია. სიგნალის სიძლიერის გაზრდა, როუტერის კონფიგურაცია, Mesh სისტემების დაყენება.</span>
-          <span data-lang="en">Home or office network optimization. Signal strength improvement, router configuration and Mesh system setup for full coverage.</span>
-          <span data-lang="ru">Оптимизация домашней или офисной сети. Усиление сигнала, настройка роутера, установка Mesh-систем для полного покрытия.</span>
-        </p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
-        <div class="service-title">
-          <span data-lang="ka" class="active">კონსულტაცია და სწავლება</span>
-          <span data-lang="en">Consultation & Training</span>
-          <span data-lang="ru">Консультация и Обучение</span>
-        </div>
-        <p class="service-desc">
-          <span data-lang="ka" class="active">ახალი ტექნოლოგიების ათვისება, პროგრამების სწავლება, ყიდვის კონსულტაცია — რა ლეპტოპი, სმარტფონი ან გაჯეტი შეიძინოთ.</span>
-          <span data-lang="en">Learning new technologies, program training, and buying consultations — which laptop, smartphone or gadget to purchase for your needs.</span>
-          <span data-lang="ru">Освоение новых технологий, обучение программам, консультации по покупке — какой ноутбук, смартфон или гаджет выбрать.</span>
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════ INDIVIDUALS / WHATSAPP ═══════════════════════ -->
-<section class="individuals" id="individuals">
-  <div class="section-inner">
-    <div class="whatsapp-feature">
-      <div class="wa-text">
-        <div class="section-label">
-          <span data-lang="ka" class="active">ფიზიკური პირები</span>
-          <span data-lang="en">Individuals</span>
-          <span data-lang="ru">Частные Лица</span>
-        </div>
-        <h2 class="section-title">
-          <span data-lang="ka" class="active">ერთი <span>კლიკი</span> — და ჩვენ ვართ<br>თქვენთან</span>
-          <span data-lang="en">One <span>Click</span> Away —<br>We're Here for You</span>
-          <span data-lang="ru">Один <span>Клик</span> — и мы<br>уже здесь</span>
-        </h2>
-        <p class="wa-lead">
-          <span data-lang="ka" class="active">არ გჭირდება ელ-ფოსტა, ფორმები ან ზარი. მოგვწერეთ WhatsApp-ში, ჩვენ პასუხს გაგცემთ მომენტალურად.</span>
-          <span data-lang="en">No email forms or phone calls needed. Just message us on WhatsApp and we'll respond instantly.</span>
-          <span data-lang="ru">Никаких форм или звонков. Напишите нам в WhatsApp и мы ответим моментально.</span>
-        </p>
-        <div class="wa-steps">
-          <div class="wa-step">
-            <div class="wa-step-num">1</div>
-            <div class="wa-step-text">
-              <span data-lang="ka" class="active"><strong>დააჭირეთ ღილაკს</strong> — WhatsApp-ი გაიხსნება ავტომატურად Mokri-ის ნომერზე.</span>
-              <span data-lang="en"><strong>Click the button</strong> — WhatsApp opens automatically to Mokri's number.</span>
-              <span data-lang="ru"><strong>Нажмите кнопку</strong> — WhatsApp откроется автоматически на номер Mokri.</span>
-            </div>
-          </div>
-          <div class="wa-step">
-            <div class="wa-step-num">2</div>
-            <div class="wa-step-text">
-              <span data-lang="ka" class="active"><strong>აღწერეთ პრობლემა</strong> — "გთხოვთ, Macbook-ზე Microsoft Office დამიყენოთ" ან სხვა ნებისმიერი.</span>
-              <span data-lang="en"><strong>Describe your issue</strong> — "Please install Microsoft Office on my Mac" or anything else you need.</span>
-              <span data-lang="ru"><strong>Опишите проблему</strong> — "Установите Microsoft Office на мой Mac" или любую другую задачу.</span>
-            </div>
-          </div>
-          <div class="wa-step">
-            <div class="wa-step-num">3</div>
-            <div class="wa-step-text">
-              <span data-lang="ka" class="active"><strong>ჩვენ ვპასუხობთ</strong> — სპეციალისტი დაგიდასტურებთ დავალების მიღებას და შეუდგება მუშაობას.</span>
-              <span data-lang="en"><strong>We respond</strong> — A specialist will confirm receipt of your task and get to work immediately.</span>
-              <span data-lang="ru"><strong>Мы отвечаем</strong> — специалист подтвердит получение задачи и немедленно приступит к работе.</span>
-            </div>
-          </div>
-        </div>
-        <a href="https://wa.me/995555555555" target="_blank" rel="noopener noreferrer" class="btn-primary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          <span data-lang="ka" class="active">WhatsApp-ზე გადადი</span>
-          <span data-lang="en">Open WhatsApp</span>
-          <span data-lang="ru">Открыть WhatsApp</span>
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <!-- ═══════════════════════ TEAM ═══════════════════════ -->
 <section class="team" id="team">
@@ -1488,12 +1234,12 @@
 <footer>
   <div class="footer-brand">MOK<span>RI</span></div>
   <div class="footer-links">
-    <a href="#services">
-      <span data-lang="ka" class="active">სერვისები</span>
-      <span data-lang="en">Services</span>
-      <span data-lang="ru">Услуги</span>
+    <a href="business.html">
+      <span data-lang="ka" class="active">იურიდიული პირები</span>
+      <span data-lang="en">Business</span>
+      <span data-lang="ru">Бизнес</span>
     </a>
-    <a href="#individuals">
+    <a href="individuals.html">
       <span data-lang="ka" class="active">ფიზიკური პირები</span>
       <span data-lang="en">Individuals</span>
       <span data-lang="ru">Частные Лица</span>
@@ -1543,13 +1289,6 @@
 
     // Update html lang
     document.documentElement.lang = lang;
-  }
-
-  function showTab(tab, btn) {
-    document.getElementById('tab-business').style.display = tab === 'business' ? 'grid' : 'none';
-    document.getElementById('tab-personal').style.display = tab === 'personal' ? 'grid' : 'none';
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
   }
 
   function submitForm(btn) {
