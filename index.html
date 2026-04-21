@@ -51,8 +51,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
     padding: 0 40px;
-    height: 56px;
+    height: 64px;
     background: rgba(10,23,40,0.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
@@ -67,6 +68,45 @@
     text-decoration: none;
   }
   .lang-bar-logo span { color: var(--blue); }
+
+  .header-menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .menu-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    min-height: 36px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    color: var(--white-dim);
+    text-decoration: none;
+    font-family: 'Noto Sans Georgian', 'EB Garamond', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.25s;
+    white-space: nowrap;
+  }
+
+  .menu-link:hover,
+  .menu-link:focus-visible {
+    color: var(--white);
+    border-color: var(--border);
+    background: rgba(77,155,253,0.08);
+    outline: none;
+  }
+
+  .menu-link.menu-shop {
+    border-color: var(--border);
+    background: rgba(77,155,253,0.12);
+    color: var(--white);
+  }
 
   .lang-switcher {
     display: flex;
@@ -141,8 +181,10 @@
   }
 
   .hero-logo svg {
-    width: 120px;
-    height: 120px;
+    width: 164px;
+    height: 164px;
+    display: block;
+    margin: 0 auto;
     filter: drop-shadow(0 0 30px rgba(77,155,253,0.5));
   }
 
@@ -342,6 +384,14 @@
     font-size: 13px;
     color: var(--white-dim);
     letter-spacing: 1px;
+  }
+
+  .stat-subnote {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    letter-spacing: 0.2px;
+    color: rgba(254,254,254,0.55);
   }
 
   /* ——— SERVICES ——— */
@@ -585,99 +635,6 @@
     border: none;
   }
 
-  /* ——— SHOP SECTION ——— */
-  .shop { background: var(--bg3); }
-
-  .shop-card {
-    background: linear-gradient(135deg, rgba(77,155,253,0.08), rgba(26,59,108,0.15));
-    border: 1px solid var(--blue);
-    border-radius: 16px;
-    padding: 64px;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 60px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .shop-card::before {
-    content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(77,155,253,0.1) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .shop-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    background: rgba(77,155,253,0.15);
-    border: 1px solid var(--blue);
-    border-radius: 20px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--blue);
-    margin-bottom: 24px;
-  }
-
-  .shop-title {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 900;
-    font-size: clamp(24px, 3vw, 36px);
-    margin-bottom: 16px;
-    line-height: 1.2;
-  }
-
-  .shop-url {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 700;
-    font-size: clamp(16px, 2vw, 22px);
-    color: var(--blue);
-    margin-bottom: 20px;
-    letter-spacing: 2px;
-  }
-
-  .shop-desc {
-    font-size: 17px;
-    color: var(--white-dim);
-    max-width: 480px;
-    font-style: italic;
-  }
-
-  .shop-visual {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    min-width: 180px;
-  }
-
-  .shop-icon-box {
-    width: 120px; height: 120px;
-    background: var(--blue-dim);
-    border: 1px solid var(--blue);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .shop-icon-box svg { width: 56px; height: 56px; fill: var(--blue); }
-
-  .shop-notify {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 9px;
-    letter-spacing: 2px;
-    color: var(--white-dim);
-    text-align: center;
-  }
-
   /* ——— TEAM ——— */
   .team { background: var(--bg2); }
 
@@ -897,7 +854,6 @@
     .team-grid { grid-template-columns: 1fr 1fr; }
     .whatsapp-feature { grid-template-columns: 1fr; }
     .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-    .shop-card { grid-template-columns: 1fr; gap: 40px; }
     .stats-inner { grid-template-columns: 1fr 1fr; }
     .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
   }
@@ -905,9 +861,22 @@
   @media (max-width: 600px) {
     .services-grid { grid-template-columns: 1fr; }
     .team-grid { grid-template-columns: 1fr; }
-    .lang-bar { padding: 0 20px; }
+    .lang-bar {
+      padding: 10px 16px;
+      height: auto;
+      min-height: 64px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .header-menu {
+      order: 3;
+      width: 100%;
+      justify-content: flex-start;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .menu-link { font-size: 12px; }
     .section-inner { padding: 70px 24px; }
-    .shop-card { padding: 36px 24px; }
   }
 
   /* ——— WA BUTTON FLOATING ——— */
@@ -942,6 +911,28 @@
 <!-- ——— LANGUAGE BAR ——— -->
 <header class="lang-bar">
   <a href="#" class="lang-bar-logo">MOK<span>RI</span></a>
+  <nav class="header-menu" aria-label="Main navigation">
+    <a class="menu-link" href="individuals.html">
+      <span data-lang="ka" class="active">ფიზიკური პირები</span>
+      <span data-lang="en">Individuals</span>
+      <span data-lang="ru">Частные лица</span>
+    </a>
+    <a class="menu-link" href="business.html">
+      <span data-lang="ka" class="active">იურიდიული პირები</span>
+      <span data-lang="en">Business</span>
+      <span data-lang="ru">Бизнес</span>
+    </a>
+    <a class="menu-link" href="about.html">
+      <span data-lang="ka" class="active">ჩვენს შესახებ</span>
+      <span data-lang="en">About Us</span>
+      <span data-lang="ru">О нас</span>
+    </a>
+    <a class="menu-link menu-shop" href="shop.html">
+      <span data-lang="ka" class="active">ონლაინ მაღაზია</span>
+      <span data-lang="en">Online Shop</span>
+      <span data-lang="ru">Онлайн-магазин</span>
+    </a>
+  </nav>
   <nav class="lang-switcher">
     <button class="lang-btn active" onclick="setLang('ka')">ქარ</button>
     <button class="lang-btn" onclick="setLang('en')">ENG</button>
@@ -950,7 +941,7 @@
 </header>
 
 <!-- ——— FLOATING WHATSAPP ——— -->
-<a href="https://wa.me/995555555555" target="_blank" class="wa-float" title="WhatsApp">
+<a href="https://wa.me/995555555555" target="_blank" rel="noopener noreferrer" class="wa-float" title="WhatsApp">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
   </svg>
@@ -964,7 +955,6 @@
   <!-- Logo SVG (inline, simplified) -->
   <div class="hero-logo">
     <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
-      <rect width="280" height="280" fill="#0A1728" rx="40"/>
       <!-- Icon shape from brand -->
       <path fill="#FEFEFE" d="M152 94c1.7.4 4.7 1.4 6.4 2.1 4.6 1.8 9.3 3.6 14.1 5.3-1.7 5-3.1 10.6-4.5 15.9l-7.6-.2c.6-3.1 2.1-8 2.9-11.5l-12.4-4.6c.4-2.2 1.2-5.2 1.1-7z"/>
       <path fill="#FEFEFE" d="M128 93.9h.1c.5.4 1.5 5.8 1.7 6.8l-12 4.6c.8 3.5 2 6.8 2.6 10.3l-7.6.1-.4-.1c-.7-1.2-3.6-13.2-4.1-15.9 6.3-2.9 13.5-5.5 19.7-5.8z"/>
@@ -1002,7 +992,7 @@
   </p>
 
   <div class="hero-actions">
-    <a href="https://wa.me/995555555555" target="_blank" class="btn-primary">
+    <a href="https://wa.me/995555555555" target="_blank" rel="noopener noreferrer" class="btn-primary">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       <span data-lang="ka" class="active">WhatsApp-ით კავშირი</span>
       <span data-lang="en">Chat on WhatsApp</span>
@@ -1025,11 +1015,15 @@
 <div class="stats-bar">
   <div class="stats-inner">
     <div class="stat-item">
-      <div class="stat-num">≤1h</div>
+      <div class="stat-num">
+        <span data-lang="ka" class="active">≤30წთ</span>
+        <span data-lang="en">≤30m</span>
+        <span data-lang="ru">≤30мин</span>
+      </div>
       <div class="stat-label">
-        <span data-lang="ka" class="active">სწრაფი პასუხი</span>
-        <span data-lang="en">Fast Response</span>
-        <span data-lang="ru">Быстрый Ответ</span>
+        <span data-lang="ka" class="active">სწრაფი პასუხის დრო</span>
+        <span data-lang="en">Fast Response Time</span>
+        <span data-lang="ru">Время Быстрого Ответа</span>
       </div>
     </div>
     <div class="stat-item">
@@ -1046,6 +1040,11 @@
         <span data-lang="ka" class="active">დისტანციურად</span>
         <span data-lang="en">Remote Work</span>
         <span data-lang="ru">Удалённо</span>
+      </div>
+      <div class="stat-subnote">
+        <span data-lang="ka" class="active">საჭიროების შემთხვევაში ბუნებრივია გამოვცხადდებით ადგილზე.</span>
+        <span data-lang="en">If needed, we can naturally be on-site.</span>
+        <span data-lang="ru">При необходимости, выезжаем на место.</span>
       </div>
     </div>
     <div class="stat-item">
@@ -1299,7 +1298,7 @@
             </div>
           </div>
         </div>
-        <a href="https://wa.me/995555555555" target="_blank" class="btn-primary">
+        <a href="https://wa.me/995555555555" target="_blank" rel="noopener noreferrer" class="btn-primary">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           <span data-lang="ka" class="active">WhatsApp-ზე გადადი</span>
           <span data-lang="en">Open WhatsApp</span>
@@ -1307,48 +1306,6 @@
         </a>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════ SHOP ═══════════════════════ -->
-<section class="shop" id="shop">
-  <div class="section-inner">
-    <div class="shop-card">
-      <div>
-        <div class="shop-badge">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-          <span data-lang="ka" class="active">მალე</span>
-          <span data-lang="en">COMING SOON</span>
-          <span data-lang="ru">СКОРО</span>
-        </div>
-        <div class="shop-title">
-          <span data-lang="ka" class="active">Mokri Online მაღაზია</span>
-          <span data-lang="en">Mokri Online Store</span>
-          <span data-lang="ru">Интернет-магазин Mokri</span>
-        </div>
-        <div class="shop-url">shop.mokri.ge</div>
-        <p class="shop-desc">
-          <span data-lang="ka" class="active">IT ტექნიკა, პერიფერია, კამერები, ქსელის მოწყობილობები და სხვა — ყველაფერი ერთ ადგილას, Mokri-ის ხარისხის გარანტიით. სერვისი და პროდუქტი ერთი ბრენდიდან.</span>
-          <span data-lang="en">IT hardware, peripherals, cameras, networking equipment and more — all in one place, backed by Mokri's quality guarantee. Service and product from a single trusted brand.</span>
-          <span data-lang="ru">IT-оборудование, периферия, камеры, сетевые устройства и многое другое — всё в одном месте с гарантией качества Mokri. Сервис и продукт от одного бренда.</span>
-        </p>
-      </div>
-      <div class="shop-visual">
-        <div class="shop-icon-box">
-          <svg viewBox="0 0 24 24"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>
-        </div>
-        <div class="shop-notify">
-          <span data-lang="ka" class="active">გამოგვიგზავნეთ შეტყობინება<br>გახსნისას</span>
-          <span data-lang="en">Notify me when live</span>
-          <span data-lang="ru">Уведомить об открытии</span>
-        </div>
-        <a href="https://wa.me/995555555555?text=shop.mokri.ge%20-%20%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%AA%E1%83%A3%E1%83%93%E1%83%94%E1%83%91%E1%83%98%E1%83%A1%E1%83%90%E1%83%A1%20%E1%83%A8%E1%83%94%E1%83%9B%E1%83%90%E1%83%A2%E1%83%98%E1%83%A7%E1%83%95%E1%83%9C%E1%83%94%E1%83%91%E1%83%98%E1%83%97%20%E1%83%9B%E1%83%90%E1%83%AA%E1%83%9C%E1%83%9D%E1%83%91%E1%83%90" target="_blank" class="btn-outline" style="font-size:10px;padding:10px 20px;margin-top:8px">
-          <span data-lang="ka" class="active">შეგვატყობინე</span>
-          <span data-lang="en">Notify Me</span>
-          <span data-lang="ru">Уведомить</span>
-        </a>
-      </div>
     </div>
   </div>
 </section>
@@ -1541,7 +1498,11 @@
       <span data-lang="en">Individuals</span>
       <span data-lang="ru">Частные Лица</span>
     </a>
-    <a href="#shop">shop.mokri.ge</a>
+    <a href="shop.html">
+      <span data-lang="ka" class="active">ონლაინ მაღაზია</span>
+      <span data-lang="en">Online Shop</span>
+      <span data-lang="ru">Онлайн-магазин</span>
+    </a>
     <a href="#team">
       <span data-lang="ka" class="active">გუნდი</span>
       <span data-lang="en">Team</span>
