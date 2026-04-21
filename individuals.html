@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ფიზიკური პირები — MOKRI</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+Georgian:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A1728;--bg2:#0d1e35;--blue:#4D9BFD;--white:#FEFEFE;--dim:rgba(254,254,254,.7);--border:rgba(77,155,253,.24)}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Noto Sans Georgian',sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--white);min-height:100vh}
+.header{position:sticky;top:0;display:flex;align-items:center;gap:14px;padding:14px 20px;background:rgba(10,23,40,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.brand{font-family:'Orbitron',sans-serif;font-weight:900;letter-spacing:3px;color:var(--white);text-decoration:none}.brand span{color:var(--blue)}
+.nav{display:flex;flex-wrap:wrap;gap:8px}.nav a{color:var(--dim);text-decoration:none;padding:8px 12px;border-radius:999px;border:1px solid transparent}.nav a.active,.nav a:hover{border-color:var(--border);background:rgba(77,155,253,.14);color:var(--white)}
+.wrap{max-width:1000px;margin:0 auto;padding:52px 20px}
+.h1{font-family:'Orbitron',sans-serif;font-size:clamp(30px,5vw,52px);margin-bottom:14px}.h1 span{color:var(--blue)}
+.lead{color:var(--dim);font-size:18px;margin-bottom:28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.card{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;padding:18px}
+.card h3{font-size:16px;margin-bottom:8px}.card p{color:var(--dim);font-size:14px;line-height:1.6}
+.cta{margin-top:24px;display:inline-block;text-decoration:none;padding:12px 18px;border-radius:8px;border:1px solid var(--blue);background:var(--blue);color:var(--bg);font-weight:700}
+</style>
+</head>
+<body>
+<header class="header">
+  <a class="brand" href="index.html">MOK<span>RI</span></a>
+  <nav class="nav" aria-label="Main navigation">
+    <a class="active" href="individuals.html">ფიზიკური პირები</a>
+    <a href="business.html">იურიდიული პირები</a>
+    <a href="about.html">ჩვენს შესახებ</a>
+    <a href="shop.html">ონლაინ მაღაზია</a>
+  </nav>
+</header>
+<main class="wrap">
+  <h1 class="h1">ფიზიკური <span>პირებისთვის</span></h1>
+  <p class="lead">პერსონალური ტექნიკის სწრაფი, უსაფრთხო და კომფორტული მხარდაჭერა — დისტანციურად ან საჭიროების შემთხვევაში ადგილზე.</p>
+  <section class="grid">
+    <article class="card"><h3>დიაგნოსტიკა და ოპტიმიზაცია</h3><p>ნელი კომპიუტერი, გაყინვები, სისტემური პრობლემები — სწრაფი დიაგნოსტიკა და მუშაობის გაუმჯობესება.</p></article>
+    <article class="card"><h3>პროგრამების ინსტალაცია</h3><p>Windows/macOS პროგრამების ინსტალაცია, ლიცენზირების კონფიგურაცია და უსაფრთხო განახლება.</p></article>
+    <article class="card"><h3>Wi‑Fi და სახლის ქსელი</h3><p>როუტერის გამართვა, სიგნალის გაუმჯობესება, უსაფრთხო პარამეტრები და სტაბილური კავშირი.</p></article>
+    <article class="card"><h3>მონაცემების დაცვა</h3><p>სარეზერვო ასლები, ანტივირუსი, ანგარიშების გამაგრება და პირადი ინფორმაციის დაცვა.</p></article>
+  </section>
+  <a class="cta" href="https://wa.me/995555555555" target="_blank" rel="noopener noreferrer">დაგვიკავშირდი WhatsApp-ზე</a>
+</main>
+</body>
+</html>
