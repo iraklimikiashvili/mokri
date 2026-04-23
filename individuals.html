@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+<title>ფიზიკური პირები — MOKRI IT</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+Georgian:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A1728;
+    --bg2: #0d1e35;
+    --navy: #1A3B6C;
+    --blue: #4D9BFD;
+    --blue-dim: rgba(77,155,253,0.15);
+    --blue-glow: rgba(77,155,253,0.35);
+    --white: #FEFEFE;
+    --white-dim: rgba(254,254,254,0.65);
+    --white-faint: rgba(254,254,254,0.06);
+    --border: rgba(77,155,253,0.18);
+    --accent: #7EC8E3;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Noto Sans Georgian', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  body::before {
+    content:'';
+    position:fixed; inset:0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events:none; z-index:0; opacity:.35;
+  }
+
+  /* ——— HEADER ——— */
+  .header {
+    position: fixed; top:0; right:0; left:0; z-index:1000;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 24px;
+    padding: 0 36px;
+    height: 60px;
+    background: rgba(10,23,40,0.95);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-logo {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900; font-size: 17px;
+    letter-spacing: 4px; color: var(--white);
+    text-decoration: none; transition: opacity 0.2s;
+  }
+  .header-logo:hover { opacity: 0.8; }
+  .header-logo span { color: var(--blue); }
+
+  .header-nav {
+    display: flex; justify-content: center;
+    align-items: center; gap: 4px;
+  }
+
+  .nav-link {
+    position: relative; padding: 7px 14px;
+    font-family: 'Noto Sans Georgian', sans-serif;
+    font-size: 12.5px; font-weight: 600;
+    color: rgba(254,254,254,0.7);
+    text-decoration: none; border-radius: 6px;
+    transition: all 0.22s ease; white-space: nowrap;
+  }
+  .nav-link::after {
+    content:''; position:absolute; bottom:3px; left:50%;
+    transform: translateX(-50%) scaleX(0);
+    width:60%; height:1.5px; background: var(--blue);
+    border-radius:2px; transition: transform 0.22s ease;
+  }
+  .nav-link:hover { color:var(--white); background:rgba(77,155,253,0.08); }
+  .nav-link:hover::after { transform: translateX(-50%) scaleX(1); }
+  .nav-link.active { color:var(--blue); background:rgba(77,155,253,0.1); }
+  .nav-link.shop-link {
+    color:var(--blue); border:1px solid rgba(77,155,253,0.35);
+    margin-left:8px; font-size:11.5px; letter-spacing:1px;
+  }
+  .nav-link.shop-link:hover { background:var(--blue); color:var(--bg); box-shadow:0 0 18px var(--blue-glow); }
+  .nav-link.shop-link::after { display:none; }
+
+  .lang-switcher {
+    display:flex; gap:4px;
+    background:var(--white-faint); border:1px solid var(--border);
+    border-radius:6px; padding:3px;
+  }
+  .lang-btn {
+    padding:5px 13px;
+    font-family:'Orbitron',sans-serif; font-size:9.5px; font-weight:700;
+    letter-spacing:2px; border:none; background:transparent;
+    color:var(--white-dim); border-radius:4px; cursor:pointer; transition:all 0.25s;
+  }
+  .lang-btn.active { background:var(--blue); color:var(--bg); }
+
+  @media(max-width:660px) {
+    .header { grid-template-columns:auto auto; height:auto; padding:10px 16px; }
+    .header-nav { display:none; }
+  }
+
+  /* ——— HERO ——— */
+  .hero {
+    position:relative; min-height:52vh;
+    display:flex; flex-direction:column;
+    justify-content:center; align-items:flex-start;
+    padding: 120px 80px 80px;
+    overflow:hidden;
+  }
+
+  .hero::before {
+    content:'';
+    position:absolute; inset:0;
+    background:
+      linear-gradient(rgba(77,155,253,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(77,155,253,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-glow {
+    position:absolute; width:700px; height:500px;
+    background: radial-gradient(ellipse, rgba(77,155,253,0.1) 0%, transparent 65%);
+    top:50%; right:-100px; transform:translateY(-50%);
+    pointer-events:none;
+  }
+
+  .hero-eyebrow {
+    position:relative;
+    font-family:'Orbitron',sans-serif; font-size:10px;
+    font-weight:700; letter-spacing:4px; color:var(--blue);
+    text-transform:uppercase; margin-bottom:20px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .hero-eyebrow::before {
+    content:''; width:32px; height:1px; background:var(--blue);
+  }
+
+  .hero-title {
+    position:relative;
+    font-family:'Orbitron',sans-serif; font-weight:900;
+    font-size: clamp(36px, 6vw, 72px);
+    letter-spacing:2px; line-height:1.1;
+    margin-bottom:28px;
+  }
+  .hero-title span { color:var(--blue); }
+
+  .hero-desc {
+    position:relative; max-width:580px;
+    font-size:17px; color:var(--white-dim);
+    line-height:1.8; margin-bottom:44px;
+    font-family:'EB Garamond',Georgia,serif;
+  }
+
+  .hero-cta {
+    position:relative; display:flex; gap:16px; flex-wrap:wrap;
+  }
+
+  .btn-primary {
+    display:inline-flex; align-items:center; gap:10px;
+    padding:14px 32px; background:var(--blue); color:var(--bg);
+    font-family:'Orbitron',sans-serif; font-size:10.5px;
+    font-weight:700; letter-spacing:2px; border-radius:6px;
+    text-decoration:none; transition:all 0.25s;
+    border:1px solid transparent;
+  }
+  .btn-primary:hover {
+    background:transparent; color:var(--blue); border-color:var(--blue);
+    box-shadow:0 0 24px var(--blue-glow);
+  }
+
+  .btn-outline {
+    display:inline-flex; align-items:center; gap:10px;
+    padding:14px 32px; background:transparent; color:var(--white);
+    font-family:'Orbitron',sans-serif; font-size:10.5px;
+    font-weight:700; letter-spacing:2px; border:1px solid var(--border);
+    border-radius:6px; text-decoration:none; transition:all 0.25s;
+  }
+  .btn-outline:hover { border-color:var(--blue); color:var(--blue); }
+
+  /* ——— SERVICES ——— */
+  .services {
+    position:relative; z-index:1;
+    background:var(--bg2); padding:80px 80px;
+  }
+
+  .section-eyebrow {
+    font-family:'Orbitron',sans-serif; font-size:10px;
+    font-weight:700; letter-spacing:4px; color:var(--blue);
+    text-transform:uppercase; margin-bottom:16px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .section-eyebrow::before { content:''; width:32px; height:1px; background:var(--blue); }
+
+  .section-title {
+    font-family:'Orbitron',sans-serif; font-weight:900;
+    font-size:clamp(26px, 3.5vw, 40px); letter-spacing:2px;
+    margin-bottom:52px; line-height:1.2;
+  }
+  .section-title span { color:var(--blue); }
+
+  .services-grid {
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;
+  }
+
+  @media(max-width:900px){ .services-grid { grid-template-columns:1fr 1fr; } }
+  @media(max-width:600px){ .services-grid { grid-template-columns:1fr; } hero { padding:100px 24px 60px; } .services { padding:60px 24px; } }
+
+  .svc-card {
+    background:var(--white-faint); border:1px solid var(--border);
+    border-radius:12px; padding:32px 28px;
+    transition:all 0.3s ease; cursor:default;
+    opacity:0; transform:translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s, box-shadow 0.3s;
+  }
+  .svc-card:hover {
+    border-color:rgba(77,155,253,0.5);
+    box-shadow:0 8px 32px rgba(77,155,253,0.1);
+    transform:translateY(-3px) !important;
+  }
+
+  .svc-icon {
+    width:52px; height:52px; background:var(--blue-dim);
+    border:1px solid var(--blue); border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:20px;
+  }
+  .svc-icon svg { width:24px; height:24px; fill:var(--blue); }
+
+  .svc-name {
+    font-family:'Noto Sans Georgian',sans-serif;
+    font-size:15px; font-weight:700; margin-bottom:10px;
+    color:var(--white);
+  }
+  .svc-desc {
+    font-family:'EB Garamond',Georgia,serif;
+    font-size:15px; color:var(--white-dim); line-height:1.7;
+  }
+
+  /* ——— PROCESS ——— */
+  .process { position:relative; z-index:1; background:var(--bg); padding:80px 80px; }
+
+  .steps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:32px; }
+  @media(max-width:800px){ .steps-grid { grid-template-columns:1fr; } }
+
+  .step { display:flex; gap:20px; align-items:flex-start; }
+
+  .step-num {
+    font-family:'Orbitron',sans-serif; font-size:36px; font-weight:900;
+    color:rgba(77,155,253,0.2); line-height:1; flex-shrink:0; width:48px;
+  }
+
+  .step-content {}
+  .step-title {
+    font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700;
+    letter-spacing:1px; color:var(--blue); margin-bottom:8px;
+    text-transform:uppercase;
+  }
+  .step-text { font-size:15px; color:var(--white-dim); line-height:1.7; font-family:'EB Garamond',Georgia,serif; }
+
+  /* ——— CTA SECTION ——— */
+  .cta-section {
+    position:relative; z-index:1; background:var(--bg2);
+    padding:60px 80px;
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+  }
+
+  .cta-inner {
+    max-width:1040px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:40px; flex-wrap:wrap;
+  }
+
+  .cta-text-block h3 {
+    font-family:'Orbitron',sans-serif; font-size:22px; font-weight:900;
+    letter-spacing:2px; margin-bottom:10px;
+  }
+  .cta-text-block p { font-size:16px; color:var(--white-dim); font-family:'EB Garamond',Georgia,serif; }
+
+  /* ——— FOOTER ——— */
+  footer {
+    background:rgba(0,0,0,0.4); border-top:1px solid var(--border);
+    padding:40px; text-align:center;
+  }
+  .footer-brand {
+    font-family:'Orbitron',sans-serif; font-weight:900; font-size:18px;
+    letter-spacing:6px; margin-bottom:16px;
+  }
+  .footer-brand span { color:var(--blue); }
+  .footer-copy { font-size:13px; color:var(--white-dim); opacity:0.5; }
+
+  [data-lang] { display:none; }
+  [data-lang].active { display:block; }
+  .li[data-lang] { display:none; }
+  .li[data-lang].active { display:inline; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <a href="index.html" class="header-logo" aria-label="MOKRI - მთავარი">MOK<span>RI</span></a>
+  <nav class="header-nav" aria-label="მთავარი ნავიგაცია">
+    <a href="individuals.html" class="nav-link active">
+      <span data-lang="ka" class="active">ფიზიკური პირები</span>
+      <span data-lang="en">Individuals</span>
+      <span data-lang="ru">Частные Лица</span>
+    </a>
+    <a href="business.html" class="nav-link">
+      <span data-lang="ka" class="active">იურიდიული პირები</span>
+      <span data-lang="en">Business</span>
+      <span data-lang="ru">Бизнес</span>
+    </a>
+    <a href="about.html" class="nav-link">
+      <span data-lang="ka" class="active">ჩვენს შესახებ</span>
+      <span data-lang="en">About Us</span>
+      <span data-lang="ru">О Нас</span>
+    </a>
+    <a href="index.html#contact" class="nav-link">
+      <span data-lang="ka" class="active">კავშირი</span>
+      <span data-lang="en">Contact</span>
+      <span data-lang="ru">Контакты</span>
+    </a>
+    <a href="https://shop.mokri.ge" target="_blank" rel="noopener noreferrer" class="nav-link shop-link">
+      <span>shop.mokri.ge</span>
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="margin-left:4px;opacity:0.7"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6m0 0v6m0-6L10 14"/></svg>
+    </a>
+  </nav>
+  <div class="lang-switcher" role="group" aria-label="ენის არჩევა">
+    <button class="lang-btn active" onclick="setLang('ka')">ქარ</button>
+    <button class="lang-btn" onclick="setLang('en')">ENG</button>
+    <button class="lang-btn" onclick="setLang('ru')">РУС</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-eyebrow">
+    <span data-lang="ka" class="active">ფიზიკური პირები</span>
+    <span data-lang="en">Personal IT Services</span>
+    <span data-lang="ru">Услуги для частных лиц</span>
+  </div>
+  <h1 class="hero-title">
+    <span data-lang="ka" class="active">თქვენი პირადი<br>IT <span>ასისტენტი</span></span>
+    <span data-lang="en">Your Personal<br>IT <span>Assistant</span></span>
+    <span data-lang="ru">Ваш личный<br>IT <span>ассистент</span></span>
+  </h1>
+  <p class="hero-desc">
+    <span data-lang="ka" class="active">კომპიუტერის პრობლემა, ინტერნეტი, ტელეფონი, ვირუსი — ჩვენ ვართ ყოველთვის ხელმისაწვდომი. სწრაფი, სანდო, დისტანციური მხარდაჭერა — WhatsApp-ზე ერთი შეტყობინებით.</span>
+    <span data-lang="en">Computer trouble, internet issues, phone, virus — we're always available. Fast, reliable, remote support — one message on WhatsApp.</span>
+    <span data-lang="ru">Проблема с компьютером, интернетом, телефоном или вирус — мы всегда на связи. Быстрая, надёжная, удалённая поддержка — одно сообщение в WhatsApp.</span>
+  </p>
+  <div class="hero-cta">
+    <a href="https://wa.me/995555555555" target="_blank" rel="noopener noreferrer" class="btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <span data-lang="ka" class="active">WhatsApp-ით კავშირი</span>
+      <span data-lang="en">Chat on WhatsApp</span>
+      <span data-lang="ru">Написать в WhatsApp</span>
+    </a>
+    <a href="index.html" class="btn-outline">
+      <span data-lang="ka" class="active">← მთავარი გვერდი</span>
+      <span data-lang="en">← Back to Home</span>
+      <span data-lang="ru">← На главную</span>
+    </a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <div class="section-eyebrow">
+    <span data-lang="ka" class="active">სერვისები</span>
+    <span data-lang="en">Services</span>
+    <span data-lang="ru">Услуги</span>
+  </div>
+  <h2 class="section-title">
+    <span data-lang="ka" class="active">რით შეგვიძლია <span>დაგეხმაროთ</span></span>
+    <span data-lang="en">How We Can <span>Help You</span></span>
+    <span data-lang="ru">Чем мы можем <span>помочь</span></span>
+  </h2>
+  <div class="services-grid">
+
+    <div class="svc-card">
+      <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+      <div class="svc-name">
+        <span data-lang="ka" class="active">კომპიუტერის რემონტი</span>
+        <span data-lang="en">Computer Repair</span>
+        <span data-lang="ru">Ремонт компьютера</span>
+      </div>
+      <p class="svc-desc">
+        <span data-lang="ka" class="active">ნელი კომპიუტერი, გათიშვა, ეკრანის პრობლემა, Windows-ის ინსტალაცია, დრაივერები — ყველაფერი დისტანციურად.</span>
+        <span data-lang="en">Slow computer, crashes, screen issues, Windows installation, drivers — all handled remotely.</span>
+        <span data-lang="ru">Медленный ПК, вылеты, проблемы с экраном, установка Windows, драйверы — всё удалённо.</span>
+      </p>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg></div>
+      <div class="svc-name">
+        <span data-lang="ka" class="active">ვირუსის მოშორება</span>
+        <span data-lang="en">Virus Removal</span>
+        <span data-lang="ru">Удаление вирусов</span>
+      </div>
+      <p class="svc-desc">
+        <span data-lang="ka" class="active">მავნე პროგრამების, რეკლამების, გამოსყიდვის ვირუსების სრული გაწმენდა. მონაცემები დაცული, კომპიუტერი სუფთა.</span>
+        <span data-lang="en">Complete removal of malware, adware, ransomware. Your data stays safe, your computer clean.</span>
+        <span data-lang="ru">Полная очистка от вирусов, рекламного ПО, шифровальщиков. Данные в безопасности, ПК чистый.</span>
+      </p>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.14 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/></svg></div>
+      <div class="svc-name">
+        <span data-lang="ka" class="active">ინტერნეტი და WiFi</span>
+        <span data-lang="en">Internet & WiFi</span>
+        <span data-lang="ru">Интернет и WiFi</span>
+      </div>
+      <p class="svc-desc">
+        <span data-lang="ka" class="active">WiFi-ის კონფიგურაცია, სიჩქარის ოპტიმიზაცია, როუტერის დაყენება, ქსელის უსაფრთხოება სახლში.</span>
+        <span data-lang="en">WiFi setup, speed optimization, router configuration, home network security.</span>
+        <span data-lang="ru">Настройка WiFi, оптимизация скорости, настройка роутера, безопасность домашней сети.</span>
+      </p>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 18h.01M8 21h8a2 2 0 002-2v-2H6v2a2 2 0 002 2zM3 9a9 9 0 1118 0H3z"/></svg></div>
+      <div class="svc-name">
+        <span data-lang="ka" class="active">ტელეფონის დახმარება</span>
+        <span data-lang="en">Phone Support</span>
+        <span data-lang="ru">Помощь с телефоном</span>
+      </div>
+      <p class="svc-desc">
+        <span data-lang="ka" class="active">Android / iPhone-ის პრობლემები, აპების კონფიგურაცია, მონაცემების გადატანა, ელ-ფოსტის დაყენება.</span>
+        <span data-lang="en">Android / iPhone issues, app setup, data migration, email configuration.</span>
+        <span data-lang="ru">Проблемы Android/iPhone, настройка приложений, перенос данных, настройка почты.</span>
+      </p>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+      <div class="svc-name">
+        <span data-lang="ka" class="active">მონაცემების სარეზერვო</span>
+        <span data-lang="en">Data Backup</span>
+        <span data-lang="ru">Резервное копирование</span>
+      </div>
+      <p class="svc-desc">
+        <span data-lang="ka" class="active">ფოტოების, დოკუმენტების, მნიშვნელოვანი ფაილების Cloud-სა და გარე მეხსიერებაზე სარეზერვო კოპიის შექმნა.</span>
+        <span data-lang="en">Backup photos, documents, important files to cloud and external storage.</span>
+        <span data-lang="ru">Резервное копирование фото, документов, важных файлов в облако и на внешний накопитель.</span>
+      </p>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg></div>
+      <div class="svc-name">
+        <span data-lang="ka" class="active">ციფრული უსაფრთხოება</span>
+        <span data-lang="en">Digital Security</span>
+        <span data-lang="ru">Цифровая безопасность</span>
+      </div>
+      <p class="svc-desc">
+        <span data-lang="ka" class="active">პაროლების მენეჯმენტი, ორფაქტორიანი ავთენტიფიკაცია, ანტივირუსი — თქვენი ციფრული ცხოვრება დაცულია.</span>
+        <span data-lang="en">Password management, two-factor authentication, antivirus — your digital life protected.</span>
+        <span data-lang="ru">Управление паролями, двухфакторная аутентификация, антивирус — защита вашей цифровой жизни.</span>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="section-eyebrow">
+    <span data-lang="ka" class="active">პროცესი</span>
+    <span data-lang="en">How It Works</span>
+    <span data-lang="ru">Как это работает</span>
+  </div>
+  <h2 class="section-title">
+    <span data-lang="ka" class="active">3 <span>მარტივი</span> ნაბიჯი</span>
+    <span data-lang="en">3 <span>Simple</span> Steps</span>
+    <span data-lang="ru">3 <span>простых</span> шага</span>
+  </h2>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <div class="step-title">
+          <span data-lang="ka" class="active">დაგვიკავშირდით</span>
+          <span data-lang="en">Contact Us</span>
+          <span data-lang="ru">Свяжитесь с нами</span>
+        </div>
+        <p class="step-text">
+          <span data-lang="ka" class="active">გამოგვიგზავნეთ შეტყობინება WhatsApp-ში, ელ-ფოსტაზე ან საკონტაქტო ფორმით. ≤30 წუთში გავეცი პასუხი.</span>
+          <span data-lang="en">Send us a message on WhatsApp, email, or contact form. We respond within ≤30 minutes.</span>
+          <span data-lang="ru">Напишите нам в WhatsApp, по email или через форму. Ответим в течение ≤30 минут.</span>
+        </p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <div class="step-title">
+          <span data-lang="ka" class="active">დიაგნოსტიკა</span>
+          <span data-lang="en">Diagnosis</span>
+          <span data-lang="ru">Диагностика</span>
+        </div>
+        <p class="step-text">
+          <span data-lang="ka" class="active">სპეციალისტი გაუწევს დისტანციური კავშირის საშუალებით პრობლემის სწრაფ დიაგნოსტიკას და შეგატყობინებთ გადაწყვეტის პლანს.</span>
+          <span data-lang="en">Our specialist connects remotely, diagnoses the problem quickly, and explains the solution plan.</span>
+          <span data-lang="ru">Специалист подключается удалённо, быстро диагностирует проблему и объясняет план решения.</span>
+        </p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <div class="step-title">
+          <span data-lang="ka" class="active">გადაჭრა</span>
+          <span data-lang="en">Resolution</span>
+          <span data-lang="ru">Решение</span>
+        </div>
+        <p class="step-text">
+          <span data-lang="ka" class="active">პრობლემა გადაიჭრება, სპეციალისტი დაადასტურებს სამუშაოს დასრულებას. საჭიროების შემთხვევაში ადგილზეც ვცხადდებით.</span>
+          <span data-lang="en">Problem solved, specialist confirms completion. On-site visit available when needed.</span>
+          <span data-lang="ru">Проблема решена, специалист подтверждает завершение. При необходимости выезд на место.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-text-block">
+      <h3>
+        <span data-lang="ka" class="active">მზად ხართ? ≤30წთ-ში ვართ</span>
+        <span data-lang="en">Ready? We respond in ≤30min</span>
+        <span data-lang="ru">Готовы? Ответим за ≤30 мин</span>
+      </h3>
+      <p>
+        <span data-lang="ka" class="active">WhatsApp-ზე ერთი შეტყობინება — დანარჩენს ჩვენ ვიზრუნებთ.</span>
+        <span data-lang="en">One message on WhatsApp — we'll take care of the rest.</span>
+        <span data-lang="ru">Одно сообщение в WhatsApp — мы обо всём позаботимся.</span>
+      </p>
+    </div>
+    <a href="https://wa.me/995555555555" target="_blank" rel="noopener noreferrer" class="btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <span data-lang="ka" class="active">WhatsApp-ით კავშირი</span>
+      <span data-lang="en">Chat on WhatsApp</span>
+      <span data-lang="ru">Написать в WhatsApp</span>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">MOK<span>RI</span></div>
+  <div class="footer-copy">© 2025 MOKRI. 
+    <span data-lang="ka" class="active">ყველა უფლება დაცულია.</span>
+    <span data-lang="en">All rights reserved.</span>
+    <span data-lang="ru">Все права защищены.</span>
+  </div>
+</footer>
+
+<script>
+'use strict';
+let currentLang = 'ka';
+
+function setLang(lang) {
+  const allowed = ['ka','en','ru'];
+  if (!allowed.includes(lang)) return;
+  currentLang = lang;
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-lang') === lang);
+  });
+  document.querySelectorAll('.lang-btn').forEach((btn,i) => {
+    btn.classList.toggle('active', ['ka','en','ru'][i] === lang);
+  });
+  document.documentElement.lang = lang;
+  try { localStorage.setItem('mokri-lang', lang); } catch(e) {}
+}
+
+(function(){
+  try {
+    const s = localStorage.getItem('mokri-lang');
+    if (s && ['ka','en','ru'].includes(s)) setLang(s);
+  } catch(e){}
+})();
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.svc-card').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

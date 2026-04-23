@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+<title>ჩვენს შესახებ — MOKRI IT</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+Georgian:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A1728; --bg2: #0d1e35; --navy: #1A3B6C;
+    --blue: #4D9BFD; --blue-dim: rgba(77,155,253,0.15);
+    --blue-glow: rgba(77,155,253,0.35);
+    --white: #FEFEFE; --white-dim: rgba(254,254,254,0.65);
+    --white-faint: rgba(254,254,254,0.06);
+    --border: rgba(77,155,253,0.18);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--white); font-family:'Noto Sans Georgian',sans-serif; overflow-x:hidden; line-height:1.7; }
+  body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:0; opacity:.35; }
+
+  /* ——— HEADER ——— */
+  .header { position:fixed; top:0; right:0; left:0; z-index:1000; display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:24px; padding:0 36px; height:60px; background:rgba(10,23,40,0.95); backdrop-filter:blur(18px) saturate(180%); -webkit-backdrop-filter:blur(18px) saturate(180%); border-bottom:1px solid var(--border); }
+  .header-logo { font-family:'Orbitron',sans-serif; font-weight:900; font-size:17px; letter-spacing:4px; color:var(--white); text-decoration:none; transition:opacity 0.2s; }
+  .header-logo:hover { opacity:0.8; }
+  .header-logo span { color:var(--blue); }
+  .header-nav { display:flex; justify-content:center; align-items:center; gap:4px; }
+  .nav-link { position:relative; padding:7px 14px; font-family:'Noto Sans Georgian',sans-serif; font-size:12.5px; font-weight:600; color:rgba(254,254,254,0.7); text-decoration:none; border-radius:6px; transition:all 0.22s ease; white-space:nowrap; }
+  .nav-link::after { content:''; position:absolute; bottom:3px; left:50%; transform:translateX(-50%) scaleX(0); width:60%; height:1.5px; background:var(--blue); border-radius:2px; transition:transform 0.22s ease; }
+  .nav-link:hover { color:var(--white); background:rgba(77,155,253,0.08); }
+  .nav-link:hover::after { transform:translateX(-50%) scaleX(1); }
+  .nav-link.active { color:var(--blue); background:rgba(77,155,253,0.1); }
+  .nav-link.shop-link { color:var(--blue); border:1px solid rgba(77,155,253,0.35); margin-left:8px; font-size:11.5px; letter-spacing:1px; }
+  .nav-link.shop-link:hover { background:var(--blue); color:var(--bg); box-shadow:0 0 18px var(--blue-glow); }
+  .nav-link.shop-link::after { display:none; }
+  .lang-switcher { display:flex; gap:4px; background:var(--white-faint); border:1px solid var(--border); border-radius:6px; padding:3px; }
+  .lang-btn { padding:5px 13px; font-family:'Orbitron',sans-serif; font-size:9.5px; font-weight:700; letter-spacing:2px; border:none; background:transparent; color:var(--white-dim); border-radius:4px; cursor:pointer; transition:all 0.25s; }
+  .lang-btn.active { background:var(--blue); color:var(--bg); }
+  @media(max-width:660px){ .header { grid-template-columns:auto auto; height:auto; padding:10px 16px; } .header-nav { display:none; } }
+
+  /* ——— HERO ——— */
+  .hero { position:relative; min-height:48vh; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:120px 80px 60px; overflow:hidden; }
+  .hero::before { content:''; position:absolute; inset:0; background:linear-gradient(rgba(77,155,253,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(77,155,253,0.04) 1px, transparent 1px); background-size:60px 60px; }
+  .hero-glow { position:absolute; width:600px; height:400px; background:radial-gradient(ellipse,rgba(77,155,253,0.1) 0%,transparent 65%); top:50%; right:-50px; transform:translateY(-50%); pointer-events:none; }
+  .hero-eyebrow { position:relative; font-family:'Orbitron',sans-serif; font-size:10px; font-weight:700; letter-spacing:4px; color:var(--blue); text-transform:uppercase; margin-bottom:20px; display:flex; align-items:center; gap:12px; }
+  .hero-eyebrow::before { content:''; width:32px; height:1px; background:var(--blue); }
+  .hero-title { position:relative; font-family:'Orbitron',sans-serif; font-weight:900; font-size:clamp(36px,6vw,68px); letter-spacing:2px; line-height:1.1; margin-bottom:28px; }
+  .hero-title span { color:var(--blue); }
+  .hero-desc { position:relative; max-width:640px; font-size:18px; color:var(--white-dim); line-height:1.8; font-family:'EB Garamond',Georgia,serif; }
+
+  /* ——— SECTIONS ——— */
+  .section-eyebrow { font-family:'Orbitron',sans-serif; font-size:10px; font-weight:700; letter-spacing:4px; color:var(--blue); text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:12px; }
+  .section-eyebrow::before { content:''; width:32px; height:1px; background:var(--blue); }
+  .section-title { font-family:'Orbitron',sans-serif; font-weight:900; font-size:clamp(24px,3.5vw,38px); letter-spacing:2px; margin-bottom:48px; line-height:1.2; }
+  .section-title span { color:var(--blue); }
+
+  /* ——— MISSION ——— */
+  .mission { position:relative; z-index:1; background:var(--bg2); padding:80px 80px; }
+  .mission-content { max-width:780px; }
+  .mission-text { font-family:'EB Garamond',Georgia,serif; font-size:19px; color:var(--white-dim); line-height:1.9; margin-bottom:24px; }
+  .mission-text:last-child { margin-bottom:0; }
+
+  /* ——— VALUES ——— */
+  .values { position:relative; z-index:1; background:var(--bg); padding:80px 80px; }
+  .values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  @media(max-width:800px){ .values-grid { grid-template-columns:1fr 1fr; } }
+  @media(max-width:520px){ .values-grid { grid-template-columns:1fr; } .hero,.mission,.values,.team-section,.cta-section { padding-left:24px; padding-right:24px; } }
+
+  .val-card { background:var(--white-faint); border:1px solid var(--border); border-radius:12px; padding:36px 28px; text-align:center; transition:all 0.3s ease; opacity:0; transform:translateY(20px); transition:opacity 0.5s ease, transform 0.5s ease, border-color 0.3s; }
+  .val-card:hover { border-color:rgba(77,155,253,0.5); transform:translateY(-3px) !important; }
+  .val-icon { width:56px; height:56px; background:var(--blue-dim); border:1px solid var(--blue); border-radius:12px; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; }
+  .val-icon svg { width:26px; height:26px; fill:none; stroke:var(--blue); stroke-width:2; }
+  .val-title { font-family:'Orbitron',sans-serif; font-size:11px; font-weight:700; letter-spacing:1px; color:var(--blue); margin-bottom:10px; text-transform:uppercase; }
+  .val-desc { font-family:'EB Garamond',Georgia,serif; font-size:15px; color:var(--white-dim); line-height:1.7; }
+
+  /* ——— TEAM ——— */
+  .team-section { position:relative; z-index:1; background:var(--bg2); padding:80px 80px; }
+  .team-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  @media(max-width:900px){ .team-grid { grid-template-columns:1fr 1fr; } }
+  @media(max-width:520px){ .team-grid { grid-template-columns:1fr; } }
+
+  .t-card { background:var(--white-faint); border:1px solid var(--border); border-radius:10px; padding:32px 20px; text-align:center; transition:all 0.3s; opacity:0; transform:translateY(20px); transition:opacity 0.5s ease, transform 0.5s ease, border-color 0.3s; }
+  .t-card:hover { border-color:var(--blue); transform:translateY(-4px) !important; }
+  .t-avatar { width:64px; height:64px; background:var(--blue-dim); border:2px solid var(--blue); border-radius:50%; margin:0 auto 18px; display:flex; align-items:center; justify-content:center; }
+  .t-avatar svg { width:28px; height:28px; fill:none; stroke:var(--blue); stroke-width:1.8; }
+  .t-role { font-family:'Orbitron',sans-serif; font-size:10px; font-weight:700; letter-spacing:1px; color:var(--blue); margin-bottom:8px; text-transform:uppercase; }
+  .t-desc { font-size:13px; color:var(--white-dim); line-height:1.6; }
+
+  /* ——— CTA ——— */
+  .cta-section { position:relative; z-index:1; background:var(--bg); padding:60px 80px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .cta-inner { max-width:1040px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap; }
+  .cta-text-block h3 { font-family:'Orbitron',sans-serif; font-size:22px; font-weight:900; letter-spacing:2px; margin-bottom:10px; }
+  .cta-text-block p { font-size:16px; color:var(--white-dim); font-family:'EB Garamond',Georgia,serif; }
+
+  .btn-primary { display:inline-flex; align-items:center; gap:10px; padding:14px 32px; background:var(--blue); color:var(--bg); font-family:'Orbitron',sans-serif; font-size:10.5px; font-weight:700; letter-spacing:2px; border-radius:6px; text-decoration:none; transition:all 0.25s; border:1px solid transparent; }
+  .btn-primary:hover { background:transparent; color:var(--blue); border-color:var(--blue); box-shadow:0 0 24px var(--blue-glow); }
+
+  /* ——— FOOTER ——— */
+  footer { background:rgba(0,0,0,0.4); border-top:1px solid var(--border); padding:40px; text-align:center; }
+  .footer-brand { font-family:'Orbitron',sans-serif; font-weight:900; font-size:18px; letter-spacing:6px; margin-bottom:16px; }
+  .footer-brand span { color:var(--blue); }
+  .footer-copy { font-size:13px; color:var(--white-dim); opacity:0.5; }
+  [data-lang] { display:none; }
+  [data-lang].active { display:block; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <a href="index.html" class="header-logo" aria-label="MOKRI - მთავარი">MOK<span>RI</span></a>
+  <nav class="header-nav" aria-label="მთავარი ნავიგაცია">
+    <a href="individuals.html" class="nav-link"><span data-lang="ka" class="active">ფიზიკური პირები</span><span data-lang="en">Individuals</span><span data-lang="ru">Частные Лица</span></a>
+    <a href="business.html" class="nav-link"><span data-lang="ka" class="active">იურიდიული პირები</span><span data-lang="en">Business</span><span data-lang="ru">Бизнес</span></a>
+    <a href="about.html" class="nav-link active"><span data-lang="ka" class="active">ჩვენს შესახებ</span><span data-lang="en">About Us</span><span data-lang="ru">О Нас</span></a>
+    <a href="index.html#contact" class="nav-link"><span data-lang="ka" class="active">კავშირი</span><span data-lang="en">Contact</span><span data-lang="ru">Контакты</span></a>
+    <a href="https://shop.mokri.ge" target="_blank" rel="noopener noreferrer" class="nav-link shop-link"><span>shop.mokri.ge</span><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="margin-left:4px;opacity:0.7"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6m0 0v6m0-6L10 14"/></svg></a>
+  </nav>
+  <div class="lang-switcher" role="group" aria-label="ენის არჩევა">
+    <button class="lang-btn active" onclick="setLang('ka')">ქარ</button>
+    <button class="lang-btn" onclick="setLang('en')">ENG</button>
+    <button class="lang-btn" onclick="setLang('ru')">РУС</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-eyebrow"><span data-lang="ka" class="active">ჩვენს შესახებ</span><span data-lang="en">About Us</span><span data-lang="ru">О Нас</span></div>
+  <h1 class="hero-title">
+    <span data-lang="ka" class="active">ვინ <span>ვართ</span> ჩვენ</span>
+    <span data-lang="en">Who <span>We</span> Are</span>
+    <span data-lang="ru">Кто <span>мы</span></span>
+  </h1>
+  <p class="hero-desc">
+    <span data-lang="ka" class="active">Mokri არის თბილისში დაფუძნებული IT კომპანია, რომელიც ფიზიკურ პირებსა და ბიზნესს სთავაზობს სრულ ტექნოლოგიურ მხარდაჭერას — სწრაფად, სანდოდ, პროფესიონალურად.</span>
+    <span data-lang="en">Mokri is a Tbilisi-based IT company offering comprehensive technology support for individuals and businesses — fast, reliable, professional.</span>
+    <span data-lang="ru">Mokri — IT-компания в Тбилиси, предлагающая полную техническую поддержку для частных лиц и бизнеса — быстро, надёжно, профессионально.</span>
+  </p>
+</section>
+
+<!-- MISSION -->
+<section class="mission">
+  <div class="section-eyebrow"><span data-lang="ka" class="active">მისია</span><span data-lang="en">Our Mission</span><span data-lang="ru">Наша миссия</span></div>
+  <h2 class="section-title"><span data-lang="ka" class="active">ტექნოლოგია <span>ყველასთვის</span> ხელმისაწვდომი</span><span data-lang="en">Technology <span>Accessible</span> to Everyone</span><span data-lang="ru">Технологии <span>доступные</span> каждому</span></h2>
+  <div class="mission-content">
+    <p class="mission-text">
+      <span data-lang="ka" class="active">ჩვენ გვჯერა, რომ ხარისხიანი IT მომსახურება არ უნდა იყოს ძვირი ან რთულად ხელმისაწვდომი. Mokri შეიქმნა იმისთვის, რომ ყველას — კერძო პირს თუ მცირე ბიზნესს — ჰქონდეს წვდომა პროფესიონალურ ტექნიკურ მხარდაჭერაზე.</span>
+      <span data-lang="en">We believe quality IT service shouldn't be expensive or hard to access. Mokri was created so that everyone — individuals and small businesses alike — can access professional technical support.</span>
+      <span data-lang="ru">Мы верим, что качественное IT-обслуживание не должно быть дорогим или труднодоступным. Mokri создан для того, чтобы каждый — частное лицо или малый бизнес — имел доступ к профессиональной технической поддержке.</span>
+    </p>
+    <p class="mission-text">
+      <span data-lang="ka" class="active">ჩვენი პრინციპია გამჭვირვალობა, სიჩქარე და შედეგზე ორიენტირებულობა. არ ვიყენებთ ტექნიკურ ჟარგონს იმისთვის, რომ კლიენტი დავაბნიოთ — ვლაპარაკობთ გასაგებად, ვმოქმედებთ სწრაფად, და ვაკეთებთ იმას, რაც ნამდვილად საჭიროა.</span>
+      <span data-lang="en">Our principles are transparency, speed, and results. We don't use technical jargon to confuse — we speak clearly, act fast, and do what's truly needed.</span>
+      <span data-lang="ru">Наши принципы — прозрачность, скорость и ориентация на результат. Мы не используем технический жаргон для запутывания — говорим понятно, действуем быстро и делаем то, что действительно нужно.</span>
+    </p>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values">
+  <div class="section-eyebrow"><span data-lang="ka" class="active">ღირებულებები</span><span data-lang="en">Our Values</span><span data-lang="ru">Наши ценности</span></div>
+  <h2 class="section-title"><span data-lang="ka" class="active">რას ვეყრდნობით <span>ყოველდღე</span></span><span data-lang="en">What Guides Us <span>Every Day</span></span><span data-lang="ru">Чем мы руководствуемся <span>каждый день</span></span></h2>
+  <div class="values-grid">
+    <div class="val-card">
+      <div class="val-icon"><svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+      <div class="val-title"><span data-lang="ka" class="active">სიჩქარე</span><span data-lang="en">Speed</span><span data-lang="ru">Скорость</span></div>
+      <p class="val-desc"><span data-lang="ka" class="active">≤30 წუთში პასუხი, სწრაფი დიაგნოსტიკა, მყისიერი მოქმედება.</span><span data-lang="en">≤30min response, fast diagnosis, immediate action.</span><span data-lang="ru">Ответ за ≤30 мин, быстрая диагностика, немедленное действие.</span></p>
+    </div>
+    <div class="val-card">
+      <div class="val-icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+      <div class="val-title"><span data-lang="ka" class="active">სანდოობა</span><span data-lang="en">Reliability</span><span data-lang="ru">Надёжность</span></div>
+      <p class="val-desc"><span data-lang="ka" class="active">კეთილსინდისიერი მუშაობა, რეალური ვადები, ჩვენზე დაეყრდნობიან.</span><span data-lang="en">Honest work, realistic timelines, dependable results.</span><span data-lang="ru">Честная работа, реальные сроки, надёжный результат.</span></p>
+    </div>
+    <div class="val-card">
+      <div class="val-icon"><svg viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></div>
+      <div class="val-title"><span data-lang="ka" class="active">გამჭვირვალობა</span><span data-lang="en">Transparency</span><span data-lang="ru">Прозрачность</span></div>
+      <p class="val-desc"><span data-lang="ka" class="active">გასაგები ენა, ნათელი ფასი, ყოველი ნაბიჯი ახსნილია.</span><span data-lang="en">Clear language, transparent pricing, every step explained.</span><span data-lang="ru">Понятный язык, прозрачные цены, каждый шаг объяснён.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section">
+  <div class="section-eyebrow"><span data-lang="ka" class="active">გუნდი</span><span data-lang="en">Our Team</span><span data-lang="ru">Наша команда</span></div>
+  <h2 class="section-title"><span data-lang="ka" class="active">სპეციალისტები, <span>ვისაც</span> შეგიძლია დაეყრდნო</span><span data-lang="en">Specialists <span>You Can</span> Rely On</span><span data-lang="ru">Специалисты, <span>которым</span> можно доверять</span></h2>
+  <div class="team-grid">
+    <div class="t-card">
+      <div class="t-avatar"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zm-8 8a2 2 0 110-4 2 2 0 010 4z"/></svg></div>
+      <div class="t-role"><span data-lang="ka" class="active">სისტემური ადმინისტრატორი</span><span data-lang="en">System Administrator</span><span data-lang="ru">Системный Администратор</span></div>
+      <p class="t-desc"><span data-lang="ka" class="active">Windows Server, Linux, AD, ვირტუალიზაცია, Backup</span><span data-lang="en">Windows Server, Linux, AD, Virtualization, Backup</span><span data-lang="ru">Windows Server, Linux, AD, Виртуализация, Backup</span></p>
+    </div>
+    <div class="t-card">
+      <div class="t-avatar"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+      <div class="t-role"><span data-lang="ka" class="active">ქსელის ადმინისტრატორი</span><span data-lang="en">Network Administrator</span><span data-lang="ru">Сетевой Администратор</span></div>
+      <p class="t-desc"><span data-lang="ka" class="active">Cisco, Mikrotik, Ubiquiti, VPN, Firewall</span><span data-lang="en">Cisco, Mikrotik, Ubiquiti, VPN, Firewall</span><span data-lang="ru">Cisco, Mikrotik, Ubiquiti, VPN, Firewall</span></p>
+    </div>
+    <div class="t-card">
+      <div class="t-avatar"><svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0121 8.845v6.31a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg></div>
+      <div class="t-role"><span data-lang="ka" class="active">კამერების სპეციალისტი</span><span data-lang="en">CCTV Specialist</span><span data-lang="ru">Специалист по Видеонаблюдению</span></div>
+      <p class="t-desc"><span data-lang="ka" class="active">Hikvision, Dahua, IP კამერები, NVR/DVR</span><span data-lang="en">Hikvision, Dahua, IP Cameras, NVR/DVR</span><span data-lang="ru">Hikvision, Dahua, IP-камеры, NVR/DVR</span></p>
+    </div>
+    <div class="t-card">
+      <div class="t-avatar"><svg viewBox="0 0 24 24"><path d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg></div>
+      <div class="t-role"><span data-lang="ka" class="active">IT საპორტო სპეციალისტი</span><span data-lang="en">IT Support Specialist</span><span data-lang="ru">Специалист IT Поддержки</span></div>
+      <p class="t-desc"><span data-lang="ka" class="active">L1/L2, ინსტალაციები, დისტანციური დახმარება</span><span data-lang="en">L1/L2, installations, remote assistance</span><span data-lang="ru">L1/L2, установки, удалённая помощь</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-text-block">
+      <h3><span data-lang="ka" class="active">მზად ვართ დაგეხმაროთ</span><span data-lang="en">Ready to Help</span><span data-lang="ru">Готовы помочь</span></h3>
+      <p><span data-lang="ka" class="active">დაგვიკავშირდით WhatsApp-ზე ან საკონტაქტო ფორმით — ≤30 წუთში გიპასუხებთ.</span><span data-lang="en">Reach out via WhatsApp or contact form — we'll respond in ≤30 minutes.</span><span data-lang="ru">Свяжитесь через WhatsApp или форму — ответим за ≤30 минут.</span></p>
+    </div>
+    <a href="https://wa.me/995555555555" target="_blank" rel="noopener noreferrer" class="btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <span data-lang="ka" class="active">WhatsApp-ით კავშირი</span><span data-lang="en">Chat on WhatsApp</span><span data-lang="ru">Написать в WhatsApp</span>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">MOK<span>RI</span></div>
+  <div class="footer-copy">© 2025 MOKRI. <span data-lang="ka" class="active">ყველა უფლება დაცულია.</span><span data-lang="en">All rights reserved.</span><span data-lang="ru">Все права защищены.</span></div>
+</footer>
+
+<script>
+'use strict';
+let currentLang='ka';
+function setLang(lang){const a=['ka','en','ru'];if(!a.includes(lang))return;currentLang=lang;document.querySelectorAll('[data-lang]').forEach(el=>{el.classList.toggle('active',el.getAttribute('data-lang')===lang);});document.querySelectorAll('.lang-btn').forEach((b,i)=>{b.classList.toggle('active',a[i]===lang);});document.documentElement.lang=lang;try{localStorage.setItem('mokri-lang',lang);}catch(e){}}
+(function(){try{const s=localStorage.getItem('mokri-lang');if(s&&['ka','en','ru'].includes(s))setLang(s);}catch(e){}})();
+const obs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';obs.unobserve(e.target);}});},{threshold:0.08});
+document.querySelectorAll('.val-card,.t-card').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
