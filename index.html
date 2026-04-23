@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- ═══ Security Headers ═══ -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
-<title>MOKRI — ფიზიკური პირები | IT Solutions</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+<meta name="robots" content="index, follow">
+<title>MOKRI — IT Solutions</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+Georgian:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -25,10 +24,10 @@
     --white-dim: rgba(254,254,254,0.65);
     --white-faint: rgba(254,254,254,0.08);
     --border: rgba(77,155,253,0.2);
-    --header-h: 68px;
   }
 
-  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+
   html { scroll-behavior: smooth; }
 
   body {
@@ -39,6 +38,7 @@
     line-height: 1.7;
   }
 
+  /* ——— NOISE TEXTURE OVERLAY ——— */
   body::before {
     content:'';
     position:fixed;
@@ -49,112 +49,114 @@
     opacity:.4;
   }
 
-  /* ═══════════════ HEADER ═══════════════ */
-  .site-header {
+  /* ——— HEADER / NAV BAR ——— */
+  .lang-bar {
     position: fixed;
-    top: 0; left: 0; right: 0;
+    top: 0; right: 0; left: 0;
     z-index: 1000;
-    height: var(--header-h);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 24px;
+    padding: 0 36px;
+    height: 60px;
     background: rgba(10,23,40,0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
     border-bottom: 1px solid var(--border);
   }
 
-  .header-inner {
-    max-width: 1400px;
-    margin: 0 auto;
-    height: 100%;
-    padding: 0 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-  }
-
-  .header-logo {
+  .lang-bar-logo {
     font-family: 'Orbitron', sans-serif;
     font-weight: 900;
-    font-size: 18px;
+    font-size: 17px;
     letter-spacing: 4px;
     color: var(--white);
     text-decoration: none;
-    flex-shrink: 0;
+    white-space: nowrap;
     transition: opacity 0.2s;
   }
-  .header-logo:hover { opacity: 0.8; }
-  .header-logo span { color: var(--blue); }
+  .lang-bar-logo:hover { opacity: 0.8; }
+  .lang-bar-logo span { color: var(--blue); }
 
+  /* ——— CENTER NAV ——— */
   .header-nav {
     display: flex;
-    align-items: center;
-    gap: 2px;
-    flex: 1;
     justify-content: center;
+    align-items: center;
+    gap: 4px;
   }
 
-  .nav-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+  .header-nav-link {
+    position: relative;
     padding: 7px 14px;
     font-family: 'Noto Sans Georgian', sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--white-dim);
-    text-decoration: none;
-    border-radius: 8px;
-    transition: all 0.22s;
-    white-space: nowrap;
-    border: 1px solid transparent;
-  }
-  .nav-link:hover {
-    color: var(--white);
-    background: var(--white-faint);
-  }
-  .nav-link.active {
-    color: var(--blue);
-    background: var(--blue-dim);
-    border-color: rgba(77,155,253,0.25);
+    font-size: 12.5px;
     font-weight: 600;
+    letter-spacing: 0.3px;
+    color: rgba(254,254,254,0.7);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.22s ease;
+    white-space: nowrap;
   }
-  .nav-sep {
-    width: 1px;
-    height: 14px;
-    background: var(--border);
-    margin: 0 2px;
-    flex-shrink: 0;
+
+  .header-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 60%;
+    height: 1.5px;
+    background: var(--blue);
+    border-radius: 2px;
+    transition: transform 0.22s ease;
   }
-  .nav-shop {
-    margin-left: 8px;
+
+  .header-nav-link:hover {
+    color: var(--white);
+    background: rgba(77,155,253,0.08);
+  }
+
+  .header-nav-link:hover::after { transform: translateX(-50%) scaleX(1); }
+
+  .header-nav-link.active {
     color: var(--blue);
-    border-color: rgba(77,155,253,0.3);
+    background: rgba(77,155,253,0.1);
   }
-  .nav-shop:hover {
+
+  .header-nav-link.shop-link {
+    color: var(--blue);
+    border: 1px solid rgba(77,155,253,0.35);
+    margin-left: 8px;
+    font-size: 11.5px;
+    letter-spacing: 1px;
+  }
+
+  .header-nav-link.shop-link:hover {
     background: var(--blue);
     color: var(--bg);
     border-color: var(--blue);
+    box-shadow: 0 0 18px rgba(77,155,253,0.35);
   }
 
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
-  }
+  .header-nav-link.shop-link::after { display: none; }
 
+  /* ——— LANG SWITCHER ——— */
   .lang-switcher {
     display: flex;
-    gap: 3px;
+    gap: 4px;
     background: var(--white-faint);
     border: 1px solid var(--border);
     border-radius: 6px;
     padding: 3px;
   }
+
   .lang-btn {
-    padding: 4px 12px;
+    padding: 5px 13px;
     font-family: 'Orbitron', sans-serif;
-    font-size: 9px;
+    font-size: 9.5px;
     font-weight: 700;
     letter-spacing: 2px;
     border: none;
@@ -162,70 +164,27 @@
     color: var(--white-dim);
     border-radius: 4px;
     cursor: pointer;
-    transition: all 0.22s;
+    transition: all 0.25s;
   }
+
   .lang-btn.active {
     background: var(--blue);
     color: var(--bg);
   }
 
-  /* Hamburger */
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    padding: 6px;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    transition: border-color 0.2s;
-  }
-  .hamburger:hover { border-color: var(--blue); }
-  .hamburger span {
-    display: block;
-    width: 20px;
-    height: 2px;
-    background: var(--white-dim);
-    border-radius: 2px;
-    transition: all 0.25s;
+  /* Mobile nav */
+  @media (max-width: 860px) {
+    .header-nav { gap: 2px; }
+    .header-nav-link { padding: 6px 9px; font-size: 11px; }
+    .header-nav-link.shop-link { margin-left: 4px; }
   }
 
-  /* Mobile nav overlay */
-  .mobile-nav {
-    display: none;
-    position: fixed;
-    top: var(--header-h);
-    left: 0; right: 0;
-    background: rgba(10,23,40,0.98);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 12px 24px;
-    border-bottom: 1px solid var(--border);
-    z-index: 999;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .mobile-nav.open { display: flex; }
-  .mobile-nav .nav-link {
-    justify-content: flex-start;
-    padding: 12px 16px;
-    border-radius: 10px;
-    font-size: 15px;
-  }
-  .mobile-nav .nav-sep { display: none; }
-
-  @media (max-width: 960px) {
+  @media (max-width: 660px) {
+    .lang-bar { grid-template-columns: auto auto; height: auto; padding: 10px 16px; gap: 8px; flex-wrap: wrap; }
     .header-nav { display: none; }
-    .hamburger { display: flex; }
-    .header-inner { padding: 0 20px; }
-  }
-  @media (max-width: 480px) {
-    .header-logo { font-size: 15px; letter-spacing: 3px; }
-    .lang-btn { padding: 4px 8px; font-size: 8px; }
   }
 
-  /* ═══════════════ HERO ═══════════════ */
+  /* ——— HERO ——— */
   .hero {
     position: relative;
     min-height: 100vh;
@@ -234,7 +193,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: calc(var(--header-h) + 60px) 40px 80px;
+    padding: 120px 40px 80px;
     overflow: hidden;
   }
 
@@ -250,31 +209,29 @@
 
   @keyframes gridFade {
     from { opacity: 0.3; }
-    to   { opacity: 0.9; }
+    to { opacity: 0.8; }
   }
 
   .hero-glow {
     position: absolute;
-    width: 700px; height: 700px;
-    background: radial-gradient(circle, rgba(77,155,253,0.1) 0%, transparent 65%);
-    top:50%; left:50%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(77,155,253,0.12) 0%, transparent 70%);
+    top: 50%; left: 50%;
     transform: translate(-50%,-50%);
     pointer-events: none;
   }
 
   .hero-logo {
     position: relative;
-    margin-bottom: 28px;
+    margin-bottom: 32px;
     animation: fadeUp 0.9s ease both;
   }
+
   .hero-logo svg {
-    width: 130px;
-    height: 130px;
-    filter: drop-shadow(0 0 28px rgba(77,155,253,0.65));
-    transition: filter 0.3s;
-  }
-  .hero-logo:hover svg {
-    filter: drop-shadow(0 0 40px rgba(77,155,253,0.85));
+    width: 150px;
+    height: 150px;
+    filter: drop-shadow(0 0 28px rgba(77,155,253,0.6)) drop-shadow(0 0 12px rgba(77,155,253,0.4));
   }
 
   .hero-brand {
@@ -287,34 +244,35 @@
     animation: fadeUp 0.9s 0.1s ease both;
     text-shadow: 0 0 40px rgba(77,155,253,0.3);
   }
+
   .hero-brand span { color: var(--blue); }
 
   .hero-tagline {
-    font-size: clamp(13px, 1.8vw, 17px);
+    font-size: clamp(14px, 2vw, 18px);
     letter-spacing: 3px;
     color: var(--blue);
     text-transform: uppercase;
     font-family: 'Orbitron', sans-serif;
     font-weight: 400;
     margin-top: 12px;
-    margin-bottom: 28px;
+    margin-bottom: 32px;
     animation: fadeUp 0.9s 0.2s ease both;
     opacity: 0;
     animation-fill-mode: both;
   }
 
   .hero-desc {
-    font-size: clamp(16px, 1.8vw, 20px);
+    font-size: clamp(16px, 2vw, 20px);
     color: var(--white-dim);
-    max-width: 600px;
-    margin: 0 auto 44px;
+    max-width: 640px;
+    margin: 0 auto 48px;
     font-style: italic;
     animation: fadeUp 0.9s 0.3s ease both;
   }
 
   .hero-actions {
     display: flex;
-    gap: 14px;
+    gap: 16px;
     flex-wrap: wrap;
     justify-content: center;
     animation: fadeUp 0.9s 0.4s ease both;
@@ -322,12 +280,57 @@
 
   @keyframes fadeUp {
     from { opacity:0; transform: translateY(24px); }
-    to   { opacity:1; transform: translateY(0); }
+    to { opacity:1; transform: translateY(0); }
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    background: var(--blue);
+    color: var(--bg);
+    font-family: 'Noto Sans Georgian', 'EB Garamond', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.25s;
+    border: 2px solid var(--blue);
+  }
+
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--blue);
+    box-shadow: 0 0 24px var(--blue-glow);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    background: transparent;
+    color: var(--white);
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    border-radius: 4px;
+    border: 2px solid var(--border);
+    transition: all 0.25s;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--blue);
+    color: var(--blue);
   }
 
   .hero-scroll {
     position: absolute;
-    bottom: 32px;
+    bottom: 36px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -337,10 +340,12 @@
     opacity: 0.4;
     animation: bounce 2s ease-in-out infinite;
   }
+
   @keyframes bounce {
-    0%,100% { transform: translateX(-50%) translateY(0); }
-    50%     { transform: translateX(-50%) translateY(8px); }
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
   }
+
   .hero-scroll span {
     font-family: 'Orbitron', sans-serif;
     font-size: 9px;
@@ -348,52 +353,7 @@
     color: var(--blue);
   }
 
-  /* ═══════════════ BUTTONS ═══════════════ */
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 32px;
-    background: var(--blue);
-    color: var(--bg);
-    font-family: 'Noto Sans Georgian', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    letter-spacing: 0.5px;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: all 0.25s;
-    border: 2px solid var(--blue);
-  }
-  .btn-primary:hover {
-    background: transparent;
-    color: var(--blue);
-    box-shadow: 0 0 28px var(--blue-glow);
-  }
-
-  .btn-outline {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 32px;
-    background: transparent;
-    color: var(--white);
-    font-family: 'Noto Sans Georgian', sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    letter-spacing: 0.5px;
-    text-decoration: none;
-    border-radius: 8px;
-    border: 2px solid var(--border);
-    transition: all 0.25s;
-  }
-  .btn-outline:hover {
-    border-color: var(--blue);
-    color: var(--blue);
-    background: var(--blue-dim);
-  }
-
-  /* ═══════════════ SECTIONS ═══════════════ */
+  /* ——— SECTIONS ——— */
   section { position: relative; z-index: 1; }
 
   .section-inner {
@@ -414,41 +374,37 @@
     align-items: center;
     gap: 12px;
   }
+
   .section-label::before {
     content: '';
     display: block;
     width: 32px;
-    height: 2px;
-    background: linear-gradient(90deg, var(--blue), transparent);
+    height: 1px;
+    background: var(--blue);
   }
 
   .section-title {
     font-family: 'Orbitron', sans-serif;
     font-weight: 900;
-    font-size: clamp(26px, 3.8vw, 42px);
+    font-size: clamp(28px, 4vw, 44px);
     letter-spacing: 2px;
-    margin-bottom: 56px;
-    line-height: 1.25;
+    margin-bottom: 60px;
+    line-height: 1.2;
   }
+
   .section-title span { color: var(--blue); }
 
-  @media (max-width: 600px) {
-    .section-inner { padding: 70px 20px; }
-  }
-
-  /* ═══════════════ STATS BAR ═══════════════ */
+  /* ——— STATS BAR ——— */
   .stats-bar {
-    background: linear-gradient(135deg, var(--bg2) 0%, #0e2137 100%);
+    background: var(--bg2);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
-    position: relative;
-    z-index: 1;
   }
 
   .stats-inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 48px 40px;
+    padding: 40px 40px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 40px;
@@ -458,318 +414,40 @@
     text-align: center;
     border-right: 1px solid var(--border);
     padding-right: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
   .stat-item:last-child { border-right: none; }
 
   .stat-num {
     font-family: 'Orbitron', sans-serif;
     font-weight: 900;
-    font-size: 42px;
-    background: linear-gradient(135deg, var(--white) 30%, var(--blue) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-size: 40px;
+    color: var(--blue);
     line-height: 1;
     margin-bottom: 8px;
-    display: flex;
-    align-items: baseline;
-    gap: 4px;
-  }
-
-  .stat-unit {
-    font-size: 22px;
-    font-weight: 700;
   }
 
   .stat-label {
-    font-family: 'Noto Sans Georgian', sans-serif;
     font-size: 13px;
     color: var(--white-dim);
-    letter-spacing: 0.5px;
-    font-weight: 500;
+    letter-spacing: 1px;
   }
 
-  .stat-note {
-    font-family: 'Noto Sans Georgian', sans-serif;
+  .stat-subnote {
     font-size: 10px;
     color: rgba(254,254,254,0.35);
-    margin-top: 8px;
-    line-height: 1.5;
-    max-width: 150px;
-    text-align: center;
+    letter-spacing: 0.3px;
+    margin-top: 5px;
+    font-style: italic;
+    font-family: 'EB Garamond', Georgia, serif;
+    line-height: 1.4;
   }
 
-  @media (max-width: 900px) {
-    .stats-inner { grid-template-columns: 1fr 1fr; }
-    .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 24px; }
-    .stat-item:last-child { border-bottom: none; }
-  }
-  @media (max-width: 480px) {
-    .stats-inner { grid-template-columns: 1fr; }
-  }
-
-  /* ═══════════════ SERVICES ═══════════════ */
-  .services { background: var(--bg); }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .service-card {
-    background: var(--white-faint);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 32px 28px;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-  .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px; height: 100%;
-    background: linear-gradient(180deg, var(--blue) 0%, rgba(77,155,253,0) 100%);
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 0.3s;
-  }
-  .service-card:hover {
-    border-color: var(--blue);
-    transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(77,155,253,0.12);
-    background: rgba(77,155,253,0.06);
-  }
-  .service-card:hover::before { transform: scaleY(1); }
-
-  .service-icon {
-    width: 48px; height: 48px;
-    background: var(--blue-dim);
-    border: 1px solid rgba(77,155,253,0.4);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    transition: all 0.3s;
-  }
-  .service-card:hover .service-icon {
-    background: var(--blue);
-  }
-  .service-card:hover .service-icon svg { fill: var(--bg); }
-  .service-icon svg { width: 22px; height: 22px; fill: var(--blue); transition: fill 0.3s; }
-
-  .service-title {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.5px;
-    margin-bottom: 10px;
-    color: var(--white);
-  }
-  .service-desc {
-    font-size: 15px;
-    color: var(--white-dim);
-    line-height: 1.65;
-  }
-
-  @media (max-width: 900px) {
-    .services-grid { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 600px) {
-    .services-grid { grid-template-columns: 1fr; }
-  }
-
-  /* ═══════════════ INDIVIDUALS / WA SECTION ═══════════════ */
-  .individuals { background: var(--bg2); }
-
-  .whatsapp-feature {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
-    max-width: 680px;
-  }
-
-  .wa-lead {
-    font-size: clamp(16px, 1.8vw, 20px);
-    color: var(--white-dim);
-    margin-bottom: 28px;
-    font-family: 'Noto Sans Georgian', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.7;
-  }
-
-  .wa-steps { display: flex; flex-direction: column; gap: 18px; margin-bottom: 36px; }
-
-  .wa-step { display: flex; gap: 16px; align-items: flex-start; }
-
-  .wa-step-num {
-    width: 32px; height: 32px;
-    background: var(--blue-dim);
-    border: 1px solid var(--blue);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--blue);
-    flex-shrink: 0;
-  }
-  .wa-step-text { font-size: 16px; color: var(--white-dim); padding-top: 4px; font-family: 'Noto Sans Georgian', sans-serif; }
-  .wa-step-text strong { color: var(--white); }
-
-  /* ═══════════════ TEAM ═══════════════ */
-  .team { background: var(--bg2); }
-
-  .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-
-  .team-card {
-    background: var(--white-faint);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 28px 20px;
-    text-align: center;
-    transition: all 0.3s;
-  }
-  .team-card:hover {
-    border-color: var(--blue);
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(77,155,253,0.1);
-  }
-
-  .team-avatar {
-    width: 68px; height: 68px;
-    background: var(--blue-dim);
-    border: 2px solid rgba(77,155,253,0.4);
-    border-radius: 50%;
-    margin: 0 auto 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-  }
-  .team-card:hover .team-avatar { border-color: var(--blue); background: var(--blue); }
-  .team-card:hover .team-avatar svg { fill: var(--bg); }
-  .team-avatar svg { width: 30px; height: 30px; fill: var(--blue); transition: fill 0.3s; }
-
-  .team-role {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    color: var(--blue);
-    margin-bottom: 8px;
-    text-transform: uppercase;
-  }
-  .team-desc { font-size: 13px; color: var(--white-dim); line-height: 1.6; }
-
-  @media (max-width: 900px) { .team-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 480px) { .team-grid { grid-template-columns: 1fr; } }
-
-  /* ═══════════════ CONTACT ═══════════════ */
-  .contact { background: var(--bg); }
-
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
-  .contact-info { display: flex; flex-direction: column; gap: 28px; }
-  .contact-item { display: flex; gap: 16px; align-items: flex-start; }
-
-  .contact-icon {
-    width: 44px; height: 44px;
-    background: var(--blue-dim);
-    border: 1px solid rgba(77,155,253,0.3);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.25s;
-  }
-  .contact-item:hover .contact-icon { background: var(--blue); }
-  .contact-item:hover .contact-icon svg { fill: var(--bg); }
-  .contact-icon svg { width: 20px; height: 20px; fill: var(--blue); transition: fill 0.25s; }
-
-  .contact-label {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--blue);
-    margin-bottom: 4px;
-  }
-  .contact-value { font-size: 17px; color: var(--white); font-family: 'Noto Sans Georgian', sans-serif; }
-  .contact-value a { color: inherit; text-decoration: none; }
-  .contact-value a:hover { color: var(--blue); }
-
-  .contact-form {
-    background: var(--white-faint);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 36px;
-  }
-
-  .form-group { margin-bottom: 18px; }
-  .form-label {
-    display: block;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--blue);
-    margin-bottom: 8px;
-  }
-  .form-input, .form-textarea {
-    width: 100%;
-    background: rgba(10,23,40,0.5);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px 16px;
-    color: var(--white);
-    font-family: 'Noto Sans Georgian', sans-serif;
-    font-size: 15px;
-    outline: none;
-    transition: border-color 0.25s;
-  }
-  .form-input:focus, .form-textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 2px var(--blue-dim); }
-  .form-textarea { min-height: 120px; resize: vertical; }
-
-  .form-submit {
-    width: 100%;
-    padding: 14px;
-    background: var(--blue);
-    color: var(--bg);
-    font-family: 'Noto Sans Georgian', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    border: 2px solid var(--blue);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.25s;
-    margin-top: 6px;
-  }
-  .form-submit:hover {
-    background: transparent;
-    color: var(--blue);
-    box-shadow: 0 0 20px var(--blue-glow);
-  }
-
-  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } }
-
-  /* ═══════════════ FOOTER ═══════════════ */
+  /* ——— FOOTER ——— */
   footer {
-    background: rgba(0,0,0,0.45);
+    background: rgba(0,0,0,0.4);
     border-top: 1px solid var(--border);
-    padding: 48px 40px;
+    padding: 40px;
     text-align: center;
-    position: relative;
-    z-index: 1;
   }
 
   .footer-brand {
@@ -777,148 +455,138 @@
     font-weight: 900;
     font-size: 20px;
     letter-spacing: 6px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
   .footer-brand span { color: var(--blue); }
 
   .footer-links {
     display: flex;
     justify-content: center;
-    gap: 28px;
-    margin-bottom: 20px;
+    gap: 32px;
+    margin-bottom: 24px;
     flex-wrap: wrap;
   }
+
   .footer-links a {
-    font-family: 'Noto Sans Georgian', sans-serif;
-    font-size: 12px;
-    letter-spacing: 0.5px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
     color: var(--white-dim);
     text-decoration: none;
     transition: color 0.2s;
   }
+
   .footer-links a:hover { color: var(--blue); }
 
-  .footer-copy { font-size: 12px; color: var(--white-dim); opacity: 0.45; font-family: 'Noto Sans Georgian', sans-serif; }
+  .footer-copy {
+    font-size: 13px;
+    color: var(--white-dim);
+    opacity: 0.5;
+  }
 
-  /* ═══════════════ LANG VISIBILITY ═══════════════ */
+  /* ——— LANGUAGE SECTIONS ——— */
   [data-lang] { display: none; }
-  [data-lang].active { display: inline; }
-  .block-lang[data-lang] { display: none; }
-  .block-lang[data-lang].active { display: block; }
+  [data-lang].active { display: block; }
+  .lang-inline[data-lang] { display: none; }
+  .lang-inline[data-lang].active { display: inline; }
 
-  /* ═══════════════ FLOATING WA ═══════════════ */
+  /* ——— DIVIDER ——— */
+  .divider {
+    width: 60px;
+    height: 2px;
+    background: var(--blue);
+    margin: 0 auto 40px;
+  }
+
+  /* ——— RESPONSIVE ——— */
+  @media (max-width: 900px) {
+    .stats-inner { grid-template-columns: 1fr 1fr; }
+    .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+  }
+
+  @media (max-width: 600px) {
+    .lang-bar { padding: 0 20px; }
+    .section-inner { padding: 70px 24px; }
+  }
+
+  /* ——— WA BUTTON FLOATING ——— */
   .wa-float {
     position: fixed;
-    bottom: 32px; right: 32px;
-    width: 58px; height: 58px;
+    bottom: 32px;
+    right: 32px;
+    width: 60px; height: 60px;
     background: #25d366;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 8px 28px rgba(37,211,102,0.45);
+    box-shadow: 0 8px 32px rgba(37,211,102,0.4);
     z-index: 999;
     text-decoration: none;
     transition: transform 0.2s, box-shadow 0.2s;
     animation: waPulse 2.5s ease-in-out infinite;
   }
-  @keyframes waPulse {
-    0%,100% { box-shadow: 0 8px 28px rgba(37,211,102,0.45); }
-    50%      { box-shadow: 0 8px 48px rgba(37,211,102,0.75); }
-  }
-  .wa-float:hover { transform: scale(1.1); }
-  .wa-float svg { width: 28px; height: 28px; fill: white; }
 
-  /* ═══════════════ DIVIDER ═══════════════ */
-  .divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--blue), transparent); margin: 0 auto 40px; }
+  @keyframes waPulse {
+    0%, 100% { box-shadow: 0 8px 32px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 8px 48px rgba(37,211,102,0.7); }
+  }
+
+  .wa-float:hover { transform: scale(1.1); }
+  .wa-float svg { width: 30px; height: 30px; fill: white; }
 </style>
 </head>
 <body>
 
-<!-- ═══ SITE HEADER ═══ -->
-<header class="site-header" role="banner">
-  <div class="header-inner">
-    <a href="mokri.html" class="header-logo" aria-label="MOKRI - მთავარი გვერდი">MOK<span>RI</span></a>
+<!-- ——— HEADER / NAV BAR ——— -->
+<header class="lang-bar">
+  <a href="index.html" class="lang-bar-logo" aria-label="MOKRI - მთავარი">MOK<span>RI</span></a>
 
-    <nav class="header-nav" role="navigation" aria-label="მთავარი ნავიგაცია">
-      <a href="mokri.html" class="nav-link active">
-        <span data-lang="ka" class="active">ფიზ. პირები</span>
-        <span data-lang="en">Individuals</span>
-        <span data-lang="ru">Частные Лица</span>
-      </a>
-      <div class="nav-sep" role="separator" aria-hidden="true"></div>
-      <a href="mokri-legal.html" class="nav-link">
-        <span data-lang="ka" class="active">იურ. პირები</span>
-        <span data-lang="en">Business</span>
-        <span data-lang="ru">Бизнес</span>
-      </a>
-      <div class="nav-sep" role="separator" aria-hidden="true"></div>
-      <a href="mokri-about.html" class="nav-link">
-        <span data-lang="ka" class="active">ჩვენს შესახებ</span>
-        <span data-lang="en">About Us</span>
-        <span data-lang="ru">О Нас</span>
-      </a>
-      <div class="nav-sep" role="separator" aria-hidden="true"></div>
-      <a href="mokri-shop.html" class="nav-link nav-shop">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>
-        <span data-lang="ka" class="active">მაღაზია</span>
-        <span data-lang="en">Shop</span>
-        <span data-lang="ru">Магазин</span>
-      </a>
-    </nav>
+  <nav class="header-nav" aria-label="მთავარი ნავიგაცია">
+    <a href="individuals.html" class="header-nav-link" data-nav="individuals">
+      <span data-lang="ka" class="active">ფიზიკური პირები</span>
+      <span data-lang="en">Individuals</span>
+      <span data-lang="ru">Частные Лица</span>
+    </a>
+    <a href="business.html" class="header-nav-link" data-nav="business">
+      <span data-lang="ka" class="active">იურიდიული პირები</span>
+      <span data-lang="en">Business</span>
+      <span data-lang="ru">Бизнес</span>
+    </a>
+    <a href="about.html" class="header-nav-link" data-nav="about">
+      <span data-lang="ka" class="active">ჩვენს შესახებ</span>
+      <span data-lang="en">About Us</span>
+      <span data-lang="ru">О Нас</span>
+    </a>
+    <a href="https://shop.mokri.ge" target="_blank" rel="noopener noreferrer" class="header-nav-link shop-link" aria-label="Mokri Online Shop">
+      <span>shop.mokri.ge</span>
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="margin-left:4px;opacity:0.7"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6m0 0v6m0-6L10 14"/></svg>
+    </a>
+  </nav>
 
-    <div class="header-right">
-      <button class="hamburger" id="hamburger" aria-label="მენიუ" aria-expanded="false" aria-controls="mobileNav">
-        <span></span><span></span><span></span>
-      </button>
-      <nav class="lang-switcher" aria-label="ენის შეცვლა">
-        <button class="lang-btn active" aria-label="ქართული" id="btn-ka">ქარ</button>
-        <button class="lang-btn" aria-label="English" id="btn-en">ENG</button>
-        <button class="lang-btn" aria-label="Русский" id="btn-ru">РУС</button>
-      </nav>
-    </div>
+  <div class="lang-switcher" role="group" aria-label="ენის არჩევა">
+    <button class="lang-btn active" onclick="setLang('ka')" aria-label="ქართული">ქარ</button>
+    <button class="lang-btn" onclick="setLang('en')" aria-label="English">ENG</button>
+    <button class="lang-btn" onclick="setLang('ru')" aria-label="Русский">РУС</button>
   </div>
 </header>
 
-<!-- Mobile nav -->
-<div class="mobile-nav" id="mobileNav" role="navigation" aria-label="მობილური ნავიგაცია">
-  <a href="mokri.html" class="nav-link active">
-    <span data-lang="ka" class="active">ფიზ. პირები</span>
-    <span data-lang="en">Individuals</span>
-    <span data-lang="ru">Частные Лица</span>
-  </a>
-  <a href="mokri-legal.html" class="nav-link">
-    <span data-lang="ka" class="active">იურ. პირები</span>
-    <span data-lang="en">Business</span>
-    <span data-lang="ru">Бизнес</span>
-  </a>
-  <a href="mokri-about.html" class="nav-link">
-    <span data-lang="ka" class="active">ჩვენს შესახებ</span>
-    <span data-lang="en">About Us</span>
-    <span data-lang="ru">О Нас</span>
-  </a>
-  <a href="mokri-shop.html" class="nav-link nav-shop">
-    <span data-lang="ka" class="active">🛒 მაღაზია</span>
-    <span data-lang="en">🛒 Shop</span>
-    <span data-lang="ru">🛒 Магазин</span>
-  </a>
-</div>
-
-<!-- ═══ FLOATING WHATSAPP ═══ -->
-<a href="https://wa.me/995555555555" target="_blank" rel="noopener noreferrer" class="wa-float" aria-label="WhatsApp-ით კავშირი">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<!-- ——— FLOATING WHATSAPP ——— -->
+<a href="https://wa.me/995555555555" target="_blank" class="wa-float" title="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
   </svg>
 </a>
 
 <!-- ═══════════════════════ HERO ═══════════════════════ -->
-<section class="hero" id="home">
-  <div class="hero-grid" aria-hidden="true"></div>
-  <div class="hero-glow" aria-hidden="true"></div>
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
 
-  <!-- Logo: transparent background, icon only, properly cropped -->
-  <div class="hero-logo" aria-hidden="true">
-    <svg viewBox="107 85 72 95" xmlns="http://www.w3.org/2000/svg">
+  <!-- Logo SVG (no background, content centered in viewBox 100x100) -->
+  <div class="hero-logo">
+    <svg viewBox="108 88 68 100" xmlns="http://www.w3.org/2000/svg">
+      <!-- Icon shape from brand -->
       <path fill="#FEFEFE" d="M152 94c1.7.4 4.7 1.4 6.4 2.1 4.6 1.8 9.3 3.6 14.1 5.3-1.7 5-3.1 10.6-4.5 15.9l-7.6-.2c.6-3.1 2.1-8 2.9-11.5l-12.4-4.6c.4-2.2 1.2-5.2 1.1-7z"/>
       <path fill="#FEFEFE" d="M128 93.9h.1c.5.4 1.5 5.8 1.7 6.8l-12 4.6c.8 3.5 2 6.8 2.6 10.3l-7.6.1-.4-.1c-.7-1.2-3.6-13.2-4.1-15.9 6.3-2.9 13.5-5.5 19.7-5.8z"/>
       <path fill="#FEFEFE" d="M125 153.6c.9.7 1.5 1.3 2.3 2.1 2.8 2.8 5.7 5.5 8.5 8.2l.1 10.8c-4.7-4.3-9.5-9-14.3-13.3-.6-.4-1.7-1.5-2.2-2 1-0.8 4.9-4.4 5.6-5.8z"/>
@@ -928,4 +596,194 @@
       <path fill="#FEFEFE" d="M153.8 156.4l5.3 4.9c-4.4 4-8.8 8.8-13.3 12.8l-.1-10.2c2.7-2.5 5.4-5 8-7.5z"/>
       <path fill="#FEFEFE" d="M113.8 142l8.4.1c.6 2.6 1.7 8 2.8 10.5-.6.7-4.6 4.4-5.8 5.1-.6-.6-1.3-1.3-1.9-1.9-.8-4.3-2.4-9-3.5-13.8z"/>
       <path fill="#FEFEFE" d="M139 96.5c1.2.2 1.4.2 2.6.1l-.1 11.5c1.2 1.1 1.5 1.6 1 3.2 2.6 2.5 5 4.7 7.5 7.3 2.1 0 3 .1 4.2 2 .2 1.5.2 2-.4 3.4-1.4 1.2-2.9 2-4.7.9-.8-.5-1.3-1.2-1.5-2.1-.3-1.3.1-2.2.8-3.2-2.1-2.2-4.7-4.7-6.9-6.8-3.5-.2-4.7-1.8-2.5-4.5.1-3.7.1-8.1 0-11.8z"/>
-      <path fill="#FEFEFE" d="M126.3 124.5c.7-.9 1.8-2 3-1.9 3.5.1 3.8 2.8 3.
+      <path fill="#FEFEFE" d="M126.3 124.5c.7-.9 1.8-2 3-1.9 3.5.1 3.8 2.8 3.4 5.2 3.3 2.8 5.6 5.5 8.6 8.3 1.3.3 2.4.6 3.1 1.8 1.3 2.2.1 4.1-2.1 4.9-1.7.1-1.7 0-3.3-.8-1.5-2.1-1.4-2.6-.2-4.7-2.2-2.5-5.5-5.5-7.9-8a9 9 0 01-.9.1c-1.6.1-2.2-.4-3.3-1.4-.6-1.5-.5-2-.3-3.5z"/>
+      <path fill="#4D9BFD" d="M129.7 141.2c1.6.8 1.6.9 3.3.8.1 4.3 0 8.7 0 13l.2 7.7-2 1.9-1.6-1.5c-.1-7.3 0-14.6.1-21.9z"/>
+      <path fill="#4D9BFD" d="M111.9 124.4l14.4.1c-.3 1.5-.4 2 .2 3.4-4.2-.2-9.4-.1-13.7-.1z"/>
+      <path fill="#4D9BFD" d="M151.5 124.3c4.5.1 9.9-.2 14.3.1-.3 1.1-.6 2.2-.9 3.3l-13.7-.1c.6-1.4.6-1.9.3-3.3z"/>
+      <path fill="#4D9BFD" d="M137.3 93.4c1.6-2.9 3.9-2.4 5.9-.2-.1 1.4-.2 2.1-1.1 3.2l-.6.6c-1.2.1-1.4.1-2.6-.1l-.2-.3c-1.2-1.3-1.4-1.5-1.4-3.2z"/>
+      <path fill="#1A3B6C" d="M143.2 93.2c2.1 1.2 4.3 2.4 6.2 3.6-.2 1-.5 2.3-.7 3.2-2.2-1.2-4.5-2.5-6.6-3.6 1-1.1 1-1.8 1.1-3.2z"/>
+      <path fill="#1A3B6C" d="M131 97c1.8-1.1 4.1-2.8 5.7-3.7 0 1.7.2 1.9 1.4 3.2-2 .9-4.2 2.5-6.3 3.5-.3-1-.6-2-.8-3z"/>
+    </svg>
+  </div>
+
+  <div class="hero-brand">MOK<span>RI</span></div>
+
+  <div class="hero-tagline">
+    <span data-lang="ka" class="active">IT გადაწყვეტილებები · მხარდაჭერა · ინოვაცია</span>
+    <span data-lang="en">IT Solutions · Support · Innovation</span>
+    <span data-lang="ru">IT Решения · Поддержка · Инновации</span>
+  </div>
+
+  <p class="hero-desc">
+    <span data-lang="ka" class="active">თქვენი ბიზნესისა და ციფრული ცხოვრების სანდო ტექნიკური პარტნიორი.</span>
+    <span data-lang="en">Your trusted technology partner for business and personal digital life.</span>
+    <span data-lang="ru">Ваш надёжный технологический партнёр для бизнеса и цифровой жизни.</span>
+  </p>
+
+  <div class="hero-actions">
+    <a href="https://wa.me/995555555555" target="_blank" class="btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <span data-lang="ka" class="active">WhatsApp-ით კავშირი</span>
+      <span data-lang="en">Chat on WhatsApp</span>
+      <span data-lang="ru">Написать в WhatsApp</span>
+    </a>
+    <a href="individuals.html" class="btn-outline">
+      <span data-lang="ka" class="active">სერვისები</span>
+      <span data-lang="en">Our Services</span>
+      <span data-lang="ru">Наши Услуги</span>
+    </a>
+  </div>
+
+  <div class="hero-scroll">
+    <span>SCROLL</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4D9BFD" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════ STATS ═══════════════════════ -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">≤30წთ</div>
+      <div class="stat-label">
+        <span data-lang="ka" class="active">სწრაფი პასუხი</span>
+        <span data-lang="en">Fast Response</span>
+        <span data-lang="ru">Быстрый Ответ</span>
+      </div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">SMB</div>
+      <div class="stat-label">
+        <span data-lang="ka" class="active">ბიზნეს ფოკუსი</span>
+        <span data-lang="en">Business Focus</span>
+        <span data-lang="ru">Фокус на Бизнесе</span>
+      </div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">
+        <span data-lang="ka" class="active">დისტანციურად</span>
+        <span data-lang="en">Remote Work</span>
+        <span data-lang="ru">Удалённо</span>
+      </div>
+      <div class="stat-subnote">
+        <span data-lang="ka" class="active">საჭიროებისამებრ ადგილზეც</span>
+        <span data-lang="en">on-site when needed</span>
+        <span data-lang="ru">при необходимости — лично</span>
+      </div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">
+        <span data-lang="ka" class="active">გადაწყვეტილება</span>
+        <span data-lang="en">Solutions</span>
+        <span data-lang="ru">Решений</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer>
+  <div class="footer-brand">MOK<span>RI</span></div>
+  <div class="footer-links">
+    <a href="individuals.html">
+      <span data-lang="ka" class="active">ფიზიკური პირები</span>
+      <span data-lang="en">Individuals</span>
+      <span data-lang="ru">Частные Лица</span>
+    </a>
+    <a href="business.html">
+      <span data-lang="ka" class="active">იურიდიული პირები</span>
+      <span data-lang="en">Business</span>
+      <span data-lang="ru">Бизнес</span>
+    </a>
+    <a href="about.html">
+      <span data-lang="ka" class="active">ჩვენს შესახებ</span>
+      <span data-lang="en">About</span>
+      <span data-lang="ru">О Нас</span>
+    </a>
+    <a href="https://shop.mokri.ge" target="_blank" rel="noopener noreferrer">shop.mokri.ge</a>
+  </div>
+  <div class="footer-copy">© 2025 MOKRI. 
+    <span data-lang="ka" class="active">ყველა უფლება დაცულია.</span>
+    <span data-lang="en">All rights reserved.</span>
+    <span data-lang="ru">Все права защищены.</span>
+  </div>
+</footer>
+
+<script>
+  'use strict';
+
+  let currentLang = 'ka';
+
+  /* ——— Input sanitizer ——— */
+  function sanitizeInput(str) {
+    if (typeof str !== 'string') return '';
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#x27;')
+      .replace(/\//g, '&#x2F;')
+      .slice(0, 2000);
+  }
+
+  /* ——— Language switcher ——— */
+  function setLang(lang) {
+    const allowed = ['ka', 'en', 'ru'];
+    if (!allowed.includes(lang)) return;
+    currentLang = lang;
+
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.classList.toggle('active', el.getAttribute('data-lang') === lang);
+    });
+
+    document.querySelectorAll('.lang-btn').forEach((btn, i) => {
+      btn.classList.toggle('active', ['ka','en','ru'][i] === lang);
+    });
+
+    document.documentElement.lang = lang;
+
+    try { localStorage.setItem('mokri-lang', lang); } catch(e) {}
+  }
+
+  /* ——— Restore saved language ——— */
+  (function() {
+    try {
+      const saved = localStorage.getItem('mokri-lang');
+      if (saved && ['ka','en','ru'].includes(saved)) setLang(saved);
+    } catch(e) {}
+  })();
+
+  /* ——— Highlight active nav link ——— */
+  (function() {
+    const page = window.location.pathname.split('/').pop().replace('.html', '') || 'index';
+    document.querySelectorAll('.header-nav-link[data-nav]').forEach(link => {
+      if (link.getAttribute('data-nav') === page) link.classList.add('active');
+    });
+  })();
+
+  /* ——— Intersection Observer for fade-in ——— */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.stat-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
