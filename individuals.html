@@ -8,6 +8,7 @@
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+<meta name="robots" content="index, follow">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <title>ფიზიკური პირები — MOKRI IT</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+Georgian:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -15,15 +16,15 @@
   :root {
     --bg: #0A1728;
     --bg2: #0d1e35;
+    --bg3: #0f2240;
     --navy: #1A3B6C;
     --blue: #4D9BFD;
     --blue-dim: rgba(77,155,253,0.15);
     --blue-glow: rgba(77,155,253,0.35);
     --white: #FEFEFE;
     --white-dim: rgba(254,254,254,0.65);
-    --white-faint: rgba(254,254,254,0.06);
-    --border: rgba(77,155,253,0.18);
-    --accent: #7EC8E3;
+    --white-faint: rgba(254,254,254,0.08);
+    --border: rgba(77,155,253,0.2);
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -32,9 +33,10 @@
   body {
     background: var(--bg);
     color: var(--white);
-    font-family: 'Noto Sans Georgian', sans-serif;
+    font-family: 'EB Garamond', Georgia, serif;
     overflow-x: hidden;
     line-height: 1.7;
+    padding-top: 68px;
   }
 
   body::before {
@@ -45,57 +47,62 @@
   }
 
   /* ——— HEADER ——— */
-  .header {
+  .lang-bar {
     position: fixed; top:0; right:0; left:0; z-index:1000;
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
     gap: 24px;
     padding: 0 36px;
-    height: 60px;
+    height: 68px;
     background: rgba(10,23,40,0.95);
     backdrop-filter: blur(18px) saturate(180%);
     -webkit-backdrop-filter: blur(18px) saturate(180%);
     border-bottom: 1px solid var(--border);
   }
 
-  .header-logo {
+  .lang-bar-logo {
     font-family: 'Orbitron', sans-serif;
-    font-weight: 900; font-size: 17px;
-    letter-spacing: 4px; color: var(--white);
-    text-decoration: none; transition: opacity 0.2s;
+    font-weight: 900;
+    font-size: 26px;
+    letter-spacing: 6px;
+    color: var(--white);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s;
   }
-  .header-logo:hover { opacity: 0.8; }
-  .header-logo span { color: var(--blue); }
+  .lang-bar-logo:hover { opacity: 0.8; }
+  .lang-bar-logo span { color: var(--blue); }
 
   .header-nav {
     display: flex; justify-content: center;
     align-items: center; gap: 4px;
   }
 
-  .nav-link {
+  .header-nav-link {
     position: relative; padding: 7px 14px;
     font-family: 'Noto Sans Georgian', sans-serif;
     font-size: 12.5px; font-weight: 600;
+    letter-spacing: 0.3px;
     color: rgba(254,254,254,0.7);
     text-decoration: none; border-radius: 6px;
     transition: all 0.22s ease; white-space: nowrap;
   }
-  .nav-link::after {
+  .header-nav-link::after {
     content:''; position:absolute; bottom:3px; left:50%;
     transform: translateX(-50%) scaleX(0);
     width:60%; height:1.5px; background: var(--blue);
     border-radius:2px; transition: transform 0.22s ease;
   }
-  .nav-link:hover { color:var(--white); background:rgba(77,155,253,0.08); }
-  .nav-link:hover::after { transform: translateX(-50%) scaleX(1); }
-  .nav-link.active { color:var(--blue); background:rgba(77,155,253,0.1); }
-  .nav-link.shop-link {
+  .header-nav-link:hover { color:var(--white); background:rgba(77,155,253,0.08); }
+  .header-nav-link:hover::after { transform: translateX(-50%) scaleX(1); }
+  .header-nav-link.active { color:var(--blue); background:rgba(77,155,253,0.1); }
+  .header-nav-link.shop-link {
     color:var(--blue); border:1px solid rgba(77,155,253,0.35);
     margin-left:8px; font-size:11.5px; letter-spacing:1px;
   }
-  .nav-link.shop-link:hover { background:var(--blue); color:var(--bg); box-shadow:0 0 18px var(--blue-glow); }
-  .nav-link.shop-link::after { display:none; }
+  .header-nav-link.shop-link:hover { background:var(--blue); color:var(--bg); box-shadow:0 0 18px var(--blue-glow); }
+  .header-nav-link.shop-link::after { display:none; }
 
   .lang-switcher {
     display:flex; gap:4px;
@@ -110,8 +117,14 @@
   }
   .lang-btn.active { background:var(--blue); color:var(--bg); }
 
+  @media(max-width:860px) {
+    .header-nav { gap: 2px; }
+    .header-nav-link { padding: 6px 9px; font-size: 11px; }
+    .header-nav-link.shop-link { margin-left: 4px; }
+  }
+
   @media(max-width:660px) {
-    .header { grid-template-columns:auto auto; height:auto; padding:10px 16px; }
+    .lang-bar { grid-template-columns:auto auto; height:auto; padding:10px 16px; gap: 8px; flex-wrap: wrap; }
     .header-nav { display:none; }
   }
 
@@ -119,8 +132,9 @@
   .hero {
     position:relative; min-height:52vh;
     display:flex; flex-direction:column;
-    justify-content:center; align-items:flex-start;
-    padding: 120px 80px 80px;
+    justify-content:center; align-items:center;
+    text-align:center;
+    padding: 80px 80px 80px;
     overflow:hidden;
   }
 
@@ -146,6 +160,7 @@
     font-weight:700; letter-spacing:4px; color:var(--blue);
     text-transform:uppercase; margin-bottom:20px;
     display:flex; align-items:center; gap:12px;
+    justify-content:center;
   }
   .hero-eyebrow::before {
     content:''; width:32px; height:1px; background:var(--blue);
@@ -165,6 +180,7 @@
     font-size:17px; color:var(--white-dim);
     line-height:1.8; margin-bottom:44px;
     font-family:'EB Garamond',Georgia,serif;
+    margin-left:auto; margin-right:auto;
   }
 
   .hero-cta {
@@ -309,45 +325,105 @@
   [data-lang].active { display:block; }
   .li[data-lang] { display:none; }
   .li[data-lang].active { display:inline; }
+
+  /* ——— WA BUTTON FLOATING ——— */
+  .wa-float {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 60px; height: 60px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(37,211,102,0.4);
+    z-index: 999;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: waPulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes waPulse {
+    0%, 100% { box-shadow: 0 8px 32px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 8px 48px rgba(37,211,102,0.7); }
+  }
+
+  .wa-float:hover { transform: scale(1.1); }
+  .wa-float svg { width: 30px; height: 30px; fill: white; }
+
+  /* ——— EMAIL BUTTON FLOATING ——— */
+  .email-float {
+    position: fixed;
+    bottom: 104px;
+    right: 32px;
+    width: 60px; height: 60px;
+    background: #4D9BFD;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(77,155,253,0.4);
+    z-index: 999;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .email-float:hover { transform: scale(1.1); box-shadow: 0 8px 48px rgba(77,155,253,0.7); }
+  .email-float svg { width: 28px; height: 28px; fill: white; }
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
-<header class="header">
-  <a href="index.html" class="header-logo" aria-label="MOKRI - მთავარი">MOK<span>RI</span></a>
+<header class="lang-bar">
+  <a href="index.html" class="lang-bar-logo" aria-label="MOKRI - მთავარი">MOK<span>RI</span></a>
   <nav class="header-nav" aria-label="მთავარი ნავიგაცია">
-    <a href="individuals.html" class="nav-link active">
+    <a href="individuals.html" class="header-nav-link" data-nav="individuals">
       <span data-lang="ka" class="active">ფიზიკური პირები</span>
       <span data-lang="en">Individuals</span>
       <span data-lang="ru">Частные Лица</span>
     </a>
-    <a href="business.html" class="nav-link">
+    <a href="business.html" class="header-nav-link" data-nav="business">
       <span data-lang="ka" class="active">იურიდიული პირები</span>
       <span data-lang="en">Business</span>
       <span data-lang="ru">Бизнес</span>
     </a>
-    <a href="about.html" class="nav-link">
+    <a href="about.html" class="header-nav-link" data-nav="about">
       <span data-lang="ka" class="active">ჩვენს შესახებ</span>
       <span data-lang="en">About Us</span>
       <span data-lang="ru">О Нас</span>
     </a>
-    <a href="contact.html" class="nav-link">
+    <a href="contact.html" class="header-nav-link" data-nav="contact">
       <span data-lang="ka" class="active">კონტაქტი</span>
       <span data-lang="en">Contact</span>
       <span data-lang="ru">Контакты</span>
     </a>
-    <a href="https://shop.mokri.ge" target="_blank" rel="noopener noreferrer" class="nav-link shop-link">
+    <a href="https://shop.mokri.ge" target="_blank" rel="noopener noreferrer" class="header-nav-link shop-link" aria-label="Mokri Online Shop">
       <span>shop.mokri.ge</span>
       <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="margin-left:4px;opacity:0.7"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6m0 0v6m0-6L10 14"/></svg>
     </a>
   </nav>
   <div class="lang-switcher" role="group" aria-label="ენის არჩევა">
-    <button class="lang-btn active" onclick="setLang('ka')">ქარ</button>
-    <button class="lang-btn" onclick="setLang('en')">ENG</button>
-    <button class="lang-btn" onclick="setLang('ru')">РУС</button>
+    <button class="lang-btn active" onclick="setLang('ka')" aria-label="ქართული">ქარ</button>
+    <button class="lang-btn" onclick="setLang('en')" aria-label="English">ENG</button>
+    <button class="lang-btn" onclick="setLang('ru')" aria-label="Русский">РУС</button>
   </div>
 </header>
+
+<!-- ——— FLOATING EMAIL ——— -->
+<a href="mailto:info@mokri.ge" class="email-float" title="Email">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+  </svg>
+</a>
+
+<!-- ——— FLOATING WHATSAPP ——— -->
+<a href="https://wa.me/995555555555" target="_blank" rel="noopener noreferrer" class="wa-float" title="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
 
 <!-- HERO -->
 <section class="hero">
@@ -582,6 +658,20 @@
 'use strict';
 let currentLang = 'ka';
 
+/* ——— Input sanitizer ——— */
+function sanitizeInput(str) {
+  if (typeof str !== 'string') return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
+    .replace(/\//g, '&#x2F;')
+    .slice(0, 2000);
+}
+
+/* ——— Language switcher ——— */
 function setLang(lang) {
   const allowed = ['ka','en','ru'];
   if (!allowed.includes(lang)) return;
@@ -596,11 +686,20 @@ function setLang(lang) {
   try { localStorage.setItem('mokri-lang', lang); } catch(e) {}
 }
 
-(function(){
+/* ——— Restore saved language ——— */
+(function() {
   try {
-    const s = localStorage.getItem('mokri-lang');
-    if (s && ['ka','en','ru'].includes(s)) setLang(s);
-  } catch(e){}
+    const saved = localStorage.getItem('mokri-lang');
+    if (saved && ['ka','en','ru'].includes(saved)) setLang(saved);
+  } catch(e) {}
+})();
+
+/* ——— Highlight active nav link ——— */
+(function() {
+  const page = window.location.pathname.split('/').pop().replace('.html', '') || 'index';
+  document.querySelectorAll('.header-nav-link[data-nav]').forEach(link => {
+    if (link.getAttribute('data-nav') === page) link.classList.add('active');
+  });
 })();
 
 const obs = new IntersectionObserver(entries => {
