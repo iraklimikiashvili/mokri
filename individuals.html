@@ -64,7 +64,7 @@
   .lang-bar-logo {
     font-family: 'Orbitron', sans-serif;
     font-weight: 900;
-    font-size: 26px;
+    font-size: 22px;
     letter-spacing: 6px;
     color: var(--white);
     text-decoration: none;
@@ -82,7 +82,7 @@
   .header-nav-link {
     position: relative; padding: 7px 14px;
     font-family: 'Noto Sans Georgian', sans-serif;
-    font-size: 12.5px; font-weight: 600;
+    font-size: 11px; font-weight: 600;
     letter-spacing: 0.3px;
     color: rgba(254,254,254,0.7);
     text-decoration: none; border-radius: 6px;
@@ -99,7 +99,7 @@
   .header-nav-link.active { color:var(--blue); background:rgba(77,155,253,0.1); }
   .header-nav-link.shop-link {
     color:var(--blue); border:1px solid rgba(77,155,253,0.35);
-    margin-left:8px; font-size:11.5px; letter-spacing:1px;
+    margin-left:8px; font-size:10px; letter-spacing:1px;
   }
   .header-nav-link.shop-link:hover { background:var(--blue); color:var(--bg); box-shadow:0 0 18px var(--blue-glow); }
   .header-nav-link.shop-link::after { display:none; }
@@ -111,7 +111,7 @@
   }
   .lang-btn {
     padding:5px 13px;
-    font-family:'Orbitron',sans-serif; font-size:9.5px; font-weight:700;
+    font-family:'Orbitron',sans-serif; font-size:8.5px; font-weight:700;
     letter-spacing:2px; border:none; background:transparent;
     color:var(--white-dim); border-radius:4px; cursor:pointer; transition:all 0.25s;
   }
@@ -119,7 +119,7 @@
 
   @media(max-width:860px) {
     .header-nav { gap: 2px; }
-    .header-nav-link { padding: 6px 9px; font-size: 11px; }
+    .header-nav-link { padding: 6px 9px; font-size: 9.5px; }
     .header-nav-link.shop-link { margin-left: 4px; }
   }
 
@@ -156,7 +156,7 @@
 
   .hero-eyebrow {
     position:relative;
-    font-family:'Orbitron',sans-serif; font-size:10px;
+    font-family:'Orbitron',sans-serif; font-size:9px;
     font-weight:700; letter-spacing:4px; color:var(--blue);
     text-transform:uppercase; margin-bottom:20px;
     display:flex; align-items:center; gap:12px;
@@ -169,7 +169,7 @@
   .hero-title {
     position:relative;
     font-family:'Orbitron',sans-serif; font-weight:900;
-    font-size: clamp(26px, 4vw, 48px);
+    font-size: clamp(22px, 3.5vw, 42px);
     letter-spacing:2px; line-height:1.1;
     margin-bottom:28px;
   }
@@ -177,7 +177,7 @@
 
   .hero-desc {
     position:relative; max-width:580px;
-    font-size:17px; color:var(--white-dim);
+    font-size:15px; color:var(--white-dim);
     line-height:1.8; margin-bottom:44px;
     font-family:'EB Garamond',Georgia,serif;
     margin-left:auto; margin-right:auto;
@@ -190,7 +190,7 @@
   .btn-primary {
     display:inline-flex; align-items:center; gap:10px;
     padding:14px 32px; background:var(--blue); color:var(--bg);
-    font-family:'Orbitron',sans-serif; font-size:10.5px;
+    font-family:'Orbitron',sans-serif; font-size:9px;
     font-weight:700; letter-spacing:2px; border-radius:6px;
     text-decoration:none; transition:all 0.25s;
     border:1px solid transparent;
@@ -203,7 +203,7 @@
   .btn-outline {
     display:inline-flex; align-items:center; gap:10px;
     padding:14px 32px; background:transparent; color:var(--white);
-    font-family:'Orbitron',sans-serif; font-size:10.5px;
+    font-family:'Orbitron',sans-serif; font-size:9px;
     font-weight:700; letter-spacing:2px; border:1px solid var(--border);
     border-radius:6px; text-decoration:none; transition:all 0.25s;
   }
@@ -216,7 +216,7 @@
   }
 
   .section-eyebrow {
-    font-family:'Orbitron',sans-serif; font-size:10px;
+    font-family:'Orbitron',sans-serif; font-size:9px;
     font-weight:700; letter-spacing:4px; color:var(--blue);
     text-transform:uppercase; margin-bottom:16px;
     display:flex; align-items:center; gap:12px;
@@ -225,7 +225,7 @@
 
   .section-title {
     font-family:'Orbitron',sans-serif; font-weight:900;
-    font-size:clamp(26px, 3.5vw, 40px); letter-spacing:2px;
+    font-size:clamp(22px, 3vw, 34px); letter-spacing:2px;
     margin-bottom:52px; line-height:1.2;
   }
   .section-title span { color:var(--blue); }
@@ -260,12 +260,12 @@
 
   .svc-name {
     font-family:'Noto Sans Georgian',sans-serif;
-    font-size:15px; font-weight:700; margin-bottom:10px;
+    font-size:13px; font-weight:700; margin-bottom:10px;
     color:var(--white);
   }
   .svc-desc {
     font-family:'EB Garamond',Georgia,serif;
-    font-size:15px; color:var(--white-dim); line-height:1.7;
+    font-size:13px; color:var(--white-dim); line-height:1.7;
   }
 
   /* ——— PROCESS ——— */
@@ -277,17 +277,17 @@
   .step { display:flex; gap:20px; align-items:flex-start; }
 
   .step-num {
-    font-family:'Orbitron',sans-serif; font-size:36px; font-weight:900;
+    font-family:'Orbitron',sans-serif; font-size:30px; font-weight:900;
     color:rgba(77,155,253,0.2); line-height:1; flex-shrink:0; width:48px;
   }
 
   .step-content {}
   .step-title {
-    font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700;
+    font-family:'Orbitron',sans-serif; font-size:10px; font-weight:700;
     letter-spacing:1px; color:var(--blue); margin-bottom:8px;
     text-transform:uppercase;
   }
-  .step-text { font-size:15px; color:var(--white-dim); line-height:1.7; font-family:'EB Garamond',Georgia,serif; }
+  .step-text { font-size:13px; color:var(--white-dim); line-height:1.7; font-family:'EB Garamond',Georgia,serif; }
 
   /* ——— CTA SECTION ——— */
   .cta-section {
@@ -304,10 +304,10 @@
   }
 
   .cta-text-block h3 {
-    font-family:'Orbitron',sans-serif; font-size:22px; font-weight:900;
+    font-family:'Orbitron',sans-serif; font-size:18px; font-weight:900;
     letter-spacing:2px; margin-bottom:10px;
   }
-  .cta-text-block p { font-size:16px; color:var(--white-dim); font-family:'EB Garamond',Georgia,serif; }
+  .cta-text-block p { font-size:14px; color:var(--white-dim); font-family:'EB Garamond',Georgia,serif; }
 
   /* ——— FOOTER ——— */
   footer {
@@ -315,11 +315,11 @@
     padding:40px; text-align:center;
   }
   .footer-brand {
-    font-family:'Orbitron',sans-serif; font-weight:900; font-size:18px;
+    font-family:'Orbitron',sans-serif; font-weight:900; font-size:15px;
     letter-spacing:6px; margin-bottom:16px;
   }
   .footer-brand span { color:var(--blue); }
-  .footer-copy { font-size:13px; color:var(--white-dim); opacity:0.5; }
+  .footer-copy { font-size:11px; color:var(--white-dim); opacity:0.5; }
 
   [data-lang] { display:none; }
   [data-lang].active { display:block; }
