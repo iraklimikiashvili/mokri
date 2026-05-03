@@ -156,13 +156,16 @@
 
   .hero-eyebrow {
     position:relative;
-    font-family:'Orbitron',sans-serif; font-size:9px;
+    font-family:'Orbitron',sans-serif; font-size:12px;
     font-weight:700; letter-spacing:4px; color:var(--blue);
     text-transform:uppercase; margin-bottom:20px;
     display:flex; align-items:center; gap:12px;
     justify-content:center;
   }
   .hero-eyebrow::before {
+    content:''; width:32px; height:1px; background:var(--blue);
+  }
+  .hero-eyebrow::after {
     content:''; width:32px; height:1px; background:var(--blue);
   }
 
@@ -217,7 +220,7 @@
   }
 
   .section-eyebrow {
-    font-family:'Orbitron',sans-serif; font-size:9px;
+    font-family:'Orbitron',sans-serif; font-size:12px;
     font-weight:700; letter-spacing:4px; color:var(--blue);
     text-transform:uppercase; margin-bottom:16px;
     display:flex; align-items:center; gap:12px;
@@ -485,9 +488,9 @@
     <span data-lang="ru">Услуги для частных лиц</span>
   </div>
   <h1 class="hero-title">
-    <span data-lang="ka" class="active">თქვენი პირადი<br>IT <span>ასისტენტი</span></span>
-    <span data-lang="en">Your Personal<br>IT <span>Assistant</span></span>
-    <span data-lang="ru">Ваш личный<br>IT <span>ассистент</span></span>
+    <span data-lang="ka" class="active">თქვენი პირადი IT <span>ასისტენტი</span></span>
+    <span data-lang="en">Your Personal IT <span>Assistant</span></span>
+    <span data-lang="ru">Ваш личный IT <span>ассистент</span></span>
   </h1>
   <p class="hero-desc">
     <span data-lang="ka" class="active">კომპიუტერის პრობლემა, ინტერნეტი, ტელეფონი, ვირუსი — ჩვენ ვართ ყოველთვის ხელმისაწვდომი. სწრაფი, სანდო, დისტანციური მხარდაჭერა — WhatsApp-ზე ერთი შეტყობინებით.</span>
