@@ -216,18 +216,15 @@
     border-radius:14px; padding:32px 24px;
     text-align:center; text-decoration:none; color:inherit;
     display:flex; flex-direction:column; align-items:center;
-    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    opacity:0; transform:translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s, box-shadow 0.3s;
   }
   .contact-card:hover {
     border-color:rgba(77,155,253,0.55);
     border-top-color:var(--blue);
     box-shadow:0 10px 40px rgba(77,155,253,0.14);
-    transform:translateY(-4px);
+    transform:translateY(-4px) !important;
   }
-  /* Animate-in only when JS is active (sets .js-on on body) */
-  .js-on .contact-card { opacity:0; transform:translateY(20px); transition:opacity 0.5s ease, transform 0.5s ease, border-color 0.3s, box-shadow 0.3s; }
-  .js-on .contact-card.visible { opacity:1; transform:translateY(0); }
-  .js-on .contact-card.visible:hover { transform:translateY(-4px); }
 
   .contact-icon {
     width:56px; height:56px;
@@ -354,19 +351,19 @@
 <body>
 
 <!-- HEADER -->
-<header class="header">
-  <a href="index.html" class="header-logo" aria-label="MOKRI - მთავარი">MOK<span>RI</span></a>
+<header class="lang-bar">
+  <a href="index.html" class="lang-bar-logo" aria-label="MOKRI - მთავარი">MOK<span>RI</span></a>
   <nav class="header-nav" aria-label="მთავარი ნავიგაცია">
-    <a href="individuals.html" class="nav-link"><span data-lang="ka" class="active">ფიზიკური პირები</span><span data-lang="en">Individuals</span><span data-lang="ru">Частные Лица</span></a>
-    <a href="business.html" class="nav-link"><span data-lang="ka" class="active">იურიდიული პირები</span><span data-lang="en">Business</span><span data-lang="ru">Бизнес</span></a>
-    <a href="about.html" class="nav-link"><span data-lang="ka" class="active">ჩვენს შესახებ</span><span data-lang="en">About Us</span><span data-lang="ru">О Нас</span></a>
-    <a href="contact.html" class="nav-link active"><span data-lang="ka" class="active">კონტაქტი</span><span data-lang="en">Contact</span><span data-lang="ru">Контакты</span></a>
-    <a href="https://shop.mokri.ge" target="_blank" rel="noopener noreferrer" class="nav-link shop-link"><span>shop.mokri.ge</span><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="margin-left:4px;opacity:0.7"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6m0 0v6m0-6L10 14"/></svg></a>
+    <a href="individuals.html" class="header-nav-link" data-nav="individuals"><span data-lang="ka" class="active">ფიზიკური პირები</span><span data-lang="en">Individuals</span><span data-lang="ru">Частные Лица</span></a>
+    <a href="business.html" class="header-nav-link" data-nav="business"><span data-lang="ka" class="active">იურიდიული პირები</span><span data-lang="en">Business</span><span data-lang="ru">Бизнес</span></a>
+    <a href="about.html" class="header-nav-link" data-nav="about"><span data-lang="ka" class="active">ჩვენს შესახებ</span><span data-lang="en">About Us</span><span data-lang="ru">О Нас</span></a>
+    <a href="contact.html" class="header-nav-link" data-nav="contact"><span data-lang="ka" class="active">კონტაქტი</span><span data-lang="en">Contact</span><span data-lang="ru">Контакты</span></a>
+    <a href="https://shop.mokri.ge" target="_blank" rel="noopener noreferrer" class="header-nav-link shop-link" aria-label="Mokri Online Shop"><span>shop.mokri.ge</span><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="margin-left:4px;opacity:0.7"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6m0 0v6m0-6L10 14"/></svg></a>
   </nav>
   <div class="lang-switcher" role="group" aria-label="ენის არჩევა">
-    <button class="lang-btn active" onclick="setLang('ka')">ქარ</button>
-    <button class="lang-btn" onclick="setLang('en')">ENG</button>
-    <button class="lang-btn" onclick="setLang('ru')">РУС</button>
+    <button class="lang-btn active" onclick="setLang('ka')" aria-label="ქართული">ქარ</button>
+    <button class="lang-btn" onclick="setLang('en')" aria-label="English">ENG</button>
+    <button class="lang-btn" onclick="setLang('ru')" aria-label="Русский">РУС</button>
   </div>
 </header>
 
@@ -560,6 +557,14 @@ function setLang(lang) {
     const s = localStorage.getItem('mokri-lang');
     if (s && ['ka','en','ru'].includes(s)) setLang(s);
   } catch(e) {}
+})();
+
+/* ——— Highlight active nav link ——— */
+(function() {
+  const page = window.location.pathname.split('/').pop().replace('.html', '') || 'index';
+  document.querySelectorAll('.header-nav-link[data-nav]').forEach(link => {
+    if (link.getAttribute('data-nav') === page) link.classList.add('active');
+  });
 })();
 
 /* ——— FADE-IN OBSERVER ——— */
