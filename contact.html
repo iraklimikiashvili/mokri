@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline'; connect-src https://formspree.io; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io;">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
@@ -580,13 +580,16 @@ const obs = new IntersectionObserver(en => {
 document.querySelectorAll('.contact-card').forEach(el => obs.observe(el));
 
 /* ——— CONTACT FORM ——— */
+// Replace YOUR_FORM_ID with the ID from your Formspree dashboard (https://formspree.io)
+const FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORM_ID';
+
 const TXT = {
   required: { ka: 'ეს ველი სავალდებულოა', en: 'This field is required', ru: 'Это поле обязательно' },
   emailBad: { ka: 'არასწორი ელ-ფოსტის ფორმატი', en: 'Invalid email format', ru: 'Неверный формат email' },
   tooShort: { ka: 'ძალიან მოკლეა', en: 'Too short', ru: 'Слишком коротко' },
-  success:  { ka: 'მადლობა! თქვენი შეტყობინება მზადდება გასაგზავნად. გთხოვთ, დაადასტუროთ თქვენს ელ-ფოსტის აპლიკაციაში.',
-              en: 'Thanks! Your message is being prepared. Please confirm in your email app.',
-              ru: 'Спасибо! Ваше сообщение готовится к отправке. Пожалуйста, подтвердите в почтовом клиенте.' }
+  sending:  { ka: 'იგზავნება...', en: 'Sending...', ru: 'Отправка...' },
+  success:  { ka: 'მადლობა! თქვენი შეტყობინება გაიგზავნა.', en: 'Thanks! Your message has been sent.', ru: 'Спасибо! Ваше сообщение отправлено.' },
+  fail:     { ka: 'შეცდომა. სცადეთ ხელახლა ან დაგვიკავშირდით პირდაპირ.', en: 'Something went wrong. Please try again or contact us directly.', ru: 'Произошла ошибка. Попробуйте снова или свяжитесь с нами напрямую.' }
 };
 function t(key) { return TXT[key][currentLang] || TXT[key].en; }
 
@@ -604,7 +607,7 @@ function clearError(fieldId) {
 }
 function clearAllErrors() { ['cf-name','cf-email','cf-phone','cf-message'].forEach(clearError); }
 
-document.getElementById('contactForm').addEventListener('submit', function(ev) {
+document.getElementById('contactForm').addEventListener('submit', async function(ev) {
   ev.preventDefault();
   clearAllErrors();
 
@@ -620,20 +623,39 @@ document.getElementById('contactForm').addEventListener('submit', function(ev) {
   if (message.length < 10) { showError('cf-message', t('tooShort')); ok = false; }
   if (!ok) return;
 
-  // Build mailto: with pre-filled body — opens user's default email client
-  const subject = `MOKRI: ${name}`;
-  const body =
-    `Name: ${name}\n` +
-    `Email: ${email}\n` +
-    (phone ? `Phone: ${phone}\n` : '') +
-    `\n--- Message ---\n${message}\n`;
-  const url = 'mailto:info@mokri.ge?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-
-  // Show success status & open mail client
+  const btn    = this.querySelector('.submit-btn');
   const status = document.getElementById('formStatus');
-  status.className = 'form-status success active';
-  status.textContent = t('success');
-  setTimeout(() => { window.location.href = url; }, 200);
+  btn.disabled = true;
+  status.className = 'form-status active';
+  status.textContent = t('sending');
+
+  if (FORMSPREE_URL.includes('YOUR_FORM_ID')) {
+    status.className = 'form-status error-msg active';
+    status.textContent = t('fail');
+    btn.disabled = false;
+    console.error('Formspree form ID not configured. Replace YOUR_FORM_ID in contact.html with your actual form ID from https://formspree.io');
+    return;
+  }
+
+  try {
+    const res = await fetch(FORMSPREE_URL, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, phone, message })
+    });
+    if (res.ok) {
+      status.className = 'form-status success active';
+      status.textContent = t('success');
+      this.reset();
+    } else {
+      throw new Error(`Formspree submission failed with status ${res.status}`);
+    }
+  } catch (err) {
+    console.error('Form submission failed:', err);
+    status.className = 'form-status error-msg active';
+    status.textContent = t('fail');
+    btn.disabled = false;
+  }
 });
 </script>
 </body>
