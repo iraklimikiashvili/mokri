@@ -1296,6 +1296,11 @@
   (function() {
     const splash = document.getElementById('splash');
     if (!splash) return;
+    if (sessionStorage.getItem('splashSeen')) {
+      splash.remove();
+      return;
+    }
+    sessionStorage.setItem('splashSeen', '1');
     let countInterval;
     function dismissSplash() {
       clearInterval(countInterval);
