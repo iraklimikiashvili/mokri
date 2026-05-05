@@ -617,9 +617,110 @@
 
   .email-float:hover { transform: scale(1.1); box-shadow: 0 8px 48px rgba(77,155,253,0.7); }
   .email-float svg { width: 28px; height: 28px; fill: white; }
+
+  /* ——— CURTAIN OVERLAY ——— */
+  #curtain {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    text-align: center;
+    transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+
+  #curtain.lift {
+    transform: translateY(-100%);
+  }
+
+  .curtain-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--blue);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .curtain-label::before,
+  .curtain-label::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--blue);
+    opacity: 0.6;
+  }
+
+  .curtain-title {
+    font-family: 'Noto Sans Georgian', sans-serif;
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 28px;
+    letter-spacing: 0.5px;
+    line-height: 1.25;
+  }
+
+  .curtain-body {
+    font-family: 'Noto Sans Georgian', sans-serif;
+    font-size: clamp(14px, 1.8vw, 18px);
+    color: var(--white-dim);
+    max-width: 620px;
+    line-height: 1.8;
+    margin-bottom: 48px;
+  }
+
+  .curtain-bar {
+    width: 56px;
+    height: 3px;
+    background: var(--blue);
+    border-radius: 2px;
+    margin: 0 auto 48px;
+    opacity: 0.5;
+  }
+
+  .curtain-countdown {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(77,155,253,0.45);
+  }
+
+  .curtain-glow {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(77,155,253,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
 </style>
 </head>
 <body>
+
+<!-- ——— CURTAIN OVERLAY ——— -->
+<div id="curtain" role="dialog" aria-modal="true" aria-label="სტარტ ეკრანი" tabindex="0">
+  <div class="curtain-glow"></div>
+  <div class="curtain-label">ფიზიკური პირებისთვის</div>
+  <h1 class="curtain-title">IT დახმარება — სწრაფად და სანდოდ</h1>
+  <div class="curtain-bar"></div>
+  <p class="curtain-body">
+    გჭირდებათ ნებისმიერი სირთულის პროგრამის ინსტალაცია? შენელებული კომპიუტერის გაწმენდა და მაქსიმალური აჩქარება? პრინტერების, სკანერების და სხვა მოწყობილობების მიერთება? ჩვენ უსწრაფესად დაგეხმარებით!
+  </p>
+  <div class="curtain-countdown" id="curtain-countdown">იხსნება 3 წამში...</div>
+</div>
 
 <!-- ——— HEADER / NAV BAR ——— -->
 <header class="lang-bar">
@@ -864,6 +965,41 @@
     const page = window.location.pathname.split('/').pop().replace('.html', '') || 'index';
     document.querySelectorAll('.header-nav-link[data-nav]').forEach(link => {
       if (link.getAttribute('data-nav') === page) link.classList.add('active');
+    });
+  })();
+
+  /* ——— Curtain overlay ——— */
+  (function() {
+    const curtain = document.getElementById('curtain');
+    const countdown = document.getElementById('curtain-countdown');
+    if (!curtain) return;
+
+    function dismissCurtain() {
+      clearInterval(tick);
+      countdown.textContent = '';
+      curtain.classList.add('lift');
+      curtain.addEventListener('transitionend', function() {
+        curtain.style.display = 'none';
+      }, { once: true });
+    }
+
+    let secs = 3;
+    var tick = setInterval(function() {
+      secs -= 1;
+      if (secs > 0) {
+        countdown.textContent = 'იხსნება ' + secs + ' წამში...';
+      } else {
+        dismissCurtain();
+      }
+    }, 1000);
+
+    curtain.addEventListener('click', dismissCurtain);
+
+    document.addEventListener('keydown', function onKey(e) {
+      if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') {
+        document.removeEventListener('keydown', onKey);
+        dismissCurtain();
+      }
     });
   })();
 </script>
