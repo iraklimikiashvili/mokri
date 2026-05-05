@@ -894,82 +894,120 @@
     letter-spacing: 0.12em;
     color: var(--white);
   }
-  .splash-tagline {
-    font-family: 'Noto Sans Georgian', sans-serif;
-    font-size: clamp(1.35rem, 3.3vw, 1.65rem);
-    font-weight: 500;
-    color: var(--white);
-    line-height: 1.9;
-    max-width: 480px;
-    margin-top: 12px;
+  /* ——— Splash subtitle (right under MOKRI brand) — matches .hero-desc on main page ——— */
+  .splash-subtitle {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: clamp(14px, 1.6vw, 17px);
+    color: var(--white-dim);
+    font-style: italic;
+    line-height: 1.5;
+    margin-top: -4px;
+    white-space: nowrap;
   }
+
+  /* ——— Decorative divider between brand and panels ——— */
+  .splash-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: 100%;
+    max-width: 360px;
+    margin: 2px 0 0;
+  }
+  .splash-divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(77,155,253,0.45), transparent);
+  }
+  .splash-divider-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 12px rgba(77,155,253,0.85);
+    flex-shrink: 0;
+    animation: splashDotPulse 2.4s ease-in-out infinite;
+  }
+  @keyframes splashDotPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.45; transform: scale(0.7); }
+  }
+
+  /* ——— Countdown (more subtle, integrated) ——— */
   .splash-countdown {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    margin-top: 12px;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 4px;
   }
   .splash-countdown-number {
     font-family: 'Orbitron', sans-serif;
     font-weight: 700;
-    font-size: clamp(3rem, 9vw, 4.5rem);
+    font-size: clamp(1.7rem, 3.5vw, 2.2rem);
     color: var(--blue);
-    text-shadow: 0 0 28px rgba(77,155,253,0.8);
+    text-shadow: 0 0 18px rgba(77,155,253,0.65);
     line-height: 1;
     animation: splashCountdownPulse 1s ease-in-out infinite;
+    font-variant-numeric: tabular-nums;
   }
   @keyframes splashCountdownPulse {
     0%, 100% { opacity: 1; transform: scale(1); }
-    50%       { opacity: 0.65; transform: scale(0.92); }
+    50%      { opacity: 0.6; transform: scale(0.92); }
   }
   .splash-countdown-label {
     font-family: 'Noto Sans Georgian', sans-serif;
-    font-size: 1.05rem;
-    color: rgba(254,254,254,0.5);
-    letter-spacing: 0.12em;
+    font-size: 0.85rem;
+    color: rgba(254,254,254,0.45);
+    letter-spacing: 0.18em;
     text-transform: uppercase;
   }
 
   /* ——— SPLASH: TWO-PANEL LAYOUT ——— */
   #splash .splash-inner {
-    max-width: 900px;
-    width: min(calc(100vw - 40px), 900px);
-    gap: 20px;
+    max-width: 880px;
+    width: min(calc(100vw - 40px), 880px);
+    gap: 18px;
   }
   .splash-panels {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 18px;
     width: 100%;
-    margin-top: 2px; /* small breathing room below MOKRI heading */
+    margin-top: 4px;
   }
   .splash-panel {
     position: relative;
-    background: linear-gradient(160deg, rgba(77,155,253,0.07) 0%, rgba(77,155,253,0.02) 100%);
+    background: linear-gradient(160deg, rgba(77,155,253,0.06) 0%, rgba(77,155,253,0.018) 100%);
     border: 1px solid rgba(77,155,253,0.22);
-    border-radius: 14px;
-    padding: 24px 26px 22px;
+    border-radius: 16px;
+    padding: 26px 24px 24px;
     overflow: hidden;
     isolation: isolate;
     opacity: 0;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
     /* staggered entrance: left panel at 0.55 s, right panel at 0.70 s */
-    animation: splashPanelIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+    animation: splashPanelIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
   }
-  .splash-panel:nth-child(2) { animation-delay: 0.7s; /* +0.15 s stagger */ }
+  .splash-panel:nth-child(2) { animation-delay: 0.7s; }
   .splash-panel::before {
     content: '';
     position: absolute;
-    top: 0; left: 15%; right: 15%;
+    top: 0; left: 18%; right: 18%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(77,155,253,0.75), transparent);
+    background: linear-gradient(90deg, transparent, rgba(77,155,253,0.7), transparent);
   }
   .splash-panel::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 80% 55% at 50% 0%, rgba(77,155,253,0.09), transparent 70%);
+    background: radial-gradient(ellipse 90% 55% at 50% 0%, rgba(77,155,253,0.1), transparent 70%);
     pointer-events: none;
     z-index: -1;
   }
@@ -977,79 +1015,68 @@
     from { opacity: 0; transform: translateY(14px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-  .splash-panel-head {
+
+  /* Icon — matches audience-card icon style */
+  .splash-panel-icon {
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 16px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid rgba(77,155,253,0.14);
-  }
-  .splash-panel-icon-wrap {
-    width: 34px;
-    height: 34px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: 12px;
     background: rgba(77,155,253,0.1);
-    border: 1px solid rgba(77,155,253,0.28);
-    border-radius: 8px;
-    flex-shrink: 0;
+    border: 1px solid rgba(77,155,253,0.3);
     color: var(--blue);
+    flex-shrink: 0;
+    box-shadow: 0 0 18px rgba(77,155,253,0.12) inset;
   }
-  .splash-panel-icon-wrap svg { width: 17px; height: 17px; }
+  .splash-panel-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Panel title — elegant, balanced */
   .splash-panel-title {
     font-family: 'Noto Sans Georgian', sans-serif;
-    font-size: 24px;
+    font-size: clamp(17px, 2vw, 21px);
     font-weight: 700;
     color: #fff;
-    letter-spacing: 0.2px;
-    line-height: 1.3;
-    text-align: center;
+    letter-spacing: 0.3px;
+    line-height: 1.25;
   }
-  .splash-panel-items {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
-  .splash-panel-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-  }
-  .splash-item-icon {
-    width: 26px;
-    height: 26px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(77,155,253,0.06);
-    border: 1px solid rgba(77,155,253,0.15);
-    border-radius: 6px;
-    flex-shrink: 0;
-    color: var(--blue);
-    margin-top: 1px;
-  }
-  .splash-item-icon svg { width: 13px; height: 13px; }
-  .splash-item-text {
+
+  /* Single punchy tagline replacing repetitive question list */
+  .splash-panel-desc {
     font-family: 'Noto Sans Georgian', sans-serif;
-    font-size: 22px;
-    font-weight: 600;
-    color: #fff;
+    font-size: clamp(14px, 1.65vw, 16px);
+    font-weight: 500;
+    color: rgba(254,254,254,0.92);
     line-height: 1.55;
-    text-align: center;
+    max-width: 300px;
+    letter-spacing: 0.1px;
   }
+
+  /* Tiny accent line under desc — just a hint of polish */
+  .splash-panel-accent {
+    width: 26px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(77,155,253,0.6), transparent);
+    margin-top: 2px;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .splash-panel { animation: none !important; opacity: 1 !important; transform: none !important; }
+    .splash-divider-dot { animation: none !important; }
+    .splash-countdown-number { animation: none !important; }
   }
   @media (max-width: 560px) {
+    #splash .splash-inner { gap: 14px; padding: 28px 24px; }
     .splash-panels { grid-template-columns: 1fr; gap: 12px; }
-    .splash-panel  { padding: 20px 20px 18px; }
-    .splash-panel-title { font-size: 20px; }
-    .splash-item-text { font-size: 18px; }
+    .splash-panel { padding: 20px 18px 18px; gap: 10px; }
+    .splash-panel-icon { width: 44px; height: 44px; }
+    .splash-panel-icon svg { width: 22px; height: 22px; }
+    .splash-subtitle { white-space: normal; max-width: 90%; text-align: center; }
+    .splash-divider { max-width: 240px; }
   }
 </style>
 </head>
@@ -1077,43 +1104,75 @@
       </svg>
     </div>
     <div class="splash-mokri-text">MOK<span>RI</span></div>
+
+    <!-- Brand subtitle — matches the hero-desc on the main page -->
+    <div class="splash-subtitle">
+      <span data-lang="ka" class="active">თქვენი ბიზნესისა და ციფრული ცხოვრების სანდო ტექნიკური პარტნიორი</span>
+      <span data-lang="en">Your trusted technology partner for business and personal digital life</span>
+      <span data-lang="ru">Ваш надёжный технологический партнёр для бизнеса и цифровой жизни</span>
+    </div>
+
+    <!-- Decorative divider -->
+    <div class="splash-divider" aria-hidden="true">
+      <span class="splash-divider-line"></span>
+      <span class="splash-divider-dot"></span>
+      <span class="splash-divider-line"></span>
+    </div>
+
     <!-- Two-panel layout: left = individuals, right = businesses -->
     <div class="splash-panels">
 
       <!-- ─── Left panel: ფიზიკური პირები ─── -->
       <div class="splash-panel">
-        <div class="splash-panel-head">
-          <span class="splash-panel-title">ფიზიკური პირებისთვის</span>
+        <div class="splash-panel-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M5 21c0-3.866 3.134-7 7-7s7 3.134 7 7"/>
+          </svg>
         </div>
-        <div class="splash-panel-items">
-          <div class="splash-panel-item">
-            <span class="splash-item-text">გჭირდებათ კომპიუტერული დახმარება?</span>
-          </div>
-          <div class="splash-panel-item">
-            <span class="splash-item-text">გჭირდებათ პროგრამების ინსტალაცია?</span>
-          </div>
+        <div class="splash-panel-title">
+          <span data-lang="ka" class="active">ფიზიკური პირებისთვის</span>
+          <span data-lang="en">For Individuals</span>
+          <span data-lang="ru">Для частных лиц</span>
         </div>
+        <div class="splash-panel-desc">
+          <span data-lang="ka" class="active">სწრაფი დისტანციური მომსახურება თქვენი კომპიუტერისთვის</span>
+          <span data-lang="en">Fast remote service for your computer</span>
+          <span data-lang="ru">Быстрое дистанционное обслуживание вашего компьютера</span>
+        </div>
+        <div class="splash-panel-accent" aria-hidden="true"></div>
       </div>
 
       <!-- ─── Right panel: იურიდიული პირები ─── -->
       <div class="splash-panel">
-        <div class="splash-panel-head">
-          <span class="splash-panel-title">იურიდიული პირებისთვის</span>
+        <div class="splash-panel-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="3" width="16" height="18" rx="1.5"/>
+            <path d="M9 8h.01M15 8h.01M9 12h.01M15 12h.01M9 16h.01M15 16h.01"/>
+            <path d="M10 21v-3.5h4V21"/>
+          </svg>
         </div>
-        <div class="splash-panel-items">
-          <div class="splash-panel-item">
-            <span class="splash-item-text">გჭირდებათ კომპანიის ინფრასტრუქტურის გამართვა?</span>
-          </div>
-          <div class="splash-panel-item">
-            <span class="splash-item-text">გჭირდებათ უსაფრთხო და სტაბილური IT გარემო?</span>
-          </div>
+        <div class="splash-panel-title">
+          <span data-lang="ka" class="active">იურიდიული პირებისთვის</span>
+          <span data-lang="en">For Business</span>
+          <span data-lang="ru">Для бизнеса</span>
         </div>
+        <div class="splash-panel-desc">
+          <span data-lang="ka" class="active">გამართული IT ინფრასტრუქტურა — თქვენი ბიზნესის საიმედო საყრდენი</span>
+          <span data-lang="en">A well-tuned IT infrastructure — a reliable backbone for your business</span>
+          <span data-lang="ru">Налаженная IT-инфраструктура — надёжная опора для вашего бизнеса</span>
+        </div>
+        <div class="splash-panel-accent" aria-hidden="true"></div>
       </div>
 
     </div>
     <div class="splash-countdown">
-      <div class="splash-countdown-number" id="splashCountNum">4</div>
-      <div class="splash-countdown-label">წამი</div>
+      <div class="splash-countdown-number" id="splashCountNum">5</div>
+      <div class="splash-countdown-label">
+        <span data-lang="ka" class="active">წამი</span>
+        <span data-lang="en">sec</span>
+        <span data-lang="ru">сек</span>
+      </div>
     </div>
   </div>
 </div>
@@ -1460,14 +1519,14 @@
         splash.remove();
       }, { once: true });
     }
-    let remaining = 4;
+    let remaining = 5;
     const countEl = document.getElementById('splashCountNum');
     countInterval = setInterval(function() {
       remaining -= 1;
       if (countEl) countEl.textContent = remaining > 0 ? remaining : '0';
       if (remaining <= 0) clearInterval(countInterval);
     }, 1000);
-    const timer = setTimeout(dismissSplash, 4000);
+    const timer = setTimeout(dismissSplash, 5000);
     splash.addEventListener('click', function() { clearTimeout(timer); dismissSplash(); });
     document.addEventListener('keydown', function onKey(e) {
       if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') {
