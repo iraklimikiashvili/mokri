@@ -711,7 +711,7 @@
 <body>
 
 <!-- ——— CURTAIN OVERLAY ——— -->
-<div id="curtain" role="dialog" aria-modal="true" aria-label="სტარტ ეკრანი">
+<div id="curtain" role="dialog" aria-modal="true" aria-label="სტარტ ეკრანი" tabindex="0">
   <div class="curtain-glow"></div>
   <div class="curtain-label">ფიზიკური პირებისთვის</div>
   <h1 class="curtain-title">IT დახმარება — სწრაფად და სანდოდ</h1>
@@ -974,28 +974,32 @@
     const countdown = document.getElementById('curtain-countdown');
     if (!curtain) return;
 
-    let secs = 3;
-    const tick = setInterval(function() {
-      secs -= 1;
-      if (secs > 0) {
-        countdown.textContent = 'იხსნება ' + secs + ' წამში...';
-      } else {
-        clearInterval(tick);
-        countdown.textContent = '';
-        curtain.classList.add('lift');
-        curtain.addEventListener('transitionend', function() {
-          curtain.style.display = 'none';
-        }, { once: true });
-      }
-    }, 1000);
-
-    curtain.addEventListener('click', function() {
+    function dismissCurtain() {
       clearInterval(tick);
       countdown.textContent = '';
       curtain.classList.add('lift');
       curtain.addEventListener('transitionend', function() {
         curtain.style.display = 'none';
       }, { once: true });
+    }
+
+    let secs = 3;
+    var tick = setInterval(function() {
+      secs -= 1;
+      if (secs > 0) {
+        countdown.textContent = 'იხსნება ' + secs + ' წამში...';
+      } else {
+        dismissCurtain();
+      }
+    }, 1000);
+
+    curtain.addEventListener('click', dismissCurtain);
+
+    document.addEventListener('keydown', function onKey(e) {
+      if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') {
+        document.removeEventListener('keydown', onKey);
+        dismissCurtain();
+      }
     });
   })();
 </script>
