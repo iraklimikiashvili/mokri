@@ -230,8 +230,8 @@
   }
 
   .hero-logo svg {
-    width: 165px;
-    height: 165px;
+    width: 140px;
+    height: 140px;
     filter: drop-shadow(0 0 28px rgba(77,155,253,0.6)) drop-shadow(0 0 12px rgba(77,155,253,0.4));
     transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.45s ease;
     animation: heroLogoBreath 4s ease-in-out 2.5s infinite;
@@ -299,8 +299,8 @@
   .hero-brand {
     font-family: 'Orbitron', sans-serif;
     font-weight: 900;
-    font-size: clamp(38px, 7vw, 72px);
-    letter-spacing: 12px;
+    font-size: clamp(32px, 6vw, 61px);
+    letter-spacing: 10px;
     color: var(--white);
     position: relative;
     text-shadow: 0 0 40px rgba(77,155,253,0.3);
@@ -430,6 +430,225 @@
 
   .section-title span { color: var(--blue); }
 
+  /* ══════ AUDIENCES (Personal / Business) ══════ */
+  .audiences {
+    position: relative;
+    top: -60px;
+    z-index: 2;
+    width: 100%;
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: 14px 40px 18px;
+    flex-shrink: 0;
+  }
+  .audiences-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    position: relative;
+  }
+  .audience-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 26px 18px;
+    background: linear-gradient(180deg, rgba(77,155,253,0.045) 0%, rgba(77,155,253,0.012) 100%);
+    border: 1px solid rgba(77,155,253,0.18);
+    border-radius: 14px;
+    overflow: hidden;
+    isolation: isolate;
+    text-decoration: none;
+    color: inherit;
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.4s ease,
+      box-shadow 0.6s cubic-bezier(0.32, 0.72, 0, 1),
+      opacity 0.6s ease;
+    text-align: left;
+  }
+  .audience-card.is-visible { opacity: 1; transform: translateY(0); }
+  .audience-card:nth-child(2) { transition-delay: 0.12s; }
+  .audience-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 20%; right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    opacity: 0.4;
+    transition: opacity 0.5s ease, left 0.5s ease, right 0.5s ease;
+  }
+  .audience-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(77,155,253,0.12), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .audience-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(77,155,253,0.4);
+    box-shadow:
+      0 14px 44px rgba(77,155,253,0.14),
+      0 0 0 1px rgba(77,155,253,0.1);
+  }
+  .audience-card:hover::before { opacity: 1; left: 0; right: 0; }
+  .audience-card:hover::after  { opacity: 1; }
+  .audience-icon {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(77,155,253,0.08);
+    border: 1px solid rgba(77,155,253,0.2);
+    transition:
+      background 0.4s ease,
+      border-color 0.4s ease,
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .audience-card:hover .audience-icon {
+    background: rgba(77,155,253,0.16);
+    border-color: rgba(77,155,253,0.42);
+    transform: translateY(-2px) rotate(-3deg);
+  }
+  .audience-icon svg {
+    width: 22px;
+    height: 22px;
+    color: var(--blue);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .audience-card:hover .audience-icon svg { transform: scale(1.08); }
+  .audience-title {
+    font-family: 'Noto Sans Georgian', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--white);
+    margin: 0 0 8px;
+    letter-spacing: 0.2px;
+    line-height: 1.25;
+  }
+  .audience-text {
+    font-family: 'Noto Sans Georgian', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: rgba(254,254,254,0.72);
+    margin: 0 0 14px;
+    flex: 1;
+  }
+  .audience-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .audience-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    font-family: 'Noto Sans Georgian', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--blue);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    position: relative;
+    transition: gap 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .audience-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background: var(--blue);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .audience-card:hover .audience-link { gap: 14px; }
+  .audience-card:hover .audience-link::after { transform: scaleX(0.85); }
+  .audience-link svg {
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    flex-shrink: 0;
+  }
+  .audience-card:hover .audience-link svg { transform: translateX(2px); }
+
+  /* CTA button on the right side of each card */
+  .audience-cta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    background: var(--blue);
+    color: var(--bg);
+    font-family: 'Noto Sans Georgian', sans-serif;
+    font-weight: 700;
+    font-size: 12.5px;
+    letter-spacing: 0.4px;
+    text-decoration: none;
+    border-radius: 6px;
+    border: 1px solid var(--blue);
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    isolation: isolate;
+    box-shadow: 0 0 0 0 rgba(77,155,253,0);
+    transition:
+      box-shadow 0.5s cubic-bezier(0.32, 0.72, 0, 1),
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .audience-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.5) 50%, transparent 75%);
+    transform: translateX(-110%);
+    transition: transform 0.7s cubic-bezier(0.32, 0.72, 0, 1);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .audience-cta > svg, .audience-cta > span {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .audience-cta:hover {
+    box-shadow:
+      0 0 22px rgba(77,155,253,0.5),
+      0 0 0 3px rgba(77,155,253,0.12);
+  }
+  .audience-cta:hover::before { transform: translateX(110%); }
+  .audience-cta:hover > svg { transform: rotate(-12deg) scale(1.08); }
+  .audience-cta:active { transform: scale(0.96); }
+
+  @media (max-width: 760px) {
+    .audiences { padding: 12px 24px 16px; }
+    .audiences-inner { grid-template-columns: 1fr; gap: 14px; }
+    .audience-card { padding: 18px 22px 16px; }
+    .audience-card:nth-child(2) { transition-delay: 0.08s; }
+    .audience-title { font-size: 17px; margin-bottom: 6px; }
+    .audience-text { font-size: 12.5px; margin-bottom: 12px; }
+    .audience-actions { flex-wrap: wrap; gap: 10px; }
+    .audience-cta { padding: 8px 14px; font-size: 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .audience-card { transition: border-color 0.3s ease, box-shadow 0.3s ease; opacity: 1; transform: none; }
+    .audience-card:hover { transform: none; }
+    .audience-card:hover .audience-icon { transform: none; }
+    .audience-card:hover .audience-icon svg { transform: none; }
+  }
+
   /* ——— STATS BAR ——— */
   .stats-bar {
     background: var(--bg2);
@@ -441,56 +660,62 @@
   .stats-inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 18px 40px;
+    padding: 9px 40px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
+    align-items: center;
   }
 
   .stat-item {
     text-align: center;
     border-right: 1px solid var(--border);
     padding-right: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   .stat-item:last-child { border-right: none; }
 
   .stat-num {
     font-family: 'Orbitron', sans-serif;
     font-weight: 900;
-    font-size: 28px;
+    font-size: 25px;
     color: var(--blue);
     line-height: 1;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
   }
 
   .stat-label {
-    font-size: 12px;
+    font-size: 12.5px;
     color: var(--white-dim);
-    letter-spacing: 1px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
   }
 
   .stat-subnote {
-    font-size: 9.5px;
+    font-size: 8.5px;
     color: rgba(254,254,254,0.35);
     letter-spacing: 0.3px;
-    margin-top: 4px;
+    margin-top: 2px;
     font-style: italic;
     font-family: 'EB Garamond', Georgia, serif;
-    line-height: 1.3;
+    line-height: 1.25;
   }
 
   /* ——— FOOTER ——— */
   footer {
     background: rgba(0,0,0,0.4);
     border-top: 1px solid var(--border);
-    padding: 12px 40px;
+    height: 68px;
+    padding: 0 36px;
     text-align: center;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 0;
   }
 
   .footer-copy {
@@ -505,7 +730,7 @@
     gap: 12px;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 4px 0;
+    margin: 0;
   }
   .footer-social a {
     display: flex;
@@ -539,11 +764,12 @@
 
   /* ——— RESPONSIVE ——— */
   @media (max-width: 900px) {
-    .stats-inner { grid-template-columns: 1fr 1fr; gap: 12px; padding: 14px 24px; }
+    .stats-inner { grid-template-columns: 1fr 1fr; gap: 12px; padding: 8px 24px; }
     .stat-item { border-right: none; padding-right: 0; }
     .stat-item:nth-child(odd) { border-right: 1px solid var(--border); padding-right: 12px; }
-    .stat-num { font-size: 22px; }
-    footer { padding: 12px 24px; gap: 10px; flex-direction: column; }
+    .stat-num { font-size: 21px; }
+    .stat-label { font-size: 11px; letter-spacing: 1.8px; }
+    footer { padding: 0 24px; }
   }
 
   @media (max-width: 660px) {
@@ -617,110 +843,9 @@
 
   .email-float:hover { transform: scale(1.1); box-shadow: 0 8px 48px rgba(77,155,253,0.7); }
   .email-float svg { width: 28px; height: 28px; fill: white; }
-
-  /* ——— CURTAIN OVERLAY ——— */
-  #curtain {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: var(--bg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 24px;
-    text-align: center;
-    transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
-  }
-
-  #curtain.lift {
-    transform: translateY(-100%);
-  }
-
-  .curtain-label {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 4px;
-    color: var(--blue);
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .curtain-label::before,
-  .curtain-label::after {
-    content: '';
-    display: block;
-    width: 40px;
-    height: 1px;
-    background: var(--blue);
-    opacity: 0.6;
-  }
-
-  .curtain-title {
-    font-family: 'Noto Sans Georgian', sans-serif;
-    font-size: clamp(22px, 4vw, 36px);
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 28px;
-    letter-spacing: 0.5px;
-    line-height: 1.25;
-  }
-
-  .curtain-body {
-    font-family: 'Noto Sans Georgian', sans-serif;
-    font-size: clamp(14px, 1.8vw, 18px);
-    color: var(--white-dim);
-    max-width: 620px;
-    line-height: 1.8;
-    margin-bottom: 48px;
-  }
-
-  .curtain-bar {
-    width: 56px;
-    height: 3px;
-    background: var(--blue);
-    border-radius: 2px;
-    margin: 0 auto 48px;
-    opacity: 0.5;
-  }
-
-  .curtain-countdown {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: rgba(77,155,253,0.45);
-  }
-
-  .curtain-glow {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(ellipse, rgba(77,155,253,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
 </style>
 </head>
 <body>
-
-<!-- ——— CURTAIN OVERLAY ——— -->
-<div id="curtain" role="dialog" aria-modal="true" aria-label="სტარტ ეკრანი" tabindex="0">
-  <div class="curtain-glow"></div>
-  <div class="curtain-label">ფიზიკური პირებისთვის</div>
-  <h1 class="curtain-title">IT დახმარება — სწრაფად და სანდოდ</h1>
-  <div class="curtain-bar"></div>
-  <p class="curtain-body">
-    გჭირდებათ ნებისმიერი სირთულის პროგრამის ინსტალაცია? შენელებული კომპიუტერის გაწმენდა და მაქსიმალური აჩქარება? პრინტერების, სკანერების და სხვა მოწყობილობების მიერთება? ჩვენ უსწრაფესად დაგეხმარებით!
-  </p>
-  <div class="curtain-countdown" id="curtain-countdown">იხსნება 3 წამში...</div>
-</div>
 
 <!-- ——— HEADER / NAV BAR ——— -->
 <header class="lang-bar">
@@ -819,14 +944,79 @@
     <span data-lang="en">Your trusted technology partner for business and personal digital life</span>
     <span data-lang="ru">Ваш надёжный технологический партнёр для бизнеса и цифровой жизни</span>
   </p>
+</section>
 
-  <div class="hero-actions" style="justify-content:center;">
-    <a href="contact.html" class="btn-primary">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
-      <span data-lang="ka" class="active">დაგვიკავშირდით</span>
-      <span data-lang="en">Contact Us</span>
-      <span data-lang="ru">Связаться с нами</span>
-    </a>
+<!-- ═══════════════════════ AUDIENCES ═══════════════════════ -->
+<section class="audiences" aria-label="ჩვენი მომხმარებლები">
+  <div class="audiences-inner">
+
+    <article class="audience-card">
+      <div class="audience-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M5 21c0-3.866 3.134-7 7-7s7 3.134 7 7"/>
+        </svg>
+      </div>
+      <h2 class="audience-title">
+        <span data-lang="ka" class="active">ფიზიკური პირებისთვის</span>
+        <span data-lang="en">For Individuals</span>
+        <span data-lang="ru">Для частных лиц</span>
+      </h2>
+      <p class="audience-text">
+        <span data-lang="ka" class="active">გჭირდებათ ნებისმიერი სირთულის პროგრამის ინსტალაცია? შენელებული კომპიუტერის გაწმენდა და მაქსიმალური აჩქარება? პრინტერების, სკანერების და სხვა მოწყობილობების მიერთება? ჩვენ უსწრაფესად დაგეხმარებით!</span>
+        <span data-lang="en">Need to install software of any complexity? Clean up a slow computer for maximum speed? Connect printers, scanners and other devices? We'll help you in no time!</span>
+        <span data-lang="ru">Нужна установка программ любой сложности? Очистка тормозящего компьютера и максимальное ускорение? Подключение принтеров, сканеров и других устройств? Поможем максимально быстро!</span>
+      </p>
+      <div class="audience-actions">
+        <a href="individuals.html" class="audience-link">
+          <span data-lang="ka" class="active">გაიგე მეტი</span>
+          <span data-lang="en">Learn more</span>
+          <span data-lang="ru">Узнать больше</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+        </a>
+        <a href="contact.html" class="audience-cta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+          <span data-lang="ka" class="active">დაგვიკავშირდით</span>
+          <span data-lang="en">Contact Us</span>
+          <span data-lang="ru">Связаться с нами</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="audience-card">
+      <div class="audience-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="3" width="16" height="18" rx="1.5"/>
+          <path d="M9 8h.01M15 8h.01M9 12h.01M15 12h.01M9 16h.01M15 16h.01"/>
+          <path d="M10 21v-3.5h4V21"/>
+        </svg>
+      </div>
+      <h2 class="audience-title">
+        <span data-lang="ka" class="active">იურიდიული პირებისთვის</span>
+        <span data-lang="en">For Business</span>
+        <span data-lang="ru">Для бизнеса</span>
+      </h2>
+      <p class="audience-text">
+        <span data-lang="ka" class="active">გჭირდებათ კომპანიის IT ინფრასტრუქტურის შეუფერხებელი მუშაობა? სერვერების, ქსელისა და უსაფრთხოების სისტემების გამართვა? თანამშრომლებისთვის სწრაფი და მუდმივი ტექნიკური მხარდაჭერა? ვუზრუნველყოფთ თქვენი ბიზნესის ტექნოლოგიურ სიმშვიდეს!</span>
+        <span data-lang="en">Need uninterrupted IT infrastructure for your company? Configuration of servers, networks and security systems? Fast and continuous technical support for your employees? We ensure the technological peace of your business!</span>
+        <span data-lang="ru">Нужна бесперебойная работа IT-инфраструктуры компании? Настройка серверов, сети и систем безопасности? Быстрая и постоянная техническая поддержка сотрудников? Обеспечим технологическое спокойствие вашему бизнесу!</span>
+      </p>
+      <div class="audience-actions">
+        <a href="business.html" class="audience-link">
+          <span data-lang="ka" class="active">გაიგე მეტი</span>
+          <span data-lang="en">Learn more</span>
+          <span data-lang="ru">Узнать больше</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+        </a>
+        <a href="contact.html" class="audience-cta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+          <span data-lang="ka" class="active">დაგვიკავშირდით</span>
+          <span data-lang="en">Contact Us</span>
+          <span data-lang="ru">Связаться с нами</span>
+        </a>
+      </div>
+    </article>
+
   </div>
 </section>
 
@@ -908,11 +1098,6 @@
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
     </a>
   </div>
-  <div class="footer-copy">© 2025 MOKRI. 
-    <span data-lang="ka" class="active">ყველა უფლება დაცულია.</span>
-    <span data-lang="en">All rights reserved.</span>
-    <span data-lang="ru">Все права защищены.</span>
-  </div>
 </footer>
 
 <script>
@@ -968,39 +1153,23 @@
     });
   })();
 
-  /* ——— Curtain overlay ——— */
+  /* ——— Audience cards: reveal when scrolled into view ——— */
   (function() {
-    const curtain = document.getElementById('curtain');
-    const countdown = document.getElementById('curtain-countdown');
-    if (!curtain) return;
-
-    function dismissCurtain() {
-      clearInterval(tick);
-      countdown.textContent = '';
-      curtain.classList.add('lift');
-      curtain.addEventListener('transitionend', function() {
-        curtain.style.display = 'none';
-      }, { once: true });
+    const cards = document.querySelectorAll('.audience-card');
+    if (!cards.length) return;
+    if (!('IntersectionObserver' in window)) {
+      cards.forEach(c => c.classList.add('is-visible'));
+      return;
     }
-
-    let secs = 3;
-    var tick = setInterval(function() {
-      secs -= 1;
-      if (secs > 0) {
-        countdown.textContent = 'იხსნება ' + secs + ' წამში...';
-      } else {
-        dismissCurtain();
-      }
-    }, 1000);
-
-    curtain.addEventListener('click', dismissCurtain);
-
-    document.addEventListener('keydown', function onKey(e) {
-      if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') {
-        document.removeEventListener('keydown', onKey);
-        dismissCurtain();
-      }
-    });
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+    cards.forEach(c => obs.observe(c));
   })();
 </script>
 </body>
