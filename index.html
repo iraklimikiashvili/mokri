@@ -336,6 +336,12 @@
     justify-content: center;
   }
 
+  @keyframes btn-pulse {
+    0%   { box-shadow: 0 0 0 0 var(--blue-glow); }
+    60%  { box-shadow: 0 0 0 10px transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
+  }
+
   .btn-primary {
     display: inline-flex;
     align-items: center;
@@ -351,12 +357,14 @@
     border-radius: 4px;
     transition: all 0.25s;
     border: 2px solid var(--blue);
+    animation: btn-pulse 2s ease-out infinite;
   }
 
   .btn-primary:hover {
     background: transparent;
     color: var(--blue);
     box-shadow: 0 0 24px var(--blue-glow);
+    animation: none;
   }
 
   .btn-outline {
