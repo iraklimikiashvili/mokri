@@ -117,15 +117,84 @@
   }
   .lang-btn.active { background:var(--blue); color:var(--bg); }
 
+  .nav-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--white);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .nav-toggle:hover { background: rgba(77,155,253,0.1); border-color: var(--blue); }
+  .nav-toggle svg { width: 20px; height: 20px; }
+  .nav-toggle .icon-close { display: none; }
+  .nav-toggle[aria-expanded="true"] .icon-open { display: none; }
+  .nav-toggle[aria-expanded="true"] .icon-close { display: block; }
+
   @media(max-width:860px) {
     .header-nav { gap: 2px; }
     .header-nav-link { padding: 6px 9px; font-size: 11px; }
     .header-nav-link.shop-link { margin-left: 4px; }
   }
 
-  @media(max-width:660px) {
-    .lang-bar { grid-template-columns:auto auto; height:auto; padding:10px 16px; gap: 8px; flex-wrap: wrap; }
-    .header-nav { display:none; }
+  @media(max-width:900px) {
+    .lang-bar { grid-template-columns: auto 1fr auto auto; }
+    .header-nav {
+      position: fixed;
+      top: 68px;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 4px;
+      padding: 16px 20px 24px;
+      background: rgba(10,23,40,0.98);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      max-height: calc(100dvh - 68px);
+      overflow-y: auto;
+      z-index: 999;
+    }
+    .lang-bar.is-open .header-nav {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .header-nav-link {
+      padding: 12px 14px;
+      font-size: 14px;
+      text-align: left;
+      border-radius: 8px;
+    }
+    .header-nav-link::after { display: none; }
+    .header-nav-link.shop-link { margin-left: 0; margin-top: 6px; text-align: center; }
+    .nav-toggle { display: inline-flex; }
+    .nav-backdrop {
+      position: fixed;
+      inset: 68px 0 0 0;
+      background: rgba(0,0,0,0.5);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 998;
+    }
+    .lang-bar.is-open ~ .nav-backdrop { opacity: 1; pointer-events: auto; }
+  }
+
+  @media(max-width:480px) {
+    .lang-bar { padding: 0 14px; gap: 8px; }
+    .lang-bar-logo { font-size: 20px; letter-spacing: 4px; }
+    .lang-btn { padding: 5px 9px; font-size: 9px; letter-spacing: 1.4px; }
   }
 
   /* ——— HERO ——— */
@@ -427,79 +496,80 @@
   .li[data-lang] { display:none; }
   .li[data-lang].active { display:inline; }
 
-  /* ——— WA BUTTON FLOATING ——— */
-  .wa-float {
+  /* ——— FLOATING CONTACT BUTTONS ——— */
+  .float-btn {
     position: fixed;
-    bottom: 176px;
     right: 32px;
-    width: 60px; height: 60px;
-    background: #25d366;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 8px 32px rgba(37,211,102,0.4);
     z-index: 999;
     text-decoration: none;
     transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .float-btn:hover { transform: scale(1.1); }
+  .float-btn svg { fill: white; }
+
+  .wa-float {
+    bottom: 176px;
+    background: #25d366;
+    box-shadow: 0 8px 32px rgba(37,211,102,0.4);
     animation: waPulse 2.5s ease-in-out infinite;
   }
+  .wa-float:hover { box-shadow: 0 8px 48px rgba(37,211,102,0.7); }
+  .wa-float svg { width: 30px; height: 30px; }
+
+  .msng-float {
+    bottom: 104px;
+    background: #0084FF;
+    box-shadow: 0 8px 32px rgba(0,132,255,0.4);
+  }
+  .msng-float:hover { box-shadow: 0 8px 48px rgba(0,132,255,0.7); }
+  .msng-float svg { width: 28px; height: 28px; }
+
+  .email-float {
+    bottom: 32px;
+    background: #4D9BFD;
+    box-shadow: 0 8px 32px rgba(77,155,253,0.4);
+  }
+  .email-float:hover { box-shadow: 0 8px 48px rgba(77,155,253,0.7); }
+  .email-float svg { width: 28px; height: 28px; }
 
   @keyframes waPulse {
     0%, 100% { box-shadow: 0 8px 32px rgba(37,211,102,0.4); }
-    50% { box-shadow: 0 8px 48px rgba(37,211,102,0.7); }
+    50%      { box-shadow: 0 8px 48px rgba(37,211,102,0.7); }
   }
 
-  .wa-float:hover { transform: scale(1.1); }
-  .wa-float svg { width: 30px; height: 30px; fill: white; }
-
-  /* ——— MESSENGER BUTTON FLOATING ——— */
-  .msng-float {
-    position: fixed;
-    bottom: 104px;
-    right: 32px;
-    width: 60px; height: 60px;
-    background: #0084FF;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 32px rgba(0,132,255,0.4);
-    z-index: 999;
-    text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
+  @media (max-width: 660px) {
+    .float-btn { width: 50px; height: 50px; right: 16px; }
+    .wa-float { bottom: 138px; }
+    .msng-float { bottom: 78px; }
+    .email-float { bottom: 18px; }
+    .wa-float svg { width: 26px; height: 26px; }
+    .msng-float svg, .email-float svg { width: 24px; height: 24px; }
   }
-
-  .msng-float:hover { transform: scale(1.1); box-shadow: 0 8px 48px rgba(0,132,255,0.7); }
-  .msng-float svg { width: 28px; height: 28px; fill: white; }
-
-  /* ——— EMAIL BUTTON FLOATING ——— */
-  .email-float {
-    position: fixed;
-    bottom: 32px;
-    right: 32px;
-    width: 60px; height: 60px;
-    background: #4D9BFD;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 32px rgba(77,155,253,0.4);
-    z-index: 999;
-    text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
+  @media (max-height: 600px) {
+    .float-btn { width: 44px; height: 44px; }
+    .wa-float { bottom: 116px; }
+    .msng-float { bottom: 64px; }
+    .email-float { bottom: 12px; }
+    .wa-float svg { width: 22px; height: 22px; }
+    .msng-float svg, .email-float svg { width: 20px; height: 20px; }
   }
-
-  .email-float:hover { transform: scale(1.1); box-shadow: 0 8px 48px rgba(77,155,253,0.7); }
-  .email-float svg { width: 28px; height: 28px; fill: white; }
+  @media (prefers-reduced-motion: reduce) {
+    .wa-float { animation: none; }
+  }
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
-<header class="lang-bar">
+<header class="lang-bar" id="langBar">
   <a href="index.html" class="lang-bar-logo" aria-label="MOKRI - მთავარი">MOK<span>RI</span></a>
-  <nav class="header-nav" aria-label="მთავარი ნავიგაცია">
+  <nav class="header-nav" id="mainNav" aria-label="მთავარი ნავიგაცია">
     <a href="individuals.html" class="header-nav-link" data-nav="individuals">
       <span data-lang="ka" class="active">ფიზიკური პირები</span>
       <span data-lang="en">Individuals</span>
@@ -526,29 +596,41 @@
     </a>
   </nav>
   <div class="lang-switcher" role="group" aria-label="ენის არჩევა">
-    <button class="lang-btn active" onclick="setLang('ka')" aria-label="ქართული">ქარ</button>
-    <button class="lang-btn" onclick="setLang('en')" aria-label="English">ENG</button>
-    <button class="lang-btn" onclick="setLang('ru')" aria-label="Русский">РУС</button>
+    <button class="lang-btn active" type="button" data-lang-set="ka" aria-label="ქართული" aria-pressed="true">ქარ</button>
+    <button class="lang-btn" type="button" data-lang-set="en" aria-label="English" aria-pressed="false">ENG</button>
+    <button class="lang-btn" type="button" data-lang-set="ru" aria-label="Русский" aria-pressed="false">РУС</button>
   </div>
+  <button class="nav-toggle" type="button" id="navToggle" aria-controls="mainNav" aria-expanded="false" aria-label="მენიუ">
+    <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <line x1="3" y1="12" x2="21" y2="12"/>
+      <line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+    <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <line x1="18" y1="6" x2="6" y2="18"/>
+      <line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
 </header>
+<div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
 
 <!-- ——— FLOATING WHATSAPP ——— -->
-<a href="https://wa.me/995555555555" target="_blank" rel="noopener noreferrer" class="wa-float" title="WhatsApp">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<a href="https://wa.me/995555555555" target="_blank" rel="noopener noreferrer" class="float-btn wa-float" title="WhatsApp" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
   </svg>
 </a>
 
 <!-- ——— FLOATING MESSENGER ——— -->
-<a href="https://m.me/mokri" target="_blank" rel="noopener noreferrer" class="msng-float" title="Messenger">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<a href="https://m.me/mokri" target="_blank" rel="noopener noreferrer" class="float-btn msng-float" title="Messenger" aria-label="Messenger">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
     <path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.498 1.744 6.617 4.472 8.652V24l4.086-2.242c1.09.301 2.246.464 3.442.464 6.627 0 12-4.974 12-11.111S18.627 0 12 0zm1.193 14.963l-3.056-3.259-5.963 3.259 6.559-6.963 3.13 3.259 5.889-3.259-6.559 6.963z"/>
   </svg>
 </a>
 
 <!-- ——— FLOATING EMAIL ——— -->
-<a href="mailto:info@mokri.ge" class="email-float" title="Email">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<a href="mailto:info@mokri.ge" class="float-btn email-float" title="Email" aria-label="Email">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
     <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
   </svg>
 </a>
@@ -786,7 +868,7 @@
 
 <script>
 'use strict';
-let currentLang = 'ka';
+var currentLang = 'ka';
 
 /* ——— Input sanitizer ——— */
 function sanitizeInput(str) {
@@ -801,48 +883,102 @@ function sanitizeInput(str) {
     .slice(0, 2000);
 }
 
-/* ——— Language switcher ——— */
-function setLang(lang) {
-  const allowed = ['ka','en','ru'];
-  if (!allowed.includes(lang)) return;
-  currentLang = lang;
-  document.querySelectorAll('[data-lang]').forEach(el => {
-    el.classList.toggle('active', el.getAttribute('data-lang') === lang);
-  });
-  document.querySelectorAll('.lang-btn').forEach((btn,i) => {
-    btn.classList.toggle('active', ['ka','en','ru'][i] === lang);
-  });
-  document.documentElement.lang = lang;
-  try { localStorage.setItem('mokri-lang', lang); } catch(e) {}
-}
-
-/* ——— Restore saved language ——— */
 (function() {
-  try {
-    const saved = localStorage.getItem('mokri-lang');
-    if (saved && ['ka','en','ru'].includes(saved)) setLang(saved);
-  } catch(e) {}
-})();
+  var ALLOWED_LANGS = ['ka','en','ru'];
 
-/* ——— Highlight active nav link ——— */
-(function() {
-  const page = window.location.pathname.split('/').pop().replace('.html', '') || 'index';
-  document.querySelectorAll('.header-nav-link[data-nav]').forEach(link => {
-    if (link.getAttribute('data-nav') === page) link.classList.add('active');
+  function safeGet(key) {
+    try { return localStorage.getItem(key); } catch(e) { return null; }
+  }
+  function safeSet(key, val) {
+    try { localStorage.setItem(key, val); } catch(e) {}
+  }
+
+  function setLang(lang) {
+    if (!ALLOWED_LANGS.includes(lang)) return;
+    currentLang = lang;
+    document.querySelectorAll('[data-lang]').forEach(function(el) {
+      el.classList.toggle('active', el.getAttribute('data-lang') === lang);
+    });
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+      var isActive = btn.getAttribute('data-lang-set') === lang;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+    document.documentElement.lang = lang;
+    safeSet('mokri-lang', lang);
+  }
+
+  var saved = safeGet('mokri-lang');
+  if (saved && ALLOWED_LANGS.includes(saved)) setLang(saved);
+
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-lang-set]');
+    if (!btn) return;
+    var lang = btn.getAttribute('data-lang-set');
+    if (ALLOWED_LANGS.includes(lang)) setLang(lang);
   });
-})();
 
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.style.opacity = '1';
-      e.target.style.transform = 'translateY(0)';
-      obs.unobserve(e.target);
+  /* ——— Highlight active nav link ——— */
+  (function() {
+    var path = window.location.pathname.split('/').pop();
+    var page = (path || 'index').replace(/\.html?$/i, '') || 'index';
+    document.querySelectorAll('.header-nav-link[data-nav]').forEach(function(link) {
+      if (link.getAttribute('data-nav') === page) link.classList.add('active');
+    });
+  })();
+
+  /* ——— Mobile nav toggle ——— */
+  (function() {
+    var bar = document.getElementById('langBar');
+    var toggle = document.getElementById('navToggle');
+    var nav = document.getElementById('mainNav');
+    var backdrop = document.getElementById('navBackdrop');
+    if (!bar || !toggle || !nav) return;
+
+    function openNav() {
+      bar.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('nav-open');
     }
-  });
-}, { threshold: 0.08 });
+    function closeNav() {
+      bar.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('nav-open');
+    }
+    function isOpen() { return bar.classList.contains('is-open'); }
 
-document.querySelectorAll('.svc-card').forEach(el => obs.observe(el));
+    toggle.addEventListener('click', function() {
+      if (isOpen()) closeNav(); else openNav();
+    });
+    if (backdrop) backdrop.addEventListener('click', closeNav);
+    nav.addEventListener('click', function(e) {
+      if (e.target.closest('a')) closeNav();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && isOpen()) closeNav();
+    });
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        if (window.innerWidth > 900 && isOpen()) closeNav();
+      }, 100);
+    });
+  })();
+
+  /* ——— IntersectionObserver for card animations ——— */
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.svc-card').forEach(function(el) { obs.observe(el); });
+})();
 </script>
 </body>
 </html>
