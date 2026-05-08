@@ -173,10 +173,27 @@
     position:relative;
     font-family:'Orbitron',sans-serif; font-weight:900;
     font-size: clamp(22px, 3.5vw, 42px);
-    letter-spacing:2px; line-height:1.1;
+    letter-spacing:2.4px; line-height:1.08;
     margin-bottom:28px;
+    text-align:center;
+    text-shadow: 0 0 24px rgba(77,155,253,0.16), 0 10px 30px rgba(0,0,0,0.35);
+    display:inline-block;
+    padding: 0 12px 14px;
   }
-  .hero-title span { color:var(--blue); }
+  .hero-title::after {
+    content:'';
+    position:absolute;
+    left:50%;
+    bottom:0;
+    width: clamp(140px, 34vw, 320px);
+    height: 2px;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent 0%, rgba(77,155,253,0.95) 22%, rgba(77,155,253,0.95) 78%, transparent 100%);
+    box-shadow: 0 0 18px rgba(77,155,253,0.45);
+  }
+  .hero-title > span { color:var(--white); }
+  .hero-title > span > span { color:var(--blue); text-shadow: 0 0 14px rgba(77,155,253,0.45); }
 
   .hero-desc {
     position:relative; max-width:580px;
@@ -230,12 +247,30 @@
   .section-eyebrow::after  { content:''; width:32px; height:1px; background:var(--blue); }
 
   .section-title {
+    position:relative;
     font-family:'Orbitron',sans-serif; font-weight:900;
-    font-size:clamp(20px, 2.8vw, 32px); letter-spacing:2px;
+    font-size:clamp(20px, 2.8vw, 32px); letter-spacing:2.2px;
     margin-bottom:52px; line-height:1.2;
     text-align:center;
+    text-transform:none;
+    text-shadow: 0 0 20px rgba(77,155,253,0.14), 0 8px 24px rgba(0,0,0,0.3);
+    display:inline-block;
+    padding: 0 16px 12px;
   }
-  .section-title span { color:var(--blue); }
+  .section-title::after {
+    content:'';
+    position:absolute;
+    left:50%;
+    bottom:0;
+    width: clamp(120px, 26vw, 260px);
+    height: 2px;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent 0%, rgba(77,155,253,0.9) 24%, rgba(77,155,253,0.9) 76%, transparent 100%);
+    box-shadow: 0 0 16px rgba(77,155,253,0.42);
+  }
+  .section-title > span { color:var(--white); }
+  .section-title > span > span { color:var(--blue); text-shadow: 0 0 12px rgba(77,155,253,0.4); }
 
   .services-grid {
     display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;
