@@ -886,8 +886,8 @@
   .splash-mokri-text {
     font-family: 'Orbitron', sans-serif;
     font-weight: 900;
-    font-size: clamp(2.6rem, 9vw, 6rem);
-    letter-spacing: clamp(5px, 1.5vw, 10px);
+    font-size: clamp(2.08rem, 7.2vw, 4.8rem);
+    letter-spacing: clamp(4px, 1.2vw, 8px);
     color: var(--white);
     text-shadow: 0 0 40px rgba(77,155,253,0.6), 0 0 80px rgba(77,155,253,0.3);
     line-height: 1;
@@ -1025,15 +1025,21 @@
     font-family: 'Noto Sans Georgian', sans-serif;
     font-size: clamp(16px, 2vw, 21px);
     font-weight: 700;
-    color: #fff;
+    color: #ffffff;
     letter-spacing: 0.3px;
     line-height: 1.25;
+  }
+  .splash-panel-divider {
+    width: 44px;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(77,155,253,0.85), transparent);
+    margin: 2px 0;
   }
   .splash-panel-desc {
     font-family: 'Noto Sans Georgian', sans-serif;
     font-size: clamp(13px, 1.65vw, 16px);
-    font-weight: 400;
-    color: rgba(254,254,254,0.92);
+    font-weight: 700;
+    color: #ffffff;
     line-height: 1.55;
     max-width: 300px;
     letter-spacing: 0.1px;
@@ -1129,6 +1135,7 @@
           <span data-lang="en">For Individuals</span>
           <span data-lang="ru">Для частных лиц</span>
         </div>
+        <div class="splash-panel-divider" aria-hidden="true"></div>
         <div class="splash-panel-desc">
           <span data-lang="ka" class="active">სწრაფი დისტანციური მომსახურება თქვენი კომპიუტერისთვის</span>
           <span data-lang="en">Fast remote service for your computer</span>
@@ -1150,6 +1157,7 @@
           <span data-lang="en">For Business</span>
           <span data-lang="ru">Для бизнеса</span>
         </div>
+        <div class="splash-panel-divider" aria-hidden="true"></div>
         <div class="splash-panel-desc">
           <span data-lang="ka" class="active">გამართული IT ინფრასტრუქტურა — თქვენი ბიზნესის საიმედო საყრდენი</span>
           <span data-lang="en">A well-tuned IT infrastructure — a reliable backbone for your business</span>
@@ -1157,6 +1165,12 @@
         </div>
         <div class="splash-panel-accent" aria-hidden="true"></div>
       </div>
+    </div>
+
+    <div class="splash-divider" aria-hidden="true">
+      <span class="splash-divider-line"></span>
+      <span class="splash-divider-dot"></span>
+      <span class="splash-divider-line"></span>
     </div>
 
     <div class="splash-countdown">
