@@ -243,26 +243,14 @@
     font-family:'Orbitron',sans-serif; font-weight:900;
     font-size: clamp(22px, 3.5vw, 42px);
     letter-spacing:2.4px; line-height:1.08;
-    margin-bottom:28px;
+    margin: 0;
     text-align:center;
     text-shadow: 0 0 24px rgba(77,155,253,0.16), 0 10px 30px rgba(0,0,0,0.35);
     display:block;
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 12px 14px;
-  }
-  .hero-title::after {
-    content:'';
-    position:absolute;
-    left:50%;
-    bottom:0;
-    width: clamp(140px, 34vw, 320px);
-    height: 2px;
-    transform: translateX(-50%);
-    border-radius: 999px;
-    background: linear-gradient(90deg, transparent 0%, rgba(77,155,253,0.95) 22%, rgba(77,155,253,0.95) 78%, transparent 100%);
-    box-shadow: 0 0 18px rgba(77,155,253,0.45);
+    padding: 0 12px;
   }
   .hero-title > span { color:var(--white); }
   .hero-title > span > span { color:var(--blue); text-shadow: 0 0 14px rgba(77,155,253,0.45); }
@@ -293,11 +281,11 @@
   }
 
   .btn-outline {
-    display:inline-flex; align-items:center; gap:10px;
-    padding:14px 32px; background:transparent; color:var(--white);
-    font-family:'Orbitron',sans-serif; font-size:9px;
-    font-weight:700; letter-spacing:2px; border:1px solid var(--border);
-    border-radius:6px; text-decoration:none; transition:all 0.25s;
+    display:inline-flex; align-items:center; gap:12px;
+    padding:17px 38px; background:transparent; color:var(--white);
+    font-family:'Orbitron',sans-serif; font-size:11px;
+    font-weight:700; letter-spacing:2.4px; border:1px solid var(--border);
+    border-radius:7px; text-decoration:none; transition:all 0.25s;
   }
   .btn-outline:hover { border-color:var(--blue); color:var(--blue); }
 
@@ -322,7 +310,7 @@
     position:relative;
     font-family:'Orbitron',sans-serif; font-weight:900;
     font-size:clamp(20px, 2.8vw, 32px); letter-spacing:2.2px;
-    margin-bottom:52px; line-height:1.2;
+    margin: 0; line-height:1.2;
     text-align:center;
     text-transform:none;
     text-shadow: 0 0 20px rgba(77,155,253,0.14), 0 8px 24px rgba(0,0,0,0.3);
@@ -330,22 +318,40 @@
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 16px 12px;
-  }
-  .section-title::after {
-    content:'';
-    position:absolute;
-    left:50%;
-    bottom:0;
-    width: clamp(120px, 26vw, 260px);
-    height: 2px;
-    transform: translateX(-50%);
-    border-radius: 999px;
-    background: linear-gradient(90deg, transparent 0%, rgba(77,155,253,0.9) 24%, rgba(77,155,253,0.9) 76%, transparent 100%);
-    box-shadow: 0 0 16px rgba(77,155,253,0.42);
+    padding: 0 16px;
   }
   .section-title > span { color:var(--white); }
   .section-title > span > span { color:var(--blue); text-shadow: 0 0 12px rgba(77,155,253,0.4); }
+
+  /* Section divider — line · dot · line (same style as splash) */
+  .section-title-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    margin-bottom: 52px;
+  }
+  .section-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: 100%;
+    max-width: 880px;
+  }
+  .section-divider-line {
+    flex: 1;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(77,155,253,0.55), transparent);
+  }
+  .section-divider-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 14px rgba(77,155,253,0.95);
+    flex-shrink: 0;
+  }
 
   .services-grid {
     display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;
@@ -638,11 +644,23 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-glow"></div>
-  <h1 class="hero-title">
-    <span data-lang="ka" class="active">თქვენი პირადი IT <span>ასისტენტი</span></span>
-    <span data-lang="en">Your Personal IT <span>Assistant</span></span>
-    <span data-lang="ru">Ваш личный IT <span>ассистент</span></span>
-  </h1>
+  <div class="section-title-wrap">
+    <div class="section-divider" aria-hidden="true">
+      <span class="section-divider-line"></span>
+      <span class="section-divider-dot"></span>
+      <span class="section-divider-line"></span>
+    </div>
+    <h1 class="hero-title">
+      <span data-lang="ka" class="active">თქვენი პირადი IT <span>ასისტენტი</span></span>
+      <span data-lang="en">Your Personal IT <span>Assistant</span></span>
+      <span data-lang="ru">Ваш личный IT <span>ассистент</span></span>
+    </h1>
+    <div class="section-divider" aria-hidden="true">
+      <span class="section-divider-line"></span>
+      <span class="section-divider-dot"></span>
+      <span class="section-divider-line"></span>
+    </div>
+  </div>
   <p class="hero-desc">
     <span data-lang="ka" class="active">კომპიუტერის პრობლემა, ინტერნეტი, ტელეფონი, ვირუსი — ჩვენ ვართ ყოველთვის ხელმისაწვდომი. სწრაფი, სანდო, დისტანციური მხარდაჭერა — ერთი შეტყობინებით.</span>
     <span data-lang="en">Computer trouble, internet issues, phone, virus — we're always available. Fast, reliable, remote support — one message away.</span>
@@ -659,11 +677,23 @@
 
 <!-- SERVICES -->
 <section class="services">
-  <h2 class="section-title">
-    <span data-lang="ka" class="active">რით შეგვიძლია <span>დაგეხმაროთ</span></span>
-    <span data-lang="en">How We Can <span>Help You</span></span>
-    <span data-lang="ru">Чем мы можем <span>помочь</span></span>
-  </h2>
+  <div class="section-title-wrap">
+    <div class="section-divider" aria-hidden="true">
+      <span class="section-divider-line"></span>
+      <span class="section-divider-dot"></span>
+      <span class="section-divider-line"></span>
+    </div>
+    <h2 class="section-title">
+      <span data-lang="ka" class="active">რით შეგვიძლია <span>დაგეხმაროთ</span></span>
+      <span data-lang="en">How We Can <span>Help You</span></span>
+      <span data-lang="ru">Чем мы можем <span>помочь</span></span>
+    </h2>
+    <div class="section-divider" aria-hidden="true">
+      <span class="section-divider-line"></span>
+      <span class="section-divider-dot"></span>
+      <span class="section-divider-line"></span>
+    </div>
+  </div>
   <div class="services-grid">
 
     <div class="svc-card">
@@ -755,11 +785,23 @@
 
 <!-- PROCESS -->
 <section class="process">
-  <h2 class="section-title">
-    <span data-lang="ka" class="active">3 <span>მარტივი</span> ნაბიჯი</span>
-    <span data-lang="en">3 <span>Simple</span> Steps</span>
-    <span data-lang="ru">3 <span>простых</span> шага</span>
-  </h2>
+  <div class="section-title-wrap">
+    <div class="section-divider" aria-hidden="true">
+      <span class="section-divider-line"></span>
+      <span class="section-divider-dot"></span>
+      <span class="section-divider-line"></span>
+    </div>
+    <h2 class="section-title">
+      <span data-lang="ka" class="active">3 <span>მარტივი</span> ნაბიჯი</span>
+      <span data-lang="en">3 <span>Simple</span> Steps</span>
+      <span data-lang="ru">3 <span>простых</span> шага</span>
+    </h2>
+    <div class="section-divider" aria-hidden="true">
+      <span class="section-divider-line"></span>
+      <span class="section-divider-dot"></span>
+      <span class="section-divider-line"></span>
+    </div>
+  </div>
   <div class="steps-grid">
     <div class="step">
       <div class="step-num">01</div>
