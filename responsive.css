@@ -5,7 +5,7 @@
 }
 
 :is(.hero-title, .section-title, .hero-desc, .mission-text, .val-desc, .why-desc, .contact-value, .faq-question, .faq-answer, .step-desc) {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 @media (max-width: 1200px) {
@@ -89,10 +89,10 @@
   }
 
   .hero-title {
-    font-size: clamp(36px, 2.1vw, 64px);
+    font-size: clamp(34px, 2.4vw, 72px);
   }
 
   .section-title {
-    font-size: clamp(30px, 1.8vw, 52px);
+    font-size: clamp(28px, 1.9vw, 58px);
   }
 }
