@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0A1728">
+<meta name="description" content="MOKRI — IT Solutions, Support & Innovation. ციფრული ცხოვრებისა და ბიზნესის სანდო ტექნიკური პარტნიორი.">
+<meta name="format-detection" content="telephone=no">
+
+<!-- Security headers (note: HTTP headers from the server are stronger than meta-equiv; keep these as defense in depth) -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()">
+<meta name="robots" content="index, follow">
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="canonical" href="https://mokri.ge/">
+
+<!-- Open Graph (basic) -->
+<meta property="og:title" content="MOKRI — IT Solutions">
+<meta property="og:description" content="ციფრული ცხოვრებისა და ბიზნესის სანდო ტექნიკური პარტნიორი.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ka_GE">
+
+<title>MOKRI — IT Solutions</title>
+
+<!-- Performance: preconnect for Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;1,400&family=Noto+Sans+Georgian:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;1,400&family=Noto+Sans+Georgian:wght@400;500;600;700&display=swap">
+
+<style>
+  :root {
+    --bg: #0A1728;
+    --bg2: #0d1e35;
+    --bg3: #0f2240;
+    --navy: #1A3B6C;
+    --blue: #4D9BFD;
+    --blue-dim: rgba(77,155,253,0.15);
+    --blue-glow: rgba(77,155,253,0.35);
+    --white: #FEFEFE;
+    --white-dim: rgba(254,254,254,0.65);
+    --white-faint: rgba(254,254,254,0.08);
+    --border: rgba(77,155,253,0.2);
+    --header-h: 68px;
+    --footer-h: 68px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    height: 100%;
+    scrollbar-gutter: stable;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'EB Garamond', Georgia, serif;
+    line-height: 1.7;
+    min-height: 100vh;
+    min-height: 100dvh;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-top: var(--header-h);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Lock body scroll when mobile nav or splash open */
+  body.nav-open,
+  body.splash-open { overflow: hidden !important; }
+
+  /* Universal focus-visible for accessibility */
+  :focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  :focus:not(:focus-visible) { outline: none; }
+
+  /* ——— NOISE TEXTURE OVERLAY ——— */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: .4;
+  }
+
+  /* ——— HEADER / NAV BAR ——— */
+  .lang-bar {
+    position: fixed;
+    top: 0; right: 0; left: 0;
+    z-index: 1000;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 24px;
+    padding: 0 36px;
+    height: var(--header-h);
+    background: rgba(10,23,40,0.95);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .lang-bar-logo {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 26px;
+    letter-spacing: 6px;
+    color: var(--white);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+  }
+  .lang-bar-logo:hover { opacity: 0.8; }
+  .lang-bar-logo span { color: var(--blue); }
+
+  /* ——— DESKTOP NAV ——— */
+  .header-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .header-nav-link {
+    position: relative;
+    padding: 7px 14px;
+    font-family: 'Noto Sans Georgian', sans-serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: rgba(254,254,254,0.7);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: color 0.22s ease, background 0.22s ease;
+    white-space: nowrap;
+  }
+
+  .header-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 60%;
+    height: 1.5px;
+    background: var(--blue);
+    border-radius: 2px;
+    transition: transform 0.22s ease;
+  }
+
+  .header-nav-link:hover {
+    color: var(--white);
+    background: rgba(77,155,253,0.08);
+  }
+  .header-nav-link:hover::after { transform: translateX(-50%) scaleX(1); }
+  .header-nav-link.active { color: var(--blue); background: rgba(77,155,253,0.1); }
+
+  .header-nav-link.shop-link {
+    color: var(--blue);
+    border: 1px solid rgba(77,155,253,0.35);
+    margin-left: 8px;
+    font-size: 11.5px;
+    letter-spacing: 1px;
+  }
+  .header-nav-link.shop-link:hover {
+    background: var(--blue);
+    color: var(--bg);
+    border-color: var(--blue);
+    box-shadow: 0 0 18px rgba(77,155,253,0.35);
+  }
+  .header-nav-link.shop-link::after { display: none; }
+
+  /* ——— LANG SWITCHER ——— */
+  .lang-switcher {
+    display: flex;
+    gap: 4px;
+    background: var(--white-faint);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 3px;
+  }
+
+  .lang-btn {
+    padding: 5px 13px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    border: none;
+    background: transparent;
+    color: var(--white-dim);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.25s, color 0.25s;
+  }
+  .lang-btn.active { background: var(--blue); color: var(--bg); }
+  .lang-btn:hover:not(.active) { color: var(--white); }
+
+  /* ——— HAMBURGER (mobile) ——— */
+  .nav-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--white);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .nav-toggle:hover { background: rgba(77,155,253,0.1); border-color: var(--blue); }
+  .nav-toggle svg { width: 20px; height: 20px; }
+  .nav-toggle .icon-close { display: none; }
+  .nav-toggle[aria-expanded="true"] .icon-open { display: none; }
+  .nav-toggle[aria-expanded="true"] .icon-close { display: block; }
+
+  /* ——— RESPONSIVE NAV BREAKPOINTS ——— */
+
+  /* Laptop / smaller desktop */
+  @media (max-width: 860px) {
+    .header-nav { gap: 2px; }
+    .header-nav-link { padding: 6px 9px; font-size: 11px; }
+    .header-nav-link.shop-link { margin-left: 4px; }
+  }
+
+  /* Tablet / small laptop — switch to hamburger */
+  @media (max-width: 900px) {
+    .lang-bar { grid-template-columns: auto 1fr auto auto; }
+    .header-nav {
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 4px;
+      padding: 16px 20px 24px;
+      background: rgba(10,23,40,0.98);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      max-height: calc(100dvh - var(--header-h));
+      overflow-y: auto;
+      z-index: 999;
+    }
+    .lang-bar.is-open .header-nav {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .header-nav-link {
+      padding: 12px 14px;
+      font-size: 14px;
+      text-align: left;
+      border-radius: 8px;
+    }
+    .header-nav-link::after { display: none; }
+    .header-nav-link.shop-link { margin-left: 0; margin-top: 6px; text-align: center; }
+    .nav-toggle { display: inline-flex; }
+    /* Backdrop */
+    .nav-backdrop {
+      position: fixed;
+      inset: var(--header-h) 0 0 0;
+      background: rgba(0,0,0,0.5);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 998;
+    }
+    .lang-bar.is-open ~ .nav-backdrop { opacity: 1; pointer-events: auto; }
+  }
+
+  @media (max-width: 480px) {
+    .lang-bar { padding: 0 14px; gap: 8px; }
+    .lang-bar-logo { font-size: 20px; letter-spacing: 4px; }
+    .lang-btn { padding: 5px 9px; font-size: 9px; letter-spacing: 1.4px; }
+  }
+
+  /* ——— HERO ——— */
+  .hero {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 24px 40px;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(77,155,253,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(77,155,253,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: min(600px, 90vw);
+    height: min(600px, 90vw);
+    background: radial-gradient(circle, rgba(77,155,253,0.12) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    pointer-events: none;
+  }
+
+  .hero-logo {
+    position: relative;
+    margin-bottom: 22px;
+    cursor: default;
+  }
+
+  .hero-logo svg {
+    width: clamp(96px, 12vw, 140px);
+    height: clamp(96px, 12vw, 140px);
+    filter: drop-shadow(0 0 28px rgba(77,155,253,0.6)) drop-shadow(0 0 12px rgba(77,155,253,0.4));
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.45s ease;
+    animation: heroLogoBreath 4s ease-in-out 2.5s infinite;
+    transform-origin: center;
+  }
+
+  .hero-logo:hover svg {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 44px rgba(77,155,253,0.95)) drop-shadow(0 0 18px rgba(77,155,253,0.7));
+    animation-play-state: paused;
+  }
+
+  .hero-logo path {
+    opacity: 0;
+    animation: heroPathIn 0.55s ease-out forwards;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .hero-logo path:nth-child(2),
+  .hero-logo path:nth-child(3)  { animation-delay: 0.15s; }
+  .hero-logo path:nth-child(4),
+  .hero-logo path:nth-child(5)  { animation-delay: 0.30s; }
+  .hero-logo path:nth-child(8),
+  .hero-logo path:nth-child(9)  { animation-delay: 0.45s; }
+  .hero-logo path:nth-child(10),
+  .hero-logo path:nth-child(11) { animation-delay: 0.60s; }
+
+  .hero-logo path:nth-child(1)  { animation: heroPathIn 0.5s ease-out 0.85s forwards, circuitFlash 0.7s ease-in-out 1.40s; }
+  .hero-logo path:nth-child(6),
+  .hero-logo path:nth-child(7)  { animation: heroPathIn 0.5s ease-out 1.00s forwards, circuitFlash 0.7s ease-in-out 1.55s; }
+  .hero-logo path:nth-child(12) { animation: heroPathIn 0.5s ease-out 1.15s forwards, circuitFlash 0.7s ease-in-out 1.70s; }
+  .hero-logo path:nth-child(13),
+  .hero-logo path:nth-child(14) { animation: heroPathIn 0.5s ease-out 1.30s forwards, circuitFlash 0.7s ease-in-out 1.85s; }
+
+  @keyframes heroPathIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes circuitFlash {
+    0%   { filter: brightness(1) saturate(1); }
+    50%  { filter: brightness(1.8) saturate(1.5); }
+    100% { filter: brightness(1) saturate(1); }
+  }
+  @keyframes heroLogoBreath {
+    0%, 100% { filter: drop-shadow(0 0 28px rgba(77,155,253,0.6)) drop-shadow(0 0 12px rgba(77,155,253,0.4)); }
+    50%      { filter: drop-shadow(0 0 40px rgba(77,155,253,0.9)) drop-shadow(0 0 16px rgba(77,155,253,0.55)); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-logo svg { animation: none; }
+    .hero-logo path { animation: none !important; opacity: 1 !important; }
+    .hero-logo:hover svg { transform: none; }
+  }
+
+  .hero-brand {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: clamp(30px, 5.5vw, 61px);
+    letter-spacing: clamp(4px, 0.8vw, 10px);
+    color: var(--white);
+    position: relative;
+    text-shadow: 0 0 40px rgba(77,155,253,0.3);
+    line-height: 1;
+  }
+  .hero-brand span { color: var(--blue); }
+
+  .hero-tagline {
+    font-size: clamp(11px, 1.6vw, 16px);
+    letter-spacing: clamp(1.5px, 0.3vw, 3px);
+    color: var(--blue);
+    text-transform: uppercase;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 400;
+    margin-top: 10px;
+    margin-bottom: 16px;
+    padding: 0 8px;
+  }
+
+  .hero-desc {
+    font-size: clamp(13px, 1.6vw, 17px);
+    color: var(--white-dim);
+    max-width: 580px;
+    margin: 0 auto 0;
+    font-style: italic;
+    line-height: 1.5;
+    padding: 0 12px;
+    text-align: center;
+    white-space: normal;
+  }
+
+  /* ══════ AUDIENCES (Personal / Business) ══════ */
+  .audiences {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: 14px 40px 18px;
+    flex-shrink: 0;
+  }
+  .audiences-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    position: relative;
+  }
+  .audience-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 18px 24px 16px;
+    background: linear-gradient(180deg, rgba(77,155,253,0.045) 0%, rgba(77,155,253,0.012) 100%);
+    border: 1px solid rgba(77,155,253,0.18);
+    border-radius: 14px;
+    overflow: hidden;
+    isolation: isolate;
+    text-decoration: none;
+    color: inherit;
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.4s ease,
+      box-shadow 0.6s cubic-bezier(0.32, 0.72, 0, 1),
+      opacity 0.6s ease;
+    text-align: left;
+  }
+  .audience-card.is-visible { opacity: 1; transform: translateY(0); }
+  .audience-card:nth-child(2) { transition-delay: 0.12s; }
+  .audience-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 20%; right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    opacity: 0.4;
+    transition: opacity 0.5s ease, left 0.5s ease, right 0.5s ease;
+  }
+  .audience-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(77,155,253,0.12), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .audience-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(77,155,253,0.4);
+    box-shadow: 0 14px 44px rgba(77,155,253,0.14), 0 0 0 1px rgba(77,155,253,0.1);
+  }
+  .audience-card:hover::before { opacity: 1; left: 0; right: 0; }
+  .audience-card:hover::after  { opacity: 1; }
+
+  .audience-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(77,155,253,0.08);
+    border: 1px solid rgba(77,155,253,0.2);
+    transition: background 0.4s ease, border-color 0.4s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    flex-shrink: 0;
+  }
+  .audience-card:hover .audience-icon {
+    background: rgba(77,155,253,0.16);
+    border-color: rgba(77,155,253,0.42);
+    transform: translateY(-2px) rotate(-3deg);
+  }
+  .audience-icon svg { width: 22px; height: 22px; color: var(--blue); transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+  .audience-card:hover .audience-icon svg { transform: scale(1.08); }
+
+  .audience-title {
+    font-family: 'Noto Sans Georgian', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--white);
+    margin: 0 0 6px;
+    letter-spacing: 0.2px;
+    line-height: 1.25;
+  }
+  .audience-text {
+    font-family: 'Noto Sans Georgian', sans-serif;
+    font-size: 12.5px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgba(254,254,254,0.72);
+    margin: 0 0 12px;
+    flex: 1;
+  }
+  .audience-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .audience-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    font-family: 'Noto Sans Georgian', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--blue);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    position: relative;
+    transition: gap 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .audience-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 1px; width: 100%;
+    background: var(--blue);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .audience-card:hover .audience-link { gap: 14px; }
+  .audience-card:hover .audience-link::after { transform: scaleX(0.85); }
+  .audience-link svg { transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); flex-shrink: 0; }
+  .audience-card:hover .audience-link svg { transform: translateX(2px); }
+
+  .audience-cta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    background: var(--blue);
+    color: var(--bg);
+    font-family: 'Noto Sans Georgian', sans-serif;
+    font-weight: 700;
+    font-size: 12.5px;
+    letter-spacing: 0.4px;
+    text-decoration: none;
+    border-radius: 6px;
+    border: 1px solid var(--blue);
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    isolation: isolate;
+    box-shadow: 0 0 0 0 rgba(77,155,253,0);
+    transition: box-shadow 0.5s cubic-bezier(0.32, 0.72, 0, 1), transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .audience-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.5) 50%, transparent 75%);
+    transform: translateX(-110%);
+    transition: transform 0.7s cubic-bezier(0.32, 0.72, 0, 1);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .audience-cta > svg, .audience-cta > span {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .audience-cta:hover { box-shadow: 0 0 22px rgba(77,155,253,0.5), 0 0 0 3px rgba(77,155,253,0.12); }
+  .audience-cta:hover::before { transform: translateX(110%); }
+  .audience-cta:hover > svg { transform: rotate(-12deg) scale(1.08); }
+  .audience-cta:active { transform: scale(0.96); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .audience-card { transition: border-color 0.3s ease, box-shadow 0.3s ease; opacity: 1; transform: none; }
+    .audience-card:hover, .audience-card:hover .audience-icon, .audience-card:hover .audience-icon svg { transform: none; }
+  }
+
+  /* ——— STATS BAR ——— */
+  .stats-bar {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .stats-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 9px 40px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    align-items: center;
+  }
+  .stat-item {
+    text-align: center;
+    border-right: 1px solid var(--border);
+    padding-right: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .stat-item:last-child { border-right: none; padding-right: 0; }
+  .stat-num {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 24px;
+    color: var(--blue);
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--white-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .stat-subnote {
+    font-size: 8.5px;
+    color: rgba(254,254,254,0.35);
+    letter-spacing: 0.3px;
+    margin-top: 2px;
+    font-style: italic;
+    font-family: 'EB Garamond', Georgia, serif;
+    line-height: 1.25;
+  }
+
+  /* ——— FOOTER ——— */
+  footer {
+    background: rgba(0,0,0,0.4);
+    border-top: 1px solid var(--border);
+    height: var(--footer-h);
+    padding: 0 24px;
+    text-align: center;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-social {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .footer-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid var(--border);
+    color: var(--white-dim);
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    text-decoration: none;
+  }
+  .footer-social a:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .footer-social svg { width: 17px; height: 17px; fill: currentColor; }
+
+  /* ——— LANGUAGE SECTIONS ——— */
+  [data-lang] { display: none; }
+  [data-lang].active { display: block; }
+  .lang-inline[data-lang] { display: none; }
+  .lang-inline[data-lang].active { display: inline; }
+
+  /* ═══════════════════════════════════════════════════
+     RESPONSIVE LAYOUT FIXES
+     The original layout uses 100vh + overflow:hidden which
+     causes content overlap on shorter viewports (e.g. 13" MacBook
+     at ~720-800px). Fix with progressive height adjustments.
+     ═══════════════════════════════════════════════════ */
+
+  /* Tablet & smaller — 2x2 stats grid */
+  @media (max-width: 900px) {
+    .stats-inner { grid-template-columns: 1fr 1fr; gap: 12px; padding: 8px 24px; }
+    .stat-item { border-right: none; padding-right: 0; }
+    .stat-item:nth-child(odd) { border-right: 1px solid var(--border); padding-right: 12px; }
+    .stat-num { font-size: 20px; }
+    .stat-label { font-size: 11px; letter-spacing: 1.6px; }
+    footer { padding: 0 20px; }
+  }
+
+  /* Stacked audiences on mobile */
+  @media (max-width: 760px) {
+    .audiences { padding: 12px 20px 16px; }
+    .audiences-inner { grid-template-columns: 1fr; gap: 12px; }
+    .audience-card { padding: 16px 20px 14px; }
+    .audience-card:nth-child(2) { transition-delay: 0.08s; }
+    .audience-title { font-size: 16px; margin-bottom: 4px; }
+    .audience-text { font-size: 12px; margin-bottom: 10px; }
+    .audience-actions { flex-wrap: wrap; gap: 10px; }
+    .audience-cta { padding: 8px 14px; font-size: 12px; }
+  }
+
+  /* SHORT VIEWPORT (laptops, MacBook 13"): allow scrolling instead of cramming */
+  @media (max-height: 820px) {
+    body {
+      height: auto;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .hero { padding: 16px 32px; flex: 0 0 auto; }
+    .hero-logo { margin-bottom: 14px; }
+    .hero-tagline { margin-bottom: 12px; margin-top: 6px; }
+    .audiences { padding: 10px 32px 12px; }
+    .audience-card { padding: 14px 22px 12px; }
+    .audience-text { margin-bottom: 10px; }
+  }
+
+  /* Phone height handling */
+  @media (max-width: 660px) {
+    body {
+      height: auto;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .hero { padding: 32px 20px 24px; flex: 0 0 auto; }
+    .audiences { padding: 12px 16px 16px; }
+  }
+
+  /* Tiny phones */
+  @media (max-width: 380px) {
+    .lang-btn { padding: 4px 7px; font-size: 8.5px; letter-spacing: 1.2px; }
+    .nav-toggle { width: 36px; height: 36px; }
+    .hero-tagline { letter-spacing: 1.2px; }
+    .audience-actions { gap: 8px; }
+    .audience-cta { padding: 7px 12px; font-size: 11.5px; }
+  }
+
+  /* ——— FLOATING BUTTONS (WA / Messenger / Email) ——— */
+  .float-btn {
+    position: fixed;
+    right: 32px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .float-btn:hover { transform: scale(1.1); }
+  .float-btn svg { fill: white; }
+
+  .call-float {
+    bottom: 248px;
+    background: #FF9500;
+    box-shadow: 0 8px 32px rgba(255,149,0,0.4);
+  }
+  .call-float:hover { box-shadow: 0 8px 48px rgba(255,149,0,0.7); }
+  .call-float svg { width: 28px; height: 28px; }
+
+  .wa-float {
+    bottom: 176px;
+    background: #25d366;
+    box-shadow: 0 8px 32px rgba(37,211,102,0.4);
+    animation: waPulse 2.5s ease-in-out infinite;
+  }
+  .wa-float:hover { box-shadow: 0 8px 48px rgba(37,211,102,0.7); }
+  .wa-float svg { width: 30px; height: 30px; }
+
+  .msng-float {
+    bottom: 104px;
+    background: #0084FF;
+    box-shadow: 0 8px 32px rgba(0,132,255,0.4);
+  }
+  .msng-float:hover { box-shadow: 0 8px 48px rgba(0,132,255,0.7); }
+  .msng-float svg { width: 28px; height: 28px; }
+
+  .email-float {
+    bottom: 32px;
+    background: #4D9BFD;
+    box-shadow: 0 8px 32px rgba(77,155,253,0.4);
+  }
+  .email-float:hover { box-shadow: 0 8px 48px rgba(77,155,253,0.7); }
+  .email-float svg { width: 28px; height: 28px; }
+
+  @keyframes waPulse {
+    0%, 100% { box-shadow: 0 8px 32px rgba(37,211,102,0.4); }
+    50%      { box-shadow: 0 8px 48px rgba(37,211,102,0.7); }
+  }
+
+  /* Smaller floating buttons on mobile to not block content */
+  @media (max-width: 660px) {
+    .float-btn { width: 50px; height: 50px; right: 16px; }
+    .wa-float { bottom: 138px; }
+    .msng-float { bottom: 78px; }
+    .email-float { bottom: 18px; }
+    .call-float { bottom: 198px; }
+    .wa-float svg { width: 26px; height: 26px; }
+    .msng-float svg, .email-float svg, .call-float svg { width: 24px; height: 24px; }
+  }
+  @media (max-height: 600px) {
+    .float-btn { width: 44px; height: 44px; }
+    .wa-float { bottom: 116px; }
+    .msng-float { bottom: 64px; }
+    .email-float { bottom: 12px; }
+    .call-float { bottom: 168px; }
+    .wa-float svg { width: 22px; height: 22px; }
+    .msng-float svg, .email-float svg, .call-float svg { width: 20px; height: 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wa-float { animation: none; }
+  }
+
+  /* ——— SPLASH SCREEN ——— */
+  #splash {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s ease;
+    overflow-y: auto;
+    padding: 20px;
+  }
+  #splash.splash-hide { opacity: 0; pointer-events: none; }
+  .splash-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    text-align: center;
+    padding: 24px 32px;
+    animation: splashFadeIn 0.7s ease both;
+    max-width: 880px;
+    width: min(calc(100vw - 40px), 880px);
+    margin: auto;
+  }
+  @keyframes splashFadeIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .splash-logo svg {
+    width: clamp(96px, 18vw, 143px);
+    height: clamp(96px, 18vw, 143px);
+    filter: drop-shadow(0 0 22px rgba(77,155,253,0.55));
+  }
+  .splash-mokri-text {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.08rem, 7.2vw, 4.8rem);
+    letter-spacing: clamp(4px, 1.2vw, 8px);
+    color: var(--white);
+    text-shadow: 0 0 40px rgba(77,155,253,0.6), 0 0 80px rgba(77,155,253,0.3);
+    line-height: 1;
+  }
+  .splash-mokri-text span { color: var(--blue); }
+  .splash-subtitle {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: clamp(13px, 1.6vw, 17px);
+    color: var(--white-dim);
+    font-style: italic;
+    line-height: 1.5;
+    margin-top: -4px;
+    max-width: 90%;
+    padding: 0 8px;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .splash-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: 100%;
+    max-width: 880px;
+    margin: 2px 0 0;
+  }
+  .splash-divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(77,155,253,0.45), transparent);
+  }
+  .splash-divider-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 12px rgba(77,155,253,0.85);
+    flex-shrink: 0;
+    animation: splashDotPulse 2.4s ease-in-out infinite;
+  }
+  @keyframes splashDotPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.45; transform: scale(0.7); }
+  }
+
+  .splash-countdown {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .splash-countdown-number {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    color: var(--blue);
+    text-shadow: 0 0 18px rgba(77,155,253,0.65);
+    line-height: 1;
+    animation: splashCountdownPulse 1s ease-in-out infinite;
+    font-variant-numeric: tabular-nums;
+  }
+  @keyframes splashCountdownPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.6; transform: scale(0.92); }
+  }
+  .splash-countdown-label {
+    font-family: 'Noto Sans Georgian', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(254,254,254,0.45);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .splash-panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    width: 100%;
+    margin-top: 4px;
+  }
+  .splash-panel {
+    position: relative;
+    background: linear-gradient(160deg, rgba(77,155,253,0.06) 0%, rgba(77,155,253,0.018) 100%);
+    border: 1px solid rgba(77,155,253,0.22);
+    border-radius: 16px;
+    padding: 24px 22px 22px;
+    overflow: hidden;
+    isolation: isolate;
+    opacity: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    animation: splashPanelIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+  }
+  .splash-panel:nth-child(2) { animation-delay: 0.7s; }
+  .splash-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 18%; right: 18%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(77,155,253,0.7), transparent);
+  }
+  .splash-panel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 90% 55% at 50% 0%, rgba(77,155,253,0.1), transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+  @keyframes splashPanelIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .splash-panel-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(77,155,253,0.1);
+    border: 1px solid rgba(77,155,253,0.3);
+    color: var(--blue);
+    flex-shrink: 0;
+    box-shadow: 0 0 18px rgba(77,155,253,0.12) inset;
+  }
+  .splash-panel-icon svg { width: 24px; height: 24px; }
+
+  .splash-panel-title {
+    font-family: 'Noto Sans Georgian', sans-serif;
+    font-size: clamp(16px, 2vw, 21px);
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.3px;
+    line-height: 1.25;
+  }
+  .splash-panel-divider {
+    width: 44px;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(77,155,253,0.85), transparent);
+    margin: 2px 0;
+  }
+  .splash-panel-desc {
+    font-family: 'Noto Sans Georgian', sans-serif;
+    font-size: clamp(13px, 1.65vw, 16px);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.55;
+    max-width: 300px;
+    letter-spacing: 0.1px;
+  }
+  .splash-panel-accent {
+    width: 26px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(77,155,253,0.6), transparent);
+    margin-top: 2px;
+  }
+
+  /* Hint about clicking to skip */
+  .splash-hint {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Noto Sans Georgian', sans-serif;
+    font-size: 11px;
+    color: rgba(254,254,254,0.35);
+    letter-spacing: 0.5px;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .splash-panel { animation: none !important; opacity: 1 !important; transform: none !important; }
+    .splash-divider-dot { animation: none !important; }
+    .splash-countdown-number { animation: none !important; }
+  }
+  @media (max-width: 560px) {
+    .splash-inner { gap: 14px; padding: 20px 16px; }
+    .splash-panels { grid-template-columns: 1fr; gap: 12px; }
+    .splash-panel { padding: 18px 16px 16px; gap: 10px; }
+    .splash-panel-icon { width: 44px; height: 44px; }
+    .splash-panel-icon svg { width: 22px; height: 22px; }
+  }
+  @media (max-height: 700px) {
+    .splash-inner { gap: 12px; padding: 16px 24px; }
+    .splash-logo svg { width: clamp(72px, 12vh, 110px); height: clamp(72px, 12vh, 110px); }
+    .splash-mokri-text { font-size: clamp(2rem, 7vh, 4rem); }
+    .splash-panel { padding: 14px 18px 14px; gap: 8px; }
+  }
+</style>
+<link rel="stylesheet" href="responsive.css">
+</head>
+<body class="splash-open">
+
+<!-- ——— SPLASH SCREEN ——— -->
+<div id="splash" role="dialog" aria-modal="true" aria-label="MOKRI — საწყისი ეკრანი">
+  <div class="splash-inner">
+    <div class="splash-logo">
+      <svg viewBox="32 20 200 229" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path fill="#4D9BFD" d="M 137.340,84.450 L 126.800,84.450 L 126.800,28.860 L 132.070,24.010 L 137.340,28.860 Z"/>
+        <path fill="#FEFEFE" d="m 107.41338,34.955668 -0.35767,0.437814 c 10.17583,1.890611 14.92675,22.348411 2.13321,26.139342 -14.659273,4.170999 -29.184783,6.73287 -44.147423,9.881837 0.979928,12.75443 3.019275,25.327427 3.266655,38.157759 -8.194405,-0.94653 -17.081068,-2.57074 -25.285534,-3.90671 l -0.961073,-0.46846 C 40.161968,100.65892 36.68383,58.573194 35.938979,50.642822 59.022913,44.658243 83.971036,39.983182 107.41338,34.955668 Z"/>
+        <path fill="#FEFEFE" d="M 156.72661999999997,34.955668 L 157.08428999999998,35.393482000000006 C 146.90846,37.284093000000006 142.15753999999998,57.741893000000005 154.95108,61.532824000000005 C 169.61035299999998,65.703823 184.13586299999997,68.26569400000001 199.098503,71.41466100000001 C 198.11857499999996,84.16909100000001 196.079228,96.74208800000001 195.83184799999998,109.57242000000001 C 204.026253,108.62589000000001 212.912916,107.00168000000001 221.11738199999996,105.66571 L 222.07845499999996,105.19725000000001 C 223.97803199999998,100.65892 227.45617,58.573194 228.20102099999997,50.642822 C 205.11708699999997,44.658243 180.168964,39.983182 156.72661999999997,34.955668"/>
+        <path fill="#FEFEFE" d="m 81.703315,166.73046 c 2.847667,2.29348 4.981136,4.29882 7.632943,6.82529 9.218026,8.90624 18.972612,17.23622 28.435682,25.88988 l 0.20041,34.66093 c -15.91451,-14.41182 -31.973847,-30.13889 -47.960316,-44.08651 -1.928506,-1.19342 -5.624283,-4.90621 -7.192955,-6.65722 3.15284,-2.49979 16.808148,-14.21172 18.884236,-16.63237 z"/>
+        <path fill="#FEFEFE" d="M 182.43668499999998,166.73046 C 179.58901799999998,169.02393999999998 177.45554899999996,171.02928 174.803742,173.55575 C 165.585716,182.46199 155.83112999999997,190.79197 146.36805999999999,199.44563 L 146.16764999999998,234.10656 C 162.08216,219.69474 178.141497,203.96767 194.127966,190.02005 C 196.05647199999999,188.82663 199.752249,185.11384 201.320921,183.36283 C 198.16808099999997,180.86304 184.51277299999998,169.15111000000002 182.43668499999998,166.73046"/>
+        <path fill="#4D9BFD" d="m 81.506069,166.2002 c 3.081025,2.32316 5.389321,4.35447 8.258434,6.91366 -6.329597,4.95352 -15.015782,11.41588 -20.907769,16.67747 -2.086539,-1.20887 -6.08517,-4.96973 -7.782389,-6.74341 3.411203,-2.53217 18.185511,-14.39574 20.431724,-16.84772 z"/>
+        <path fill="#4D9BFD" d="M 182.633931,166.2002 C 179.552906,168.52336 177.24461,170.55467 174.375497,173.11386 C 180.705094,178.06737999999999 189.391279,184.52973999999998 195.283266,189.79133 C 197.36980499999999,188.58246 201.368436,184.8216 203.065655,183.04791999999998 C 199.654452,180.51574999999997 184.880144,168.65218 182.63393100000002,166.20019999999997 L 182.633931,166.2002"/>
+        <path fill="#FEFEFE" d="m 45.405026,132.79432 28.010084,0.0929 c 1.81071,8.66265 5.200596,26.39585 8.367269,33.88447 -2.110812,2.55247 -15.994512,14.90223 -19.200085,17.53815 -2.07098,-1.92607 -4.353124,-4.34913 -6.369461,-6.38961 C 53.558347,163.304 48.39665,147.72005 45.405026,132.79438 Z"/>
+        <path fill="#FEFEFE" d="M 218.734974,132.79432 L 190.72489,132.88721999999999 C 188.91418,141.54987 185.524294,159.28306999999998 182.357621,166.77168999999998 C 184.468433,169.32415999999998 198.35213299999998,181.67391999999998 201.557706,184.30983999999998 C 203.628686,182.38376999999997 205.91083,179.96070999999998 207.927167,177.92022999999998 C 210.581653,163.304 215.74335,147.72005 218.734974,132.79438 L 218.734974,132.79432"/>
+        <path fill="#FEFEFE" d="m 85.942101,115.7584 c 2.207668,-2.7737 5.637621,-6.03281 9.316773,-5.9578 10.636806,0.21555 11.718176,8.73323 10.392856,16.25334 10.23966,8.5332 17.10572,17.09657 26.34763,25.81083 4.02083,0.89324 7.26409,1.90805 9.43125,5.65086 3.99969,6.90623 0.21837,12.79505 -6.51821,15.43166 -5.17356,0.25953 -5.37346,-0.12071 -10.13839,-2.44865 -4.67952,-6.52082 -4.3132,-8.0426 -0.67012,-14.7669 -6.79036,-7.87879 -16.8882,-17.30782 -24.472823,-25.02709 -0.938725,0.0759 -1.879209,0.13277 -2.820576,0.16899 -5.020307,0.17934 -6.769188,-1.24674 -10.178877,-4.35239 -1.836934,-4.6326 -1.562187,-6.14834 -0.689513,-10.76285 z"/>
+        <path fill="#FEFEFE" d="M 178.197899,115.7584 C 175.990231,112.98469999999999 172.56027799999998,109.72559 168.881126,109.80059999999999 C 158.24432,110.01614999999998 157.16295,118.53383 158.48827,126.05393999999998 C 148.24860999999999,134.58713999999998 141.38254999999998,143.15051 132.14064,151.86477 C 128.11981,152.75800999999998 124.87654999999998,153.77282 122.70938999999998,157.51563 C 118.7097,164.42185999999998 122.49101999999999,170.31068 129.2276,172.94728999999998 C 134.40116,173.20682 134.60106,172.82657999999998 139.36599,170.49864 C 144.04550999999998,163.97782 143.67919,162.45604 140.03611,155.73174 C 146.82647,147.85295 156.92431,138.42392 164.508933,130.70465000000002 C 165.447658,130.78055 166.38814200000002,130.83742 167.329509,130.87364000000002 C 172.349816,131.05298000000002 174.09869700000002,129.62690000000003 177.508386,126.52125000000002 C 179.34532000000002,121.88865000000003 179.070573,120.37291000000002 178.197899,115.75840000000002 L 178.197899,115.7584"/>
+        <path fill="#4D9BFD" d="m 126.62447,170.89363 c -1.49911,0 5.9426,3.94347 10.92436,0.87452 0.1738,13.74284 -0.53982,29.28188 -0.40534,43.03704 0.0796,8.19182 -0.30188,16.44879 0.61107,24.59569 -1.99513,1.71268 -3.71708,4.12365 -5.65915,5.97457 l -5.63631,-6.35688 c -0.16649,-23.23258 -0.26001,-44.89587 0.16538,-68.12494 z"/>
+        <path fill="#4D9BFD" d="m 39.876509,114.84889 46.834912,-0.0571 c -1.621533,3.1706 -2.299488,6.59721 -0.251073,11.32844 -13.32096,-0.57412 -29.724519,-0.22209 -43.577889,-0.41756 z"/>
+        <path fill="#4D9BFD" d="M 224.263491,114.84889 L 177.42857899999998,114.79178999999999 C 179.05011199999998,117.96238999999998 179.72806699999998,121.389 177.67965199999998,126.12022999999999 C 191.000612,125.54611 207.404171,125.89814 221.257541,125.70267 L 224.263491,114.84889"/>
+      </svg>
+    </div>
+    <div class="splash-mokri-text">MOK<span>RI</span></div>
+
+    <div class="splash-subtitle">
+      <span data-lang="ka" class="active">თქვენი ბიზნესისა და ციფრული ცხოვრების სანდო ტექნიკური პარტნიორი</span>
+      <span data-lang="en">Your trusted technology partner for business and personal digital life</span>
+      <span data-lang="ru">Ваш надёжный технологический партнёр для бизнеса и цифровой жизни</span>
+    </div>
+
+    <div class="splash-divider" aria-hidden="true">
+      <span class="splash-divider-line"></span>
+      <span class="splash-divider-dot"></span>
+      <span class="splash-divider-line"></span>
+    </div>
+
+    <div class="splash-panels">
+      <div class="splash-panel">
+        <div class="splash-panel-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M5 21c0-3.866 3.134-7 7-7s7 3.134 7 7"/>
+          </svg>
+        </div>
+        <div class="splash-panel-title">
+          <span data-lang="ka" class="active">ფიზიკური პირებისთვის</span>
+          <span data-lang="en">For Individuals</span>
+          <span data-lang="ru">Для частных лиц</span>
+        </div>
+        <div class="splash-panel-divider" aria-hidden="true"></div>
+        <div class="splash-panel-desc">
+          <span data-lang="ka" class="active">სწრაფი დისტანციური მომსახურება თქვენი კომპიუტერისთვის</span>
+          <span data-lang="en">Fast remote service for your computer</span>
+          <span data-lang="ru">Быстрое дистанционное обслуживание вашего компьютера</span>
+        </div>
+        <div class="splash-panel-accent" aria-hidden="true"></div>
+      </div>
+
+      <div class="splash-panel">
+        <div class="splash-panel-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+            <rect x="4" y="3" width="16" height="18" rx="1.5"/>
+            <path d="M9 8h.01M15 8h.01M9 12h.01M15 12h.01M9 16h.01M15 16h.01"/>
+            <path d="M10 21v-3.5h4V21"/>
+          </svg>
+        </div>
+        <div class="splash-panel-title">
+          <span data-lang="ka" class="active">იურიდიული პირებისთვის</span>
+          <span data-lang="en">For Business</span>
+          <span data-lang="ru">Для бизнеса</span>
+        </div>
+        <div class="splash-panel-divider" aria-hidden="true"></div>
+        <div class="splash-panel-desc">
+          <span data-lang="ka" class="active">გამართული IT ინფრასტრუქტურა — თქვენი ბიზნესის საიმედო საყრდენი</span>
+          <span data-lang="en">A well-tuned IT infrastructure — a reliable backbone for your business</span>
+          <span data-lang="ru">Налаженная IT-инфраструктура — надёжная опора для вашего бизнеса</span>
+        </div>
+        <div class="splash-panel-accent" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <div class="splash-divider" aria-hidden="true">
+      <span class="splash-divider-line"></span>
+      <span class="splash-divider-dot"></span>
+      <span class="splash-divider-line"></span>
+    </div>
+
+    <div class="splash-countdown">
+      <div class="splash-countdown-number" id="splashCountNum">5</div>
+      <div class="splash-countdown-label">
+        <span data-lang="ka" class="active">წამი</span>
+        <span data-lang="en">sec</span>
+        <span data-lang="ru">сек</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ——— HEADER / NAV BAR ——— -->
+<header class="lang-bar" id="langBar">
+  <a href="index.html" class="lang-bar-logo" aria-label="MOKRI - მთავარი">MOK<span>RI</span></a>
+
+  <nav class="header-nav" id="mainNav" aria-label="მთავარი ნავიგაცია">
+    <a href="individuals.html" class="header-nav-link" data-nav="individuals">
+      <span data-lang="ka" class="active">ფიზიკური პირები</span>
+      <span data-lang="en">Individuals</span>
+      <span data-lang="ru">Частные Лица</span>
+    </a>
+    <a href="business.html" class="header-nav-link" data-nav="business">
+      <span data-lang="ka" class="active">იურიდიული პირები</span>
+      <span data-lang="en">Business</span>
+      <span data-lang="ru">Бизнес</span>
+    </a>
+    <a href="about.html" class="header-nav-link" data-nav="about">
+      <span data-lang="ka" class="active">ჩვენს შესახებ</span>
+      <span data-lang="en">About Us</span>
+      <span data-lang="ru">О Нас</span>
+    </a>
+    <a href="contact.html" class="header-nav-link" data-nav="contact">
+      <span data-lang="ka" class="active">კონტაქტი</span>
+      <span data-lang="en">Contact</span>
+      <span data-lang="ru">Контакты</span>
+    </a>
+    <a href="https://shop.mokri.ge" target="_blank" rel="noopener noreferrer" class="header-nav-link shop-link" aria-label="Mokri Online Shop">
+      <span>shop.mokri.ge</span>
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="margin-left:4px;opacity:0.7" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6m0 0v6m0-6L10 14"/></svg>
+    </a>
+  </nav>
+
+  <div class="lang-switcher" role="group" aria-label="ენის არჩევა">
+    <button class="lang-btn active" type="button" data-lang-set="ka" aria-label="ქართული" aria-pressed="true">ქარ</button>
+    <button class="lang-btn" type="button" data-lang-set="en" aria-label="English" aria-pressed="false">ENG</button>
+    <button class="lang-btn" type="button" data-lang-set="ru" aria-label="Русский" aria-pressed="false">РУС</button>
+  </div>
+
+  <button class="nav-toggle" type="button" id="navToggle" aria-controls="mainNav" aria-expanded="false" aria-label="მენიუ">
+    <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <line x1="3" y1="12" x2="21" y2="12"/>
+      <line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+    <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <line x1="18" y1="6" x2="6" y2="18"/>
+      <line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+</header>
+<div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
+<!-- ——— FLOATING CALL ——— -->
+<a href="tel:+995555555555" class="float-btn call-float" title="Call" aria-label="Call +995 555 55 55 55">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+  </svg>
+</a>
+
+<!-- ——— FLOATING WHATSAPP ——— -->
+<a href="https://wa.me/995555555555" target="_blank" rel="noopener noreferrer" class="float-btn wa-float" title="WhatsApp" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- ——— FLOATING MESSENGER ——— -->
+<a href="https://m.me/mokri" target="_blank" rel="noopener noreferrer" class="float-btn msng-float" title="Messenger" aria-label="Messenger">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.498 1.744 6.617 4.472 8.652V24l4.086-2.242c1.09.301 2.246.464 3.442.464 6.627 0 12-4.974 12-11.111S18.627 0 12 0zm1.193 14.963l-3.056-3.259-5.963 3.259 6.559-6.963 3.13 3.259 5.889-3.259-6.559 6.963z"/>
+  </svg>
+</a>
+
+<!-- ——— FLOATING EMAIL ——— -->
+<a href="mailto:info@mokri.ge" class="float-btn email-float" title="Email" aria-label="Email">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+  </svg>
+</a>
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<section class="hero">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
+
+  <div class="hero-logo">
+    <svg viewBox="32 20 200 229" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MOKRI logo">
+      <path fill="#4D9BFD" d="M 137.340,84.450 L 126.800,84.450 L 126.800,28.860 L 132.070,24.010 L 137.340,28.860 Z"/>
+      <path fill="#FEFEFE" d="m 107.41338,34.955668 -0.35767,0.437814 c 10.17583,1.890611 14.92675,22.348411 2.13321,26.139342 -14.659273,4.170999 -29.184783,6.73287 -44.147423,9.881837 0.979928,12.75443 3.019275,25.327427 3.266655,38.157759 -8.194405,-0.94653 -17.081068,-2.57074 -25.285534,-3.90671 l -0.961073,-0.46846 C 40.161968,100.65892 36.68383,58.573194 35.938979,50.642822 59.022913,44.658243 83.971036,39.983182 107.41338,34.955668 Z"/>
+      <path fill="#FEFEFE" d="M 156.72661999999997,34.955668 L 157.08428999999998,35.393482000000006 C 146.90846,37.284093000000006 142.15753999999998,57.741893000000005 154.95108,61.532824000000005 C 169.61035299999998,65.703823 184.13586299999997,68.26569400000001 199.098503,71.41466100000001 C 198.11857499999996,84.16909100000001 196.079228,96.74208800000001 195.83184799999998,109.57242000000001 C 204.026253,108.62589000000001 212.912916,107.00168000000001 221.11738199999996,105.66571 L 222.07845499999996,105.19725000000001 C 223.97803199999998,100.65892 227.45617,58.573194 228.20102099999997,50.642822 C 205.11708699999997,44.658243 180.168964,39.983182 156.72661999999997,34.955668"/>
+      <path fill="#FEFEFE" d="m 81.703315,166.73046 c 2.847667,2.29348 4.981136,4.29882 7.632943,6.82529 9.218026,8.90624 18.972612,17.23622 28.435682,25.88988 l 0.20041,34.66093 c -15.91451,-14.41182 -31.973847,-30.13889 -47.960316,-44.08651 -1.928506,-1.19342 -5.624283,-4.90621 -7.192955,-6.65722 3.15284,-2.49979 16.808148,-14.21172 18.884236,-16.63237 z"/>
+      <path fill="#FEFEFE" d="M 182.43668499999998,166.73046 C 179.58901799999998,169.02393999999998 177.45554899999996,171.02928 174.803742,173.55575 C 165.585716,182.46199 155.83112999999997,190.79197 146.36805999999999,199.44563 L 146.16764999999998,234.10656 C 162.08216,219.69474 178.141497,203.96767 194.127966,190.02005 C 196.05647199999999,188.82663 199.752249,185.11384 201.320921,183.36283 C 198.16808099999997,180.86304 184.51277299999998,169.15111000000002 182.43668499999998,166.73046"/>
+      <path fill="#4D9BFD" d="m 81.506069,166.2002 c 3.081025,2.32316 5.389321,4.35447 8.258434,6.91366 -6.329597,4.95352 -15.015782,11.41588 -20.907769,16.67747 -2.086539,-1.20887 -6.08517,-4.96973 -7.782389,-6.74341 3.411203,-2.53217 18.185511,-14.39574 20.431724,-16.84772 z"/>
+      <path fill="#4D9BFD" d="M 182.633931,166.2002 C 179.552906,168.52336 177.24461,170.55467 174.375497,173.11386 C 180.705094,178.06737999999999 189.391279,184.52973999999998 195.283266,189.79133 C 197.36980499999999,188.58246 201.368436,184.8216 203.065655,183.04791999999998 C 199.654452,180.51574999999997 184.880144,168.65218 182.63393100000002,166.20019999999997 L 182.633931,166.2002"/>
+      <path fill="#FEFEFE" d="m 45.405026,132.79432 28.010084,0.0929 c 1.81071,8.66265 5.200596,26.39585 8.367269,33.88447 -2.110812,2.55247 -15.994512,14.90223 -19.200085,17.53815 -2.07098,-1.92607 -4.353124,-4.34913 -6.369461,-6.38961 C 53.558347,163.304 48.39665,147.72005 45.405026,132.79438 Z"/>
+      <path fill="#FEFEFE" d="M 218.734974,132.79432 L 190.72489,132.88721999999999 C 188.91418,141.54987 185.524294,159.28306999999998 182.357621,166.77168999999998 C 184.468433,169.32415999999998 198.35213299999998,181.67391999999998 201.557706,184.30983999999998 C 203.628686,182.38376999999997 205.91083,179.96070999999998 207.927167,177.92022999999998 C 210.581653,163.304 215.74335,147.72005 218.734974,132.79438 L 218.734974,132.79432"/>
+      <path fill="#FEFEFE" d="m 85.942101,115.7584 c 2.207668,-2.7737 5.637621,-6.03281 9.316773,-5.9578 10.636806,0.21555 11.718176,8.73323 10.392856,16.25334 10.23966,8.5332 17.10572,17.09657 26.34763,25.81083 4.02083,0.89324 7.26409,1.90805 9.43125,5.65086 3.99969,6.90623 0.21837,12.79505 -6.51821,15.43166 -5.17356,0.25953 -5.37346,-0.12071 -10.13839,-2.44865 -4.67952,-6.52082 -4.3132,-8.0426 -0.67012,-14.7669 -6.79036,-7.87879 -16.8882,-17.30782 -24.472823,-25.02709 -0.938725,0.0759 -1.879209,0.13277 -2.820576,0.16899 -5.020307,0.17934 -6.769188,-1.24674 -10.178877,-4.35239 -1.836934,-4.6326 -1.562187,-6.14834 -0.689513,-10.76285 z"/>
+      <path fill="#FEFEFE" d="M 178.197899,115.7584 C 175.990231,112.98469999999999 172.56027799999998,109.72559 168.881126,109.80059999999999 C 158.24432,110.01614999999998 157.16295,118.53383 158.48827,126.05393999999998 C 148.24860999999999,134.58713999999998 141.38254999999998,143.15051 132.14064,151.86477 C 128.11981,152.75800999999998 124.87654999999998,153.77282 122.70938999999998,157.51563 C 118.7097,164.42185999999998 122.49101999999999,170.31068 129.2276,172.94728999999998 C 134.40116,173.20682 134.60106,172.82657999999998 139.36599,170.49864 C 144.04550999999998,163.97782 143.67919,162.45604 140.03611,155.73174 C 146.82647,147.85295 156.92431,138.42392 164.508933,130.70465000000002 C 165.447658,130.78055 166.38814200000002,130.83742 167.329509,130.87364000000002 C 172.349816,131.05298000000002 174.09869700000002,129.62690000000003 177.508386,126.52125000000002 C 179.34532000000002,121.88865000000003 179.070573,120.37291000000002 178.197899,115.75840000000002 L 178.197899,115.7584"/>
+      <path fill="#4D9BFD" d="m 126.62447,170.89363 c -1.49911,0 5.9426,3.94347 10.92436,0.87452 0.1738,13.74284 -0.53982,29.28188 -0.40534,43.03704 0.0796,8.19182 -0.30188,16.44879 0.61107,24.59569 -1.99513,1.71268 -3.71708,4.12365 -5.65915,5.97457 l -5.63631,-6.35688 c -0.16649,-23.23258 -0.26001,-44.89587 0.16538,-68.12494 z"/>
+      <path fill="#4D9BFD" d="m 39.876509,114.84889 46.834912,-0.0571 c -1.621533,3.1706 -2.299488,6.59721 -0.251073,11.32844 -13.32096,-0.57412 -29.724519,-0.22209 -43.577889,-0.41756 z"/>
+      <path fill="#4D9BFD" d="M 224.263491,114.84889 L 177.42857899999998,114.79178999999999 C 179.05011199999998,117.96238999999998 179.72806699999998,121.389 177.67965199999998,126.12022999999999 C 191.000612,125.54611 207.404171,125.89814 221.257541,125.70267 L 224.263491,114.84889"/>
+    </svg>
+  </div>
+
+  <h1 class="hero-brand">MOK<span>RI</span></h1>
+
+  <div class="hero-tagline">
+    <span data-lang="ka" class="active">IT გადაწყვეტილებები · მხარდაჭერა · ინოვაცია</span>
+    <span data-lang="en">IT Solutions · Support · Innovation</span>
+    <span data-lang="ru">IT Решения · Поддержка · Инновации</span>
+  </div>
+
+  <p class="hero-desc">
+    <span data-lang="ka" class="active">თქვენი ბიზნესისა და ციფრული ცხოვრების სანდო ტექნიკური პარტნიორი</span>
+    <span data-lang="en">Your trusted technology partner for business and personal digital life</span>
+    <span data-lang="ru">Ваш надёжный технологический партнёр для бизнеса и цифровой жизни</span>
+  </p>
+</section>
+
+<!-- ═══════════════════════ AUDIENCES ═══════════════════════ -->
+<section class="audiences" aria-label="ჩვენი მომხმარებლები">
+  <div class="audiences-inner">
+
+    <article class="audience-card">
+      <div class="audience-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M5 21c0-3.866 3.134-7 7-7s7 3.134 7 7"/>
+        </svg>
+      </div>
+      <h2 class="audience-title">
+        <span data-lang="ka" class="active">ფიზიკური პირებისთვის</span>
+        <span data-lang="en">For Individuals</span>
+        <span data-lang="ru">Для частных лиц</span>
+      </h2>
+      <p class="audience-text">
+        <span data-lang="ka" class="active">გჭირდებათ ნებისმიერი სირთულის პროგრამის ინსტალაცია? შენელებული კომპიუტერის გაწმენდა და მაქსიმალური აჩქარება? პრინტერების, სკანერების და სხვა მოწყობილობების მიერთება? ჩვენ უსწრაფესად დაგეხმარებით!</span>
+        <span data-lang="en">Need to install software of any complexity? Clean up a slow computer for maximum speed? Connect printers, scanners and other devices? We'll help you in no time!</span>
+        <span data-lang="ru">Нужна установка программ любой сложности? Очистка тормозящего компьютера и максимальное ускорение? Подключение принтеров, сканеров и других устройств? Поможем максимально быстро!</span>
+      </p>
+      <div class="audience-actions">
+        <a href="individuals.html" class="audience-link">
+          <span data-lang="ka" class="active">გაიგე მეტი</span>
+          <span data-lang="en">Learn more</span>
+          <span data-lang="ru">Узнать больше</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+        </a>
+        <a href="https://wa.me/995555555555" target="_blank" rel="noopener noreferrer" class="audience-cta" aria-label="Write us on WhatsApp">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+          <span data-lang="ka" class="active">მოგვწერეთ WhatsApp ში</span>
+          <span data-lang="en">Write us on WhatsApp</span>
+          <span data-lang="ru">Напишите нам в WhatsApp</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="audience-card">
+      <div class="audience-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+          <rect x="4" y="3" width="16" height="18" rx="1.5"/>
+          <path d="M9 8h.01M15 8h.01M9 12h.01M15 12h.01M9 16h.01M15 16h.01"/>
+          <path d="M10 21v-3.5h4V21"/>
+        </svg>
+      </div>
+      <h2 class="audience-title">
+        <span data-lang="ka" class="active">იურიდიული პირებისთვის</span>
+        <span data-lang="en">For Business</span>
+        <span data-lang="ru">Для бизнеса</span>
+      </h2>
+      <p class="audience-text">
+        <span data-lang="ka" class="active">გჭირდებათ კომპანიის IT ინფრასტრუქტურის შეუფერხებელი მუშაობა? სერვერების, ქსელისა და უსაფრთხოების სისტემების გამართვა? თანამშრომლებისთვის სწრაფი და მუდმივი ტექნიკური მხარდაჭერა? ვუზრუნველყოფთ თქვენი ბიზნესის ტექნოლოგიურ სიმშვიდეს!</span>
+        <span data-lang="en">Need uninterrupted IT infrastructure for your company? Configuration of servers, networks and security systems? Fast and continuous technical support for your employees? We ensure the technological peace of your business!</span>
+        <span data-lang="ru">Нужна бесперебойная работа IT-инфраструктуры компании? Настройка серверов, сети и систем безопасности? Быстрая и постоянная техническая поддержка сотрудников? Обеспечим технологическое спокойствие вашему бизнесу!</span>
+      </p>
+      <div class="audience-actions">
+        <a href="business.html" class="audience-link">
+          <span data-lang="ka" class="active">გაიგე მეტი</span>
+          <span data-lang="en">Learn more</span>
+          <span data-lang="ru">Узнать больше</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+        </a>
+        <a href="tel:+995555555555" class="audience-cta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+          <span data-lang="ka" class="active">დაგვიკავშირდით</span>
+          <span data-lang="en">Contact Us</span>
+          <span data-lang="ru">Связаться с нами</span>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════ STATS ═══════════════════════ -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">≤30წთ</div>
+      <div class="stat-label">
+        <span data-lang="ka" class="active">სწრაფი პასუხი</span>
+        <span data-lang="en">Fast Response</span>
+        <span data-lang="ru">Быстрый Ответ</span>
+      </div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">SMB</div>
+      <div class="stat-label">
+        <span data-lang="ka" class="active">ბიზნეს ფოკუსი</span>
+        <span data-lang="en">Business Focus</span>
+        <span data-lang="ru">Фокус на Бизнесе</span>
+      </div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">90%</div>
+      <div class="stat-label">
+        <span data-lang="ka" class="active">დისტანციური დახმარება</span>
+        <span data-lang="en">Remote support</span>
+        <span data-lang="ru">Удалённая поддержка</span>
+      </div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">15+ წელი</div>
+      <div class="stat-label">
+        <span data-lang="ka" class="active">გუნდის გამოცდილება</span>
+        <span data-lang="en">Team Experience</span>
+        <span data-lang="ru">Опыт команды</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer>
+  <div class="footer-social">
+    <a href="https://facebook.com/mokri" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987H7.898V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+    </a>
+    <a href="https://instagram.com/mokri" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.326 3.608 1.301.975.975 1.24 2.242 1.301 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.326 2.633-1.301 3.608-.975.975-2.242 1.24-3.608 1.301-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.326-3.608-1.301-.975-.975-1.24-2.242-1.301-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.326-2.633 1.301-3.608C4.509 2.489 5.776 2.225 7.142 2.163 8.408 2.105 8.788 2.163 12 2.163zm0-2.163C8.741 0 8.333.013 7.053.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.053.013 8.333 0 8.741 0 12c0 3.259.013 3.667.072 4.947.085 1.856.601 3.698 1.942 5.039 1.341 1.341 3.183 1.857 5.039 1.942C8.333 23.987 8.741 24 12 24s3.667-.013 4.947-.072c1.856-.085 3.698-.601 5.039-1.942 1.341-1.341 1.857-3.183 1.942-5.039.059-1.28.072-1.688.072-4.947 0-3.259-.013-3.667-.072-4.947-.085-1.856-.601-3.698-1.942-5.039C20.645.673 18.803.157 16.947.072 15.667.013 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
+    <a href="https://linkedin.com/company/mokri" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="https://t.me/mokri" target="_blank" rel="noopener noreferrer" title="Telegram" aria-label="Telegram">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+    </a>
+    <a href="https://signal.me/#p/mokri" target="_blank" rel="noopener noreferrer" title="Signal" aria-label="Signal">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M12.001 0C5.373 0 0 5.372 0 12c0 2.114.554 4.1 1.524 5.827L.06 23.06l5.274-1.458A11.94 11.94 0 0012 24c6.628 0 12-5.373 12-12S18.629 0 12.001 0zm.065 3.77a8.29 8.29 0 014.24 1.163l.49.3-.306.488a6.793 6.793 0 011.035 3.664 6.851 6.851 0 01-6.85 6.851 6.793 6.793 0 01-3.54-.986l-.49-.3.306-.49A6.844 6.844 0 015.215 10.3a6.851 6.851 0 016.85-6.53zm0 1.5a5.352 5.352 0 00-5.35 5.03 5.289 5.289 0 00.9 3.022l-1.213 3.35 3.378-1.188A5.35 5.35 0 1012.066 5.27zm-2.94 2.02c.134 0 .269.003.396.008.16.006.337.015.506.41.2.464.638 1.558.694 1.671.057.112.095.244.019.394-.076.15-.114.244-.228.375-.114.13-.24.292-.343.393-.114.113-.232.235-.1.46.133.228.59.972 1.267 1.574.87.774 1.603 1.013 1.831 1.126.228.113.36.094.493-.057.133-.15.57-.664.722-.892.151-.228.303-.19.51-.113.208.076 1.32.623 1.547.736.228.113.38.17.437.265.057.094.057.54-.133 1.063-.19.522-.995.988-1.395 1.045-.38.053-.848.075-1.368-.086a12.61 12.61 0 01-1.238-.457c-2.18-.94-3.604-3.14-3.71-3.286-.108-.147-.881-1.172-.881-2.235 0-1.063.558-1.585.757-1.802.198-.218.434-.273.578-.273z"/></svg>
+    </a>
+    <a href="https://youtube.com/@mokri" target="_blank" rel="noopener noreferrer" title="YouTube" aria-label="YouTube">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+    </a>
+  </div>
+</footer>
+
+<script>
+  'use strict';
+
+  (function() {
+    const ALLOWED_LANGS = ['ka', 'en', 'ru'];
+    const STORAGE_KEY = 'mokri-lang';
+    const SPLASH_KEY = 'mokri-splash-seen';
+    let currentLang = 'ka';
+
+    /* ——— Safe localStorage helpers (handle disabled / quota) ——— */
+    function safeGet(storage, key) {
+      try { return storage.getItem(key); } catch (e) { return null; }
+    }
+    function safeSet(storage, key, val) {
+      try { storage.setItem(key, val); } catch (e) { /* quota / disabled */ }
+    }
+
+    /* ——— Language switcher ——— */
+    function setLang(lang) {
+      if (!ALLOWED_LANGS.includes(lang)) return;
+      currentLang = lang;
+
+      document.querySelectorAll('[data-lang]').forEach(function(el) {
+        el.classList.toggle('active', el.getAttribute('data-lang') === lang);
+      });
+
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        const isActive = btn.getAttribute('data-lang-set') === lang;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+
+      document.documentElement.lang = lang;
+      safeSet(localStorage, STORAGE_KEY, lang);
+    }
+
+    /* Restore saved language (before binding events to avoid flicker) */
+    const saved = safeGet(localStorage, STORAGE_KEY);
+    if (saved && ALLOWED_LANGS.includes(saved)) setLang(saved);
+
+    /* Event delegation for language buttons (no inline onclick = better CSP) */
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('[data-lang-set]');
+      if (!btn) return;
+      const lang = btn.getAttribute('data-lang-set');
+      if (ALLOWED_LANGS.includes(lang)) setLang(lang);
+    });
+
+    /* ——— Highlight active nav link ——— */
+    (function() {
+      const path = window.location.pathname.split('/').pop();
+      const page = (path || 'index').replace(/\.html?$/i, '') || 'index';
+      document.querySelectorAll('.header-nav-link[data-nav]').forEach(function(link) {
+        if (link.getAttribute('data-nav') === page) link.classList.add('active');
+      });
+    })();
+
+    /* ——— Mobile nav toggle ——— */
+    (function() {
+      const bar = document.getElementById('langBar');
+      const toggle = document.getElementById('navToggle');
+      const nav = document.getElementById('mainNav');
+      const backdrop = document.getElementById('navBackdrop');
+      if (!bar || !toggle || !nav) return;
+
+      function openNav() {
+        bar.classList.add('is-open');
+        toggle.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('nav-open');
+      }
+      function closeNav() {
+        bar.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('nav-open');
+      }
+      function isOpen() { return bar.classList.contains('is-open'); }
+
+      toggle.addEventListener('click', function() {
+        if (isOpen()) closeNav(); else openNav();
+      });
+      if (backdrop) backdrop.addEventListener('click', closeNav);
+
+      // Close on link click (mobile only)
+      nav.addEventListener('click', function(e) {
+        if (e.target.closest('a')) closeNav();
+      });
+
+      // Close on ESC
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && isOpen()) closeNav();
+      });
+
+      // Close on resize back to desktop
+      let resizeTimer;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+          if (window.innerWidth > 900 && isOpen()) closeNav();
+        }, 100);
+      });
+    })();
+
+    /* ——— Audience cards: reveal when scrolled into view ——— */
+    (function() {
+      const cards = document.querySelectorAll('.audience-card');
+      if (!cards.length) return;
+
+      if (!('IntersectionObserver' in window)) {
+        cards.forEach(function(c) { c.classList.add('is-visible'); });
+        return;
+      }
+
+      const obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+
+      cards.forEach(function(c) { obs.observe(c); });
+    })();
+
+    /* ——— Splash screen: dismiss after 5 seconds with countdown ——— */
+    (function() {
+      const splash = document.getElementById('splash');
+      if (!splash) {
+        document.body.classList.remove('splash-open');
+        return;
+      }
+
+      // If splash already seen this session, skip immediately
+      if (safeGet(sessionStorage, SPLASH_KEY)) {
+        splash.remove();
+        document.body.classList.remove('splash-open');
+        return;
+      }
+      safeSet(sessionStorage, SPLASH_KEY, '1');
+
+      let countInterval = null;
+      let timer = null;
+      let dismissed = false;
+
+      function dismissSplash() {
+        if (dismissed) return;
+        dismissed = true;
+        if (countInterval) clearInterval(countInterval);
+        if (timer) clearTimeout(timer);
+        splash.classList.add('splash-hide');
+        document.body.classList.remove('splash-open');
+        splash.addEventListener('transitionend', function onEnd() {
+          splash.removeEventListener('transitionend', onEnd);
+          if (splash.parentNode) splash.parentNode.removeChild(splash);
+        }, { once: true });
+        // Fallback in case transitionend doesn't fire
+        setTimeout(function() {
+          if (splash.parentNode) splash.parentNode.removeChild(splash);
+        }, 1200);
+        document.removeEventListener('keydown', onKey);
+      }
+
+      function onKey(e) {
+        if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          dismissSplash();
+        }
+      }
+
+      let remaining = 5;
+      const countEl = document.getElementById('splashCountNum');
+      countInterval = setInterval(function() {
+        remaining -= 1;
+        if (countEl) countEl.textContent = remaining > 0 ? String(remaining) : '0';
+        if (remaining <= 0) clearInterval(countInterval);
+      }, 1000);
+
+      timer = setTimeout(dismissSplash, 5000);
+      splash.addEventListener('click', dismissSplash);
+      document.addEventListener('keydown', onKey);
+    })();
+
+    /* ——— Viewport height fix for mobile browsers ——— */
+    /* Some older mobile browsers don't support 100dvh. Set a CSS var as fallback. */
+    (function() {
+      function setVh() {
+        document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');
+      }
+      setVh();
+      let vhTimer;
+      window.addEventListener('resize', function() {
+        clearTimeout(vhTimer);
+        vhTimer = setTimeout(setVh, 100);
+      });
+      window.addEventListener('orientationchange', setVh);
+    })();
+  })();
+</script>
+</body>
+</html>

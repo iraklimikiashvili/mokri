@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline'; connect-src https://formspree.io; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io;">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>კონტაქტი — MOKRI IT</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+Georgian:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A1728;
+    --bg2: #0d1e35;
+    --bg3: #0f2240;
+    --navy: #1A3B6C;
+    --blue: #4D9BFD;
+    --blue-dim: rgba(77,155,253,0.15);
+    --blue-glow: rgba(77,155,253,0.35);
+    --white: #FEFEFE;
+    --white-dim: rgba(254,254,254,0.65);
+    --white-faint: rgba(254,254,254,0.08);
+    --border: rgba(77,155,253,0.2);
+    --error: #ff5577;
+    --success: #25D366;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'EB Garamond', Georgia, serif;
+    overflow-x: hidden;
+    line-height: 1.7;
+    padding-top: 68px;
+  }
+
+  body::before {
+    content:'';
+    position:fixed; inset:0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events:none; z-index:0; opacity:.35;
+  }
+
+  /* ——— HEADER ——— */
+  .lang-bar {
+    position: fixed; top:0; right:0; left:0; z-index:1000;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 24px;
+    padding: 0 36px;
+    height: 68px;
+    background: rgba(10,23,40,0.95);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .lang-bar-logo {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 26px;
+    letter-spacing: 6px;
+    color: var(--white);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+  }
+  .lang-bar-logo:hover { opacity: 0.8; }
+  .lang-bar-logo span { color: var(--blue); }
+
+  .header-nav {
+    display: flex; justify-content: center;
+    align-items: center; gap: 4px;
+  }
+
+  .header-nav-link {
+    position: relative; padding: 7px 14px;
+    font-family: 'Noto Sans Georgian', sans-serif;
+    font-size: 12.5px; font-weight: 600;
+    letter-spacing: 0.3px;
+    color: rgba(254,254,254,0.7);
+    text-decoration: none; border-radius: 6px;
+    transition: all 0.22s ease; white-space: nowrap;
+  }
+  .header-nav-link::after {
+    content:''; position:absolute; bottom:3px; left:50%;
+    transform: translateX(-50%) scaleX(0);
+    width:60%; height:1.5px; background: var(--blue);
+    border-radius:2px; transition: transform 0.22s ease;
+  }
+  .header-nav-link:hover { color:var(--white); background:rgba(77,155,253,0.08); }
+  .header-nav-link:hover::after { transform: translateX(-50%) scaleX(1); }
+  .header-nav-link.active { color:var(--blue); background:rgba(77,155,253,0.1); }
+  .header-nav-link.shop-link {
+    color:var(--blue); border:1px solid rgba(77,155,253,0.35);
+    margin-left:8px; font-size:11.5px; letter-spacing:1px;
+  }
+  .header-nav-link.shop-link:hover { background:var(--blue); color:var(--bg); box-shadow:0 0 18px var(--blue-glow); }
+  .header-nav-link.shop-link::after { display:none; }
+
+  .lang-switcher {
+    display:flex; gap:4px;
+    background:var(--white-faint); border:1px solid var(--border);
+    border-radius:6px; padding:3px;
+  }
+  .lang-btn {
+    padding:5px 13px;
+    font-family:'Orbitron',sans-serif; font-size:9.5px; font-weight:700;
+    letter-spacing:2px; border:none; background:transparent;
+    color:var(--white-dim); border-radius:4px; cursor:pointer; transition:all 0.25s;
+  }
+  .lang-btn.active { background:var(--blue); color:var(--bg); }
+
+  .nav-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--white);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .nav-toggle:hover { background: rgba(77,155,253,0.1); border-color: var(--blue); }
+  .nav-toggle svg { width: 20px; height: 20px; }
+  .nav-toggle .icon-close { display: none; }
+  .nav-toggle[aria-expanded="true"] .icon-open { display: none; }
+  .nav-toggle[aria-expanded="true"] .icon-close { display: block; }
+
+  @media(max-width:860px) {
+    .header-nav { gap: 2px; }
+    .header-nav-link { padding: 6px 9px; font-size: 11px; }
+    .header-nav-link.shop-link { margin-left: 4px; }
+  }
+
+  @media(max-width:900px) {
+    .lang-bar { grid-template-columns: auto 1fr auto auto; }
+    .header-nav {
+      position: fixed;
+      top: 68px;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 4px;
+      padding: 16px 20px 24px;
+      background: rgba(10,23,40,0.98);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      max-height: calc(100dvh - 68px);
+      overflow-y: auto;
+      z-index: 999;
+    }
+    .lang-bar.is-open .header-nav {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .header-nav-link {
+      padding: 12px 14px;
+      font-size: 14px;
+      text-align: left;
+      border-radius: 8px;
+    }
+    .header-nav-link::after { display: none; }
+    .header-nav-link.shop-link { margin-left: 0; margin-top: 6px; text-align: center; }
+    .nav-toggle { display: inline-flex; }
+    .nav-backdrop {
+      position: fixed;
+      inset: 68px 0 0 0;
+      background: rgba(0,0,0,0.5);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 998;
+    }
+    .lang-bar.is-open ~ .nav-backdrop { opacity: 1; pointer-events: auto; }
+  }
+
+  @media(max-width:480px) {
+    .lang-bar { padding: 0 14px; gap: 8px; }
+    .lang-bar-logo { font-size: 20px; letter-spacing: 4px; }
+    .lang-btn { padding: 5px 9px; font-size: 9px; letter-spacing: 1.4px; }
+  }
+
+  /* ——— HERO ——— */
+  .hero {
+    position:relative; min-height:38vh;
+    display:flex; flex-direction:column;
+    justify-content:center; align-items:center;
+    text-align:center;
+    padding: 80px 80px 60px;
+    overflow:hidden;
+  }
+
+  .hero::before {
+    content:'';
+    position:absolute; inset:0;
+    background:
+      linear-gradient(rgba(77,155,253,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(77,155,253,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-glow {
+    position:absolute; width:600px; height:400px;
+    background: radial-gradient(ellipse, rgba(77,155,253,0.1) 0%, transparent 65%);
+    top:50%; right:-50px; transform:translateY(-50%);
+    pointer-events:none;
+  }
+
+  .hero-eyebrow {
+    position:relative;
+    font-family:'Orbitron',sans-serif; font-size:12px;
+    font-weight:700; letter-spacing:4px; color:var(--blue);
+    text-transform:uppercase; margin-bottom:20px;
+    display:flex; align-items:center; gap:12px;
+    justify-content:center;
+  }
+  .hero-eyebrow::before { content:''; width:32px; height:1px; background:var(--blue); }
+  .hero-eyebrow::after  { content:''; width:32px; height:1px; background:var(--blue); }
+
+  .hero-title {
+    position:relative;
+    font-family:'Orbitron',sans-serif; font-weight:900;
+    font-size: clamp(22px, 3.5vw, 42px);
+    letter-spacing:2px; line-height:1.1;
+    margin-bottom:28px;
+  }
+  .hero-title span { color:var(--blue); }
+
+  .hero-desc {
+    position:relative; max-width:640px;
+    font-size:16px; color:var(--white-dim);
+    line-height:1.8;
+    font-family:'EB Garamond',Georgia,serif;
+    margin-left:auto; margin-right:auto;
+  }
+
+  /* ——— SECTION HEADERS ——— */
+  .section-eyebrow {
+    font-family:'Orbitron',sans-serif; font-size:12px;
+    font-weight:700; letter-spacing:4px; color:var(--blue);
+    text-transform:uppercase; margin-bottom:16px;
+    display:flex; align-items:center; gap:12px;
+    justify-content:center;
+  }
+  .section-eyebrow::before { content:''; width:32px; height:1px; background:var(--blue); }
+  .section-eyebrow::after  { content:''; width:32px; height:1px; background:var(--blue); }
+
+  .section-title {
+    font-family:'Orbitron',sans-serif; font-weight:900;
+    font-size:clamp(20px, 2.8vw, 32px); letter-spacing:2px;
+    margin-bottom:48px; line-height:1.2;
+    text-align:center;
+  }
+  .section-title span { color:var(--blue); }
+
+  /* ——— CONTACT METHODS ——— */
+  .contacts { position:relative; z-index:1; background:var(--bg2); padding:80px 80px; text-align:center; }
+  .contacts-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; text-align:left; }
+  @media(max-width:900px){ .contacts-grid { grid-template-columns:1fr 1fr; } }
+  @media(max-width:520px){ .contacts-grid { grid-template-columns:1fr; } .hero,.contacts,.form-section { padding-left:24px; padding-right:24px; } }
+
+  .contact-card {
+    background: linear-gradient(145deg, rgba(77,155,253,0.08) 0%, rgba(254,254,254,0.03) 100%);
+    border:1px solid var(--border);
+    border-top:2px solid rgba(77,155,253,0.35);
+    border-radius:14px; padding:32px 24px;
+    text-align:center; text-decoration:none; color:inherit;
+    display:flex; flex-direction:column; align-items:center;
+    opacity:0; transform:translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s, box-shadow 0.3s;
+  }
+  .contact-card:hover {
+    border-color:rgba(77,155,253,0.55);
+    border-top-color:var(--blue);
+    box-shadow:0 10px 40px rgba(77,155,253,0.14);
+    transform:translateY(-4px) !important;
+  }
+
+  .contact-icon {
+    width:56px; height:56px;
+    background: linear-gradient(135deg, rgba(77,155,253,0.22) 0%, rgba(77,155,253,0.08) 100%);
+    border:1px solid rgba(77,155,253,0.45);
+    border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:18px;
+    box-shadow: 0 4px 16px rgba(77,155,253,0.12);
+  }
+  .contact-icon svg { width:26px; height:26px; fill:none; stroke:var(--blue); stroke-width:2; }
+  .contact-label { font-family:'Orbitron',sans-serif; font-size:10px; font-weight:700; letter-spacing:1.5px; color:var(--blue); margin-bottom:10px; text-transform:uppercase; }
+  .contact-value { font-family:'EB Garamond',Georgia,serif; font-size:16px; color:var(--white); line-height:1.5; word-break:break-word; }
+  .contact-sub { font-size:12px; color:var(--white-dim); margin-top:6px; }
+
+  /* ——— HOURS BANNER ——— */
+  .hours-banner { position:relative; z-index:1; background:var(--bg); padding:40px 80px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .hours-inner { max-width:1040px; margin:0 auto; display:flex; align-items:center; justify-content:center; gap:32px; flex-wrap:wrap; text-align:center; }
+  .hours-block { display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .hours-block-label { font-family:'Orbitron',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; color:var(--blue); text-transform:uppercase; }
+  .hours-block-value { font-family:'EB Garamond',Georgia,serif; font-size:17px; color:var(--white); }
+  .hours-divider { width:1px; height:32px; background:var(--border); }
+  @media(max-width:700px){ .hours-divider { display:none; } }
+
+  /* ——— FORM ——— */
+  .form-section { position:relative; z-index:1; background:var(--bg2); padding:80px 80px; }
+  .form-wrap { max-width:680px; margin:0 auto; }
+  .form-grid { display:grid; gap:18px; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media(max-width:600px){ .form-row { grid-template-columns:1fr; } }
+  .field-label { font-family:'Orbitron',sans-serif; font-size:10px; font-weight:700; letter-spacing:1.5px; color:var(--blue); text-transform:uppercase; margin-bottom:8px; display:block; }
+  .field { width:100%; padding:14px 16px; background:var(--white-faint); border:1px solid var(--border); border-radius:8px; color:var(--white); font-family:'Noto Sans Georgian',sans-serif; font-size:14px; transition:border-color 0.22s, background 0.22s; }
+  .field::placeholder { color:rgba(254,254,254,0.35); }
+  .field:focus { outline:none; border-color:var(--blue); background:rgba(77,155,253,0.05); }
+  .field.error { border-color:var(--error); }
+  textarea.field { resize:vertical; min-height:130px; font-family:'EB Garamond',Georgia,serif; line-height:1.6; }
+  .form-error { font-size:12px; color:var(--error); margin-top:4px; min-height:16px; display:none; }
+  .form-error.active { display:block; }
+  .submit-btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:16px 36px; background:var(--blue); color:var(--bg); font-family:'Orbitron',sans-serif; font-size:11px; font-weight:700; letter-spacing:2.5px; border-radius:6px; border:1px solid transparent; text-transform:uppercase; cursor:pointer; transition:all 0.25s; margin-top:8px; }
+  .submit-btn:hover { background:transparent; color:var(--blue); border-color:var(--blue); box-shadow:0 0 24px var(--blue-glow); }
+  .submit-btn:disabled { opacity:0.5; cursor:not-allowed; }
+  .form-status { margin-top:16px; padding:14px 18px; border-radius:8px; font-size:14px; display:none; }
+  .form-status.active { display:block; }
+  .form-status.success { background:rgba(37,211,102,0.1); border:1px solid rgba(37,211,102,0.35); color:var(--success); }
+  .form-status.error-msg { background:rgba(255,85,119,0.08); border:1px solid rgba(255,85,119,0.35); color:var(--error); }
+
+  /* ——— FOOTER ——— */
+  footer {
+    background: rgba(0,0,0,0.4);
+    border-top: 1px solid var(--border);
+    padding: 12px 40px;
+    text-align: center;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .footer-copy {
+    font-size: 11px;
+    color: var(--white-dim);
+    opacity: 0.5;
+    margin: 0;
+    text-align: center;
+  }
+  .footer-social {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 4px 0;
+  }
+  .footer-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid var(--border);
+    color: var(--white-dim);
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    text-decoration: none;
+  }
+  .footer-social a:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .footer-social svg { width: 17px; height: 17px; fill: currentColor; }
+  [data-lang] { display:none; }
+  [data-lang].active { display:block; }
+  .lang-inline[data-lang] { display:none; }
+  .lang-inline[data-lang].active { display:inline; }
+
+  /* ——— FLOATING CONTACT BUTTONS ——— */
+  .float-btn {
+    position: fixed;
+    right: 32px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .float-btn:hover { transform: scale(1.1); }
+  .float-btn svg { fill: white; }
+
+  .call-float {
+    bottom: 248px;
+    background: #FF9500;
+    box-shadow: 0 8px 32px rgba(255,149,0,0.4);
+  }
+  .call-float:hover { box-shadow: 0 8px 48px rgba(255,149,0,0.7); }
+  .call-float svg { width: 28px; height: 28px; }
+
+  .wa-float {
+    bottom: 176px;
+    background: #25d366;
+    box-shadow: 0 8px 32px rgba(37,211,102,0.4);
+    animation: waPulse 2.5s ease-in-out infinite;
+  }
+  .wa-float:hover { box-shadow: 0 8px 48px rgba(37,211,102,0.7); }
+  .wa-float svg { width: 30px; height: 30px; }
+
+  .msng-float {
+    bottom: 104px;
+    background: #0084FF;
+    box-shadow: 0 8px 32px rgba(0,132,255,0.4);
+  }
+  .msng-float:hover { box-shadow: 0 8px 48px rgba(0,132,255,0.7); }
+  .msng-float svg { width: 28px; height: 28px; }
+
+  .email-float {
+    bottom: 32px;
+    background: #4D9BFD;
+    box-shadow: 0 8px 32px rgba(77,155,253,0.4);
+  }
+  .email-float:hover { box-shadow: 0 8px 48px rgba(77,155,253,0.7); }
+  .email-float svg { width: 28px; height: 28px; }
+
+  @keyframes waPulse {
+    0%, 100% { box-shadow: 0 8px 32px rgba(37,211,102,0.4); }
+    50%      { box-shadow: 0 8px 48px rgba(37,211,102,0.7); }
+  }
+
+  @media (max-width: 660px) {
+    .float-btn { width: 50px; height: 50px; right: 16px; }
+    .wa-float { bottom: 138px; }
+    .msng-float { bottom: 78px; }
+    .email-float { bottom: 18px; }
+    .call-float { bottom: 198px; }
+    .wa-float svg { width: 26px; height: 26px; }
+    .msng-float svg, .email-float svg, .call-float svg { width: 24px; height: 24px; }
+  }
+  @media (max-height: 600px) {
+    .float-btn { width: 44px; height: 44px; }
+    .wa-float { bottom: 116px; }
+    .msng-float { bottom: 64px; }
+    .email-float { bottom: 12px; }
+    .call-float { bottom: 168px; }
+    .wa-float svg { width: 22px; height: 22px; }
+    .msng-float svg, .email-float svg, .call-float svg { width: 20px; height: 20px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wa-float { animation: none; }
+  }
+</style>
+<link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="lang-bar" id="langBar">
+  <a href="index.html" class="lang-bar-logo" aria-label="MOKRI - მთავარი">MOK<span>RI</span></a>
+  <nav class="header-nav" id="mainNav" aria-label="მთავარი ნავიგაცია">
+    <a href="individuals.html" class="header-nav-link" data-nav="individuals"><span data-lang="ka" class="active">ფიზიკური პირები</span><span data-lang="en">Individuals</span><span data-lang="ru">Частные Лица</span></a>
+    <a href="business.html" class="header-nav-link" data-nav="business"><span data-lang="ka" class="active">იურიდიული პირები</span><span data-lang="en">Business</span><span data-lang="ru">Бизнес</span></a>
+    <a href="about.html" class="header-nav-link" data-nav="about"><span data-lang="ka" class="active">ჩვენს შესახებ</span><span data-lang="en">About Us</span><span data-lang="ru">О Нас</span></a>
+    <a href="contact.html" class="header-nav-link" data-nav="contact"><span data-lang="ka" class="active">კონტაქტი</span><span data-lang="en">Contact</span><span data-lang="ru">Контакты</span></a>
+    <a href="https://shop.mokri.ge" target="_blank" rel="noopener noreferrer" class="header-nav-link shop-link" aria-label="Mokri Online Shop">
+      <span>shop.mokri.ge</span>
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="margin-left:4px;opacity:0.7"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6m0 0v6m0-6L10 14"/></svg>
+    </a>
+  </nav>
+  <div class="lang-switcher" role="group" aria-label="ენის არჩევა">
+    <button class="lang-btn active" type="button" data-lang-set="ka" aria-label="ქართული" aria-pressed="true">ქარ</button>
+    <button class="lang-btn" type="button" data-lang-set="en" aria-label="English" aria-pressed="false">ENG</button>
+    <button class="lang-btn" type="button" data-lang-set="ru" aria-label="Русский" aria-pressed="false">РУС</button>
+  </div>
+  <button class="nav-toggle" type="button" id="navToggle" aria-controls="mainNav" aria-expanded="false" aria-label="მენიუ">
+    <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <line x1="3" y1="12" x2="21" y2="12"/>
+      <line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+    <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <line x1="18" y1="6" x2="6" y2="18"/>
+      <line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+</header>
+<div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
+<!-- ——— FLOATING CALL ——— -->
+<a href="tel:+995555555555" class="float-btn call-float" title="Call" aria-label="Call +995 555 55 55 55">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+  </svg>
+</a>
+
+<!-- ——— FLOATING WHATSAPP ——— -->
+<a href="https://wa.me/995555555555" target="_blank" rel="noopener noreferrer" class="float-btn wa-float" title="WhatsApp" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- ——— FLOATING MESSENGER ——— -->
+<a href="https://m.me/mokri" target="_blank" rel="noopener noreferrer" class="float-btn msng-float" title="Messenger" aria-label="Messenger">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.498 1.744 6.617 4.472 8.652V24l4.086-2.242c1.09.301 2.246.464 3.442.464 6.627 0 12-4.974 12-11.111S18.627 0 12 0zm1.193 14.963l-3.056-3.259-5.963 3.259 6.559-6.963 3.13 3.259 5.889-3.259-6.559 6.963z"/>
+  </svg>
+</a>
+
+<!-- ——— FLOATING EMAIL ——— -->
+<a href="mailto:info@mokri.ge" class="float-btn email-float" title="Email" aria-label="Email">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+  </svg>
+</a>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-eyebrow"><span data-lang="ka" class="active">კონტაქტი</span><span data-lang="en">Contact</span><span data-lang="ru">Контакты</span></div>
+  <h1 class="hero-title">
+    <span data-lang="ka" class="active">დაგვიკავშირდით <span style="color:var(--blue)">დღესვე</span></span>
+    <span data-lang="en">Get in <span style="color:var(--blue)">Touch</span></span>
+    <span data-lang="ru">Свяжитесь <span style="color:var(--blue)">с Нами</span></span>
+  </h1>
+  <p class="hero-desc">
+    <span data-lang="ka" class="active">ნებისმიერი IT საკითხის შესახებ — მოგვწერეთ, დაგვირეკეთ ან მოგვადექით WhatsApp-ზე. ≤30 წუთში გიპასუხებთ სამუშაო საათებში.</span>
+    <span data-lang="en">For any IT question — message us, call us, or reach out on WhatsApp. We respond in ≤30 minutes during business hours.</span>
+    <span data-lang="ru">По любому IT-вопросу — напишите, позвоните или свяжитесь через WhatsApp. Отвечаем за ≤30 минут в рабочее время.</span>
+  </p>
+</section>
+
+<!-- CONTACT METHODS -->
+<section class="contacts">
+  <div class="section-eyebrow"><span data-lang="ka" class="active">კავშირის მეთოდები</span><span data-lang="en">Reach Us</span><span data-lang="ru">Способы связи</span></div>
+  <h2 class="section-title">
+    <span data-lang="ka" class="active">აირჩიეთ <span>თქვენთვის მოსახერხებელი</span></span>
+    <span data-lang="en">Choose What <span>Works for You</span></span>
+    <span data-lang="ru">Выберите <span>удобный способ</span></span>
+  </h2>
+
+  <div class="contacts-grid">
+    <!-- Phone -->
+    <a href="tel:+995555555555" class="contact-card">
+      <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></div>
+      <div class="contact-label"><span data-lang="ka" class="active">ტელეფონი</span><span data-lang="en">Phone</span><span data-lang="ru">Телефон</span></div>
+      <div class="contact-value">+995 555 55 55 55</div>
+      <div class="contact-sub"><span data-lang="ka" class="active">დარეკეთ პირდაპირ</span><span data-lang="en">Call us directly</span><span data-lang="ru">Звоните напрямую</span></div>
+    </a>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/995555555555" target="_blank" rel="noopener noreferrer" class="contact-card">
+      <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div>
+      <div class="contact-label">WhatsApp</div>
+      <div class="contact-value">+995 555 55 55 55</div>
+      <div class="contact-sub"><span data-lang="ka" class="active">სწრაფი პასუხი</span><span data-lang="en">Fast response</span><span data-lang="ru">Быстрый ответ</span></div>
+    </a>
+
+    <!-- Messenger -->
+    <a href="https://m.me/mokri" target="_blank" rel="noopener noreferrer" class="contact-card">
+      <div class="contact-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.498 1.744 6.617 4.472 8.652V24l4.086-2.242c1.09.301 2.246.464 3.442.464 6.627 0 12-4.974 12-11.111S18.627 0 12 0zm1.193 14.963l-3.056-3.259-5.963 3.259 6.559-6.963 3.13 3.259 5.889-3.259-6.559 6.963z"/></svg></div>
+      <div class="contact-label">Messenger</div>
+      <div class="contact-value">mokri</div>
+      <div class="contact-sub"><span data-lang="ka" class="active">სწრაფი პასუხი</span><span data-lang="en">Fast response</span><span data-lang="ru">Быстрый ответ</span></div>
+    </a>
+
+    <!-- Email -->
+    <a href="mailto:info@mokri.ge" class="contact-card">
+      <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg></div>
+      <div class="contact-label"><span data-lang="ka" class="active">ელ-ფოსტა</span><span data-lang="en">Email</span><span data-lang="ru">Эл. почта</span></div>
+      <div class="contact-value">info@mokri.ge</div>
+      <div class="contact-sub"><span data-lang="ka" class="active">დაწვრილებითი მოთხოვნები</span><span data-lang="en">Detailed inquiries</span><span data-lang="ru">Подробные запросы</span></div>
+    </a>
+
+    <!-- Address -->
+    <div class="contact-card" style="cursor:default">
+      <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg></div>
+      <div class="contact-label"><span data-lang="ka" class="active">მისამართი</span><span data-lang="en">Address</span><span data-lang="ru">Адрес</span></div>
+      <div class="contact-value"><span data-lang="ka" class="active">თბილისი, საქართველო</span><span data-lang="en">Tbilisi, Georgia</span><span data-lang="ru">Тбилиси, Грузия</span></div>
+      <div class="contact-sub"><span data-lang="ka" class="active">გასვლითი სერვისი</span><span data-lang="en">On-site service</span><span data-lang="ru">Выездное обслуживание</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS BANNER -->
+<div class="hours-banner">
+  <div class="hours-inner">
+    <div class="hours-block">
+      <div class="hours-block-label"><span data-lang="ka" class="active">სამუშაო დღეები</span><span data-lang="en">Weekdays</span><span data-lang="ru">Будни</span></div>
+      <div class="hours-block-value">09:00 — 19:00</div>
+    </div>
+    <div class="hours-divider"></div>
+    <div class="hours-block">
+      <div class="hours-block-label"><span data-lang="ka" class="active">შაბათი</span><span data-lang="en">Saturday</span><span data-lang="ru">Суббота</span></div>
+      <div class="hours-block-value">10:00 — 16:00</div>
+    </div>
+    <div class="hours-divider"></div>
+    <div class="hours-block">
+      <div class="hours-block-label"><span data-lang="ka" class="active">გადაუდებელი</span><span data-lang="en">Emergency</span><span data-lang="ru">Срочно</span></div>
+      <div class="hours-block-value">24/7</div>
+    </div>
+    <div class="hours-divider"></div>
+    <div class="hours-block">
+      <div class="hours-block-label"><span data-lang="ka" class="active">საშუალო პასუხი</span><span data-lang="en">Avg Response</span><span data-lang="ru">Ответ</span></div>
+      <div class="hours-block-value">≤ 30 <span data-lang="ka" class="active lang-inline">წთ</span><span data-lang="en" class="lang-inline">min</span><span data-lang="ru" class="lang-inline">мин</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT FORM -->
+<section class="form-section">
+  <div class="form-wrap">
+    <div class="section-eyebrow"><span data-lang="ka" class="active">საკონტაქტო ფორმა</span><span data-lang="en">Contact Form</span><span data-lang="ru">Форма обратной связи</span></div>
+    <h2 class="section-title">
+      <span data-lang="ka" class="active">დაგვიწერეთ <span>შეტყობინება</span></span>
+      <span data-lang="en">Send Us a <span>Message</span></span>
+      <span data-lang="ru">Напишите <span>нам</span></span>
+    </h2>
+
+    <form id="contactForm" class="form-grid" novalidate>
+      <div class="form-row">
+        <div>
+          <label for="cf-name" class="field-label"><span data-lang="ka" class="active">სახელი</span><span data-lang="en">Name</span><span data-lang="ru">Имя</span></label>
+          <input id="cf-name" name="name" class="field" type="text" autocomplete="name" required maxlength="80" aria-required="true">
+          <div class="form-error" data-error-for="cf-name"></div>
+        </div>
+        <div>
+          <label for="cf-phone" class="field-label"><span data-lang="ka" class="active">ტელეფონი</span><span data-lang="en">Phone</span><span data-lang="ru">Телефон</span></label>
+          <input id="cf-phone" name="phone" class="field" type="tel" autocomplete="tel" maxlength="40" placeholder="+995 ...">
+          <div class="form-error" data-error-for="cf-phone"></div>
+        </div>
+      </div>
+
+      <div>
+        <label for="cf-email" class="field-label"><span data-lang="ka" class="active">ელ-ფოსტა</span><span data-lang="en">Email</span><span data-lang="ru">Эл. почта</span></label>
+        <input id="cf-email" name="email" class="field" type="email" autocomplete="email" required maxlength="120" aria-required="true">
+        <div class="form-error" data-error-for="cf-email"></div>
+      </div>
+
+      <div>
+        <label for="cf-message" class="field-label"><span data-lang="ka" class="active">შეტყობინება</span><span data-lang="en">Message</span><span data-lang="ru">Сообщение</span></label>
+        <textarea id="cf-message" name="message" class="field" rows="6" required maxlength="2000" aria-required="true"></textarea>
+        <div class="form-error" data-error-for="cf-message"></div>
+      </div>
+
+      <div>
+        <button type="submit" class="submit-btn">
+          <span data-lang="ka" class="active">გაგზავნა</span><span data-lang="en">Send</span><span data-lang="ru">Отправить</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+
+      <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-social">
+    <!-- Facebook -->
+    <a href="https://facebook.com/mokri" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987H7.898V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+    </a>
+    <!-- Instagram -->
+    <a href="https://instagram.com/mokri" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.326 3.608 1.301.975.975 1.24 2.242 1.301 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.326 2.633-1.301 3.608-.975.975-2.242 1.24-3.608 1.301-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.326-3.608-1.301-.975-.975-1.24-2.242-1.301-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.326-2.633 1.301-3.608C4.509 2.489 5.776 2.225 7.142 2.163 8.408 2.105 8.788 2.163 12 2.163zm0-2.163C8.741 0 8.333.013 7.053.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.053.013 8.333 0 8.741 0 12c0 3.259.013 3.667.072 4.947.085 1.856.601 3.698 1.942 5.039 1.341 1.341 3.183 1.857 5.039 1.942C8.333 23.987 8.741 24 12 24s3.667-.013 4.947-.072c1.856-.085 3.698-.601 5.039-1.942 1.341-1.341 1.857-3.183 1.942-5.039.059-1.28.072-1.688.072-4.947 0-3.259-.013-3.667-.072-4.947-.085-1.856-.601-3.698-1.942-5.039C20.645.673 18.803.157 16.947.072 15.667.013 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
+    <!-- LinkedIn -->
+    <a href="https://linkedin.com/company/mokri" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <!-- Telegram -->
+    <a href="https://t.me/mokri" target="_blank" rel="noopener noreferrer" title="Telegram" aria-label="Telegram">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+    </a>
+    <!-- Signal -->
+    <a href="https://signal.me/#p/mokri" target="_blank" rel="noopener noreferrer" title="Signal" aria-label="Signal">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.001 0C5.373 0 0 5.372 0 12c0 2.114.554 4.1 1.524 5.827L.06 23.06l5.274-1.458A11.94 11.94 0 0012 24c6.628 0 12-5.373 12-12S18.629 0 12.001 0zm.065 3.77a8.29 8.29 0 014.24 1.163l.49.3-.306.488a6.793 6.793 0 011.035 3.664 6.851 6.851 0 01-6.85 6.851 6.793 6.793 0 01-3.54-.986l-.49-.3.306-.49A6.844 6.844 0 015.215 10.3a6.851 6.851 0 016.85-6.53zm0 1.5a5.352 5.352 0 00-5.35 5.03 5.289 5.289 0 00.9 3.022l-1.213 3.35 3.378-1.188A5.35 5.35 0 1012.066 5.27zm-2.94 2.02c.134 0 .269.003.396.008.16.006.337.015.506.41.2.464.638 1.558.694 1.671.057.112.095.244.019.394-.076.15-.114.244-.228.375-.114.13-.24.292-.343.393-.114.113-.232.235-.1.46.133.228.59.972 1.267 1.574.87.774 1.603 1.013 1.831 1.126.228.113.36.094.493-.057.133-.15.57-.664.722-.892.151-.228.303-.19.51-.113.208.076 1.32.623 1.547.736.228.113.38.17.437.265.057.094.057.54-.133 1.063-.19.522-.995.988-1.395 1.045-.38.053-.848.075-1.368-.086a12.61 12.61 0 01-1.238-.457c-2.18-.94-3.604-3.14-3.71-3.286-.108-.147-.881-1.172-.881-2.235 0-1.063.558-1.585.757-1.802.198-.218.434-.273.578-.273z"/></svg>
+    </a>
+    <!-- YouTube -->
+    <a href="https://youtube.com/@mokri" target="_blank" rel="noopener noreferrer" title="YouTube" aria-label="YouTube">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+    </a>
+  </div>
+</footer>
+
+<script>
+'use strict';
+var currentLang = 'ka';
+
+(function() {
+  var ALLOWED_LANGS = ['ka','en','ru'];
+
+  function safeGet(key) {
+    try { return localStorage.getItem(key); } catch(e) { return null; }
+  }
+  function safeSet(key, val) {
+    try { localStorage.setItem(key, val); } catch(e) {}
+  }
+
+  function setLang(lang) {
+    if (!ALLOWED_LANGS.includes(lang)) return;
+    currentLang = lang;
+    document.querySelectorAll('[data-lang]').forEach(function(el) {
+      el.classList.toggle('active', el.getAttribute('data-lang') === lang);
+    });
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+      var isActive = btn.getAttribute('data-lang-set') === lang;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+    document.documentElement.lang = lang;
+    safeSet('mokri-lang', lang);
+  }
+
+  var saved = safeGet('mokri-lang');
+  if (saved && ALLOWED_LANGS.includes(saved)) setLang(saved);
+
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-lang-set]');
+    if (!btn) return;
+    var lang = btn.getAttribute('data-lang-set');
+    if (ALLOWED_LANGS.includes(lang)) setLang(lang);
+  });
+
+  /* ——— Highlight active nav link ——— */
+  (function() {
+    var path = window.location.pathname.split('/').pop();
+    var page = (path || 'index').replace(/\.html?$/i, '') || 'index';
+    document.querySelectorAll('.header-nav-link[data-nav]').forEach(function(link) {
+      if (link.getAttribute('data-nav') === page) link.classList.add('active');
+    });
+  })();
+
+  /* ——— Mobile nav toggle ——— */
+  (function() {
+    var bar = document.getElementById('langBar');
+    var toggle = document.getElementById('navToggle');
+    var nav = document.getElementById('mainNav');
+    var backdrop = document.getElementById('navBackdrop');
+    if (!bar || !toggle || !nav) return;
+
+    function openNav() {
+      bar.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('nav-open');
+    }
+    function closeNav() {
+      bar.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('nav-open');
+    }
+    function isOpen() { return bar.classList.contains('is-open'); }
+
+    toggle.addEventListener('click', function() {
+      if (isOpen()) closeNav(); else openNav();
+    });
+    if (backdrop) backdrop.addEventListener('click', closeNav);
+    nav.addEventListener('click', function(e) {
+      if (e.target.closest('a')) closeNav();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && isOpen()) closeNav();
+    });
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        if (window.innerWidth > 900 && isOpen()) closeNav();
+      }, 100);
+    });
+  })();
+
+  /* ——— IntersectionObserver for card animations ——— */
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.contact-card').forEach(function(el) { obs.observe(el); });
+})();
+
+/* ——— CONTACT FORM ——— */
+// Replace YOUR_FORM_ID with the ID from your Formspree dashboard (https://formspree.io)
+const FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORM_ID';
+
+const TXT = {
+  required: { ka: 'ეს ველი სავალდებულოა', en: 'This field is required', ru: 'Это поле обязательно' },
+  emailBad: { ka: 'არასწორი ელ-ფოსტის ფორმატი', en: 'Invalid email format', ru: 'Неверный формат email' },
+  tooShort: { ka: 'ძალიან მოკლეა', en: 'Too short', ru: 'Слишком коротко' },
+  sending:  { ka: 'იგზავნება...', en: 'Sending...', ru: 'Отправка...' },
+  success:  { ka: 'მადლობა! თქვენი შეტყობინება გაიგზავნა.', en: 'Thanks! Your message has been sent.', ru: 'Спасибо! Ваше сообщение отправлено.' },
+  fail:     { ka: 'შეცდომა. სცადეთ ხელახლა ან დაგვიკავშირდით პირდაპირ.', en: 'Something went wrong. Please try again or contact us directly.', ru: 'Произошла ошибка. Попробуйте снова или свяжитесь с нами напрямую.' }
+};
+function t(key) { return TXT[key][currentLang] || TXT[key].en; }
+
+function showError(fieldId, msg) {
+  const f = document.getElementById(fieldId);
+  const e = document.querySelector(`[data-error-for="${fieldId}"]`);
+  if (f) f.classList.add('error');
+  if (e) { e.textContent = msg; e.classList.add('active'); }
+}
+function clearError(fieldId) {
+  const f = document.getElementById(fieldId);
+  const e = document.querySelector(`[data-error-for="${fieldId}"]`);
+  if (f) f.classList.remove('error');
+  if (e) { e.textContent = ''; e.classList.remove('active'); }
+}
+function clearAllErrors() { ['cf-name','cf-email','cf-phone','cf-message'].forEach(clearError); }
+
+document.getElementById('contactForm').addEventListener('submit', async function(ev) {
+  ev.preventDefault();
+  clearAllErrors();
+
+  const name    = document.getElementById('cf-name').value.trim();
+  const email   = document.getElementById('cf-email').value.trim();
+  const phone   = document.getElementById('cf-phone').value.trim();
+  const message = document.getElementById('cf-message').value.trim();
+
+  let ok = true;
+  if (name.length < 2) { showError('cf-name', t('required')); ok = false; }
+  if (!email)          { showError('cf-email', t('required')); ok = false; }
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('cf-email', t('emailBad')); ok = false; }
+  if (message.length < 10) { showError('cf-message', t('tooShort')); ok = false; }
+  if (!ok) return;
+
+  const btn    = this.querySelector('.submit-btn');
+  const status = document.getElementById('formStatus');
+  btn.disabled = true;
+  status.className = 'form-status active';
+  status.textContent = t('sending');
+
+  if (FORMSPREE_URL.includes('YOUR_FORM_ID')) {
+    status.className = 'form-status error-msg active';
+    status.textContent = t('fail');
+    btn.disabled = false;
+    console.error('Formspree form ID not configured. Replace YOUR_FORM_ID in contact.html with your actual form ID from https://formspree.io');
+    return;
+  }
+
+  try {
+    const res = await fetch(FORMSPREE_URL, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, phone, message })
+    });
+    if (res.ok) {
+      status.className = 'form-status success active';
+      status.textContent = t('success');
+      this.reset();
+    } else {
+      throw new Error(`Formspree submission failed with status ${res.status}`);
+    }
+  } catch (err) {
+    console.error('Form submission failed:', err);
+    status.className = 'form-status error-msg active';
+    status.textContent = t('fail');
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
