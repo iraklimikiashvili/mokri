@@ -98,8 +98,8 @@
   .header-nav-link:hover::after { transform: translateX(-50%) scaleX(1); }
   .header-nav-link.active { color:var(--blue); background:rgba(77,155,253,0.1); }
   .header-nav-link.shop-link {
-    color:var(--blue); border:1px solid rgba(77,155,253,0.35);
-    margin-left:8px; font-size:11.5px; letter-spacing:1px;
+    color:var(--blue); background:rgba(77,155,253,0.16); border:1px solid rgba(77,155,253,0.55);
+    margin-left:8px; font-size:11.5px; letter-spacing:1px; font-weight:700;
   }
   .header-nav-link.shop-link:hover { background:var(--blue); color:var(--bg); box-shadow:0 0 18px var(--blue-glow); }
   .header-nav-link.shop-link::after { display:none; }
@@ -454,48 +454,32 @@
     justify-content: center;
     z-index: 999;
     text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
+    background: rgba(26,59,108,0.55);
+    border: 1px solid rgba(77,155,253,0.3);
+    backdrop-filter: blur(8px) saturate(140%);
+    -webkit-backdrop-filter: blur(8px) saturate(140%);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+    color: var(--blue);
+    transition: transform 0.25s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
   }
-  .float-btn:hover { transform: scale(1.1); }
-  .float-btn svg { fill: white; }
+  .float-btn:hover { transform: scale(1.1); color: #FEFEFE; }
+  .float-btn svg { fill: currentColor; transition: fill 0.3s ease; }
 
-  .call-float {
-    bottom: 248px;
-    background: #FF9500;
-    box-shadow: 0 8px 32px rgba(255,149,0,0.4);
-  }
-  .call-float:hover { box-shadow: 0 8px 48px rgba(255,149,0,0.7); }
+  .call-float { bottom: 248px; }
+  .call-float:hover { background: #FF9500; border-color: #FF9500; box-shadow: 0 8px 32px rgba(255,149,0,0.55); }
   .call-float svg { width: 28px; height: 28px; }
 
-  .wa-float {
-    bottom: 176px;
-    background: #25d366;
-    box-shadow: 0 8px 32px rgba(37,211,102,0.4);
-    animation: waPulse 2.5s ease-in-out infinite;
-  }
-  .wa-float:hover { box-shadow: 0 8px 48px rgba(37,211,102,0.7); }
+  .wa-float { bottom: 176px; }
+  .wa-float:hover { background: #25d366; border-color: #25d366; box-shadow: 0 8px 32px rgba(37,211,102,0.55); }
   .wa-float svg { width: 30px; height: 30px; }
 
-  .msng-float {
-    bottom: 104px;
-    background: #0084FF;
-    box-shadow: 0 8px 32px rgba(0,132,255,0.4);
-  }
-  .msng-float:hover { box-shadow: 0 8px 48px rgba(0,132,255,0.7); }
+  .msng-float { bottom: 104px; }
+  .msng-float:hover { background: #0084FF; border-color: #0084FF; box-shadow: 0 8px 32px rgba(0,132,255,0.55); }
   .msng-float svg { width: 28px; height: 28px; }
 
-  .email-float {
-    bottom: 32px;
-    background: #4D9BFD;
-    box-shadow: 0 8px 32px rgba(77,155,253,0.4);
-  }
-  .email-float:hover { box-shadow: 0 8px 48px rgba(77,155,253,0.7); }
+  .email-float { bottom: 32px; }
+  .email-float:hover { background: #4D9BFD; border-color: #4D9BFD; box-shadow: 0 8px 32px rgba(77,155,253,0.55); }
   .email-float svg { width: 28px; height: 28px; }
-
-  @keyframes waPulse {
-    0%, 100% { box-shadow: 0 8px 32px rgba(37,211,102,0.4); }
-    50%      { box-shadow: 0 8px 48px rgba(37,211,102,0.7); }
-  }
 
   @media (max-width: 660px) {
     .float-btn { width: 50px; height: 50px; right: 16px; }
@@ -514,9 +498,6 @@
     .call-float { bottom: 168px; }
     .wa-float svg { width: 22px; height: 22px; }
     .msng-float svg, .email-float svg, .call-float svg { width: 20px; height: 20px; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .wa-float { animation: none; }
   }
 </style>
 <link rel="stylesheet" href="responsive.css">

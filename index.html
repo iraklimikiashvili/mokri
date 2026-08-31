@@ -171,9 +171,11 @@
 
   .header-nav-link.shop-link {
     color: var(--blue);
-    border: 1px solid rgba(77,155,253,0.35);
+    background: rgba(77,155,253,0.16);
+    border: 1px solid rgba(77,155,253,0.55);
     margin-left: 8px;
     font-size: 11.5px;
+    font-weight: 700;
     letter-spacing: 1px;
   }
   .header-nav-link.shop-link:hover {
@@ -338,8 +340,8 @@
   }
 
   .hero-logo svg {
-    width: clamp(96px, 12vw, 140px);
-    height: clamp(96px, 12vw, 140px);
+    width: clamp(78px, 9.8vw, 114px);
+    height: clamp(78px, 9.8vw, 114px);
     filter: drop-shadow(0 0 28px rgba(77,155,253,0.6)) drop-shadow(0 0 12px rgba(77,155,253,0.4));
     transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.45s ease;
     animation: heroLogoBreath 4s ease-in-out 2.5s infinite;
@@ -405,19 +407,21 @@
   .hero-brand span { color: var(--blue); }
 
   .hero-tagline {
-    font-size: clamp(11px, 1.6vw, 16px);
+    font-size: clamp(14px, 2.1vw, 20px);
     letter-spacing: clamp(1.5px, 0.3vw, 3px);
     color: var(--blue);
     text-transform: uppercase;
     font-family: 'Orbitron', sans-serif;
-    font-weight: 400;
+    font-weight: 700;
     margin-top: 10px;
     margin-bottom: 16px;
     padding: 0 8px;
+    text-shadow: 0 0 24px rgba(77,155,253,0.35);
   }
 
   .hero-desc {
-    font-size: clamp(13px, 1.6vw, 17px);
+    font-size: clamp(15px, 1.8vw, 19px);
+    font-weight: 500;
     color: var(--white-dim);
     max-width: 580px;
     margin: 0 auto 0;
@@ -435,7 +439,7 @@
     width: 100%;
     max-width: 1480px;
     margin: 0 auto;
-    padding: 14px 40px 18px;
+    padding: 48px 40px 18px;
     flex-shrink: 0;
   }
   .audiences-inner {
@@ -524,14 +528,31 @@
     letter-spacing: 0.2px;
     line-height: 1.25;
   }
-  .audience-text {
+  .audience-list {
+    list-style: none;
+    margin: 0 0 12px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    flex: 1;
+  }
+  .audience-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+  }
+  .audience-list li svg {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--blue);
+  }
+  .audience-list li span[data-lang] {
     font-family: 'Noto Sans Georgian', sans-serif;
     font-size: 12.5px;
     font-weight: 400;
-    line-height: 1.5;
-    color: rgba(254,254,254,0.72);
-    margin: 0 0 12px;
-    flex: 1;
+    line-height: 1.45;
+    color: rgba(254,254,254,0.78);
   }
   .audience-actions {
     display: flex;
@@ -575,7 +596,7 @@
     align-items: center;
     gap: 8px;
     padding: 9px 16px;
-    background: var(--blue);
+    background: #FF9500;
     color: var(--bg);
     font-family: 'Noto Sans Georgian', sans-serif;
     font-weight: 700;
@@ -583,12 +604,12 @@
     letter-spacing: 0.4px;
     text-decoration: none;
     border-radius: 6px;
-    border: 1px solid var(--blue);
+    border: 1px solid #FF9500;
     flex-shrink: 0;
     white-space: nowrap;
     overflow: hidden;
     isolation: isolate;
-    box-shadow: 0 0 0 0 rgba(77,155,253,0);
+    box-shadow: 0 0 0 0 rgba(255,149,0,0);
     transition: box-shadow 0.5s cubic-bezier(0.32, 0.72, 0, 1), transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .audience-cta::before {
@@ -606,7 +627,7 @@
     z-index: 1;
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .audience-cta:hover { box-shadow: 0 0 22px rgba(77,155,253,0.5), 0 0 0 3px rgba(77,155,253,0.12); }
+  .audience-cta:hover { box-shadow: 0 0 22px rgba(255,149,0,0.55), 0 0 0 3px rgba(255,149,0,0.14); }
   .audience-cta:hover::before { transform: translateX(110%); }
   .audience-cta:hover > svg { transform: rotate(-12deg) scale(1.08); }
   .audience-cta:active { transform: scale(0.96); }
@@ -724,12 +745,13 @@
 
   /* Stacked audiences on mobile */
   @media (max-width: 760px) {
-    .audiences { padding: 12px 20px 16px; }
+    .audiences { padding: 24px 20px 16px; }
     .audiences-inner { grid-template-columns: 1fr; gap: 12px; }
     .audience-card { padding: 16px 20px 14px; }
     .audience-card:nth-child(2) { transition-delay: 0.08s; }
     .audience-title { font-size: 16px; margin-bottom: 4px; }
-    .audience-text { font-size: 12px; margin-bottom: 10px; }
+    .audience-list { margin-bottom: 10px; gap: 6px; }
+    .audience-list li span[data-lang] { font-size: 12px; }
     .audience-actions { flex-wrap: wrap; gap: 10px; }
     .audience-cta { padding: 8px 14px; font-size: 12px; }
   }
@@ -746,9 +768,9 @@
     .hero { padding: 16px 32px; flex: 0 0 auto; }
     .hero-logo { margin-bottom: 14px; }
     .hero-tagline { margin-bottom: 12px; margin-top: 6px; }
-    .audiences { padding: 10px 32px 12px; }
+    .audiences { padding: 24px 32px 12px; }
     .audience-card { padding: 14px 22px 12px; }
-    .audience-text { margin-bottom: 10px; }
+    .audience-list { margin-bottom: 10px; }
   }
 
   /* Phone height handling */
@@ -761,7 +783,7 @@
       overflow-x: hidden;
     }
     .hero { padding: 32px 20px 24px; flex: 0 0 auto; }
-    .audiences { padding: 12px 16px 16px; }
+    .audiences { padding: 24px 16px 16px; }
   }
 
   /* Tiny phones */
@@ -785,48 +807,32 @@
     justify-content: center;
     z-index: 999;
     text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
+    background: rgba(26,59,108,0.55);
+    border: 1px solid rgba(77,155,253,0.3);
+    backdrop-filter: blur(8px) saturate(140%);
+    -webkit-backdrop-filter: blur(8px) saturate(140%);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+    color: var(--blue);
+    transition: transform 0.25s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
   }
-  .float-btn:hover { transform: scale(1.1); }
-  .float-btn svg { fill: white; }
+  .float-btn:hover { transform: scale(1.1); color: #FEFEFE; }
+  .float-btn svg { fill: currentColor; transition: fill 0.3s ease; }
 
-  .call-float {
-    bottom: 248px;
-    background: #FF9500;
-    box-shadow: 0 8px 32px rgba(255,149,0,0.4);
-  }
-  .call-float:hover { box-shadow: 0 8px 48px rgba(255,149,0,0.7); }
+  .call-float { bottom: 248px; }
+  .call-float:hover { background: #FF9500; border-color: #FF9500; box-shadow: 0 8px 32px rgba(255,149,0,0.55); }
   .call-float svg { width: 28px; height: 28px; }
 
-  .wa-float {
-    bottom: 176px;
-    background: #25d366;
-    box-shadow: 0 8px 32px rgba(37,211,102,0.4);
-    animation: waPulse 2.5s ease-in-out infinite;
-  }
-  .wa-float:hover { box-shadow: 0 8px 48px rgba(37,211,102,0.7); }
+  .wa-float { bottom: 176px; }
+  .wa-float:hover { background: #25d366; border-color: #25d366; box-shadow: 0 8px 32px rgba(37,211,102,0.55); }
   .wa-float svg { width: 30px; height: 30px; }
 
-  .msng-float {
-    bottom: 104px;
-    background: #0084FF;
-    box-shadow: 0 8px 32px rgba(0,132,255,0.4);
-  }
-  .msng-float:hover { box-shadow: 0 8px 48px rgba(0,132,255,0.7); }
+  .msng-float { bottom: 104px; }
+  .msng-float:hover { background: #0084FF; border-color: #0084FF; box-shadow: 0 8px 32px rgba(0,132,255,0.55); }
   .msng-float svg { width: 28px; height: 28px; }
 
-  .email-float {
-    bottom: 32px;
-    background: #4D9BFD;
-    box-shadow: 0 8px 32px rgba(77,155,253,0.4);
-  }
-  .email-float:hover { box-shadow: 0 8px 48px rgba(77,155,253,0.7); }
+  .email-float { bottom: 32px; }
+  .email-float:hover { background: #4D9BFD; border-color: #4D9BFD; box-shadow: 0 8px 32px rgba(77,155,253,0.55); }
   .email-float svg { width: 28px; height: 28px; }
-
-  @keyframes waPulse {
-    0%, 100% { box-shadow: 0 8px 32px rgba(37,211,102,0.4); }
-    50%      { box-shadow: 0 8px 48px rgba(37,211,102,0.7); }
-  }
 
   /* Smaller floating buttons on mobile to not block content */
   @media (max-width: 660px) {
@@ -846,10 +852,6 @@
     .call-float { bottom: 168px; }
     .wa-float svg { width: 22px; height: 22px; }
     .msng-float svg, .email-float svg, .call-float svg { width: 20px; height: 20px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .wa-float { animation: none; }
   }
 
   /* ——— SPLASH SCREEN ——— */
@@ -1324,11 +1326,26 @@
         <span data-lang="en">For Individuals</span>
         <span data-lang="ru">Для частных лиц</span>
       </h2>
-      <p class="audience-text">
-        <span data-lang="ka" class="active">გჭირდებათ ნებისმიერი სირთულის პროგრამის ინსტალაცია? შენელებული კომპიუტერის გაწმენდა და მაქსიმალური აჩქარება? პრინტერების, სკანერების და სხვა მოწყობილობების მიერთება? ჩვენ უსწრაფესად დაგეხმარებით!</span>
-        <span data-lang="en">Need to install software of any complexity? Clean up a slow computer for maximum speed? Connect printers, scanners and other devices? We'll help you in no time!</span>
-        <span data-lang="ru">Нужна установка программ любой сложности? Очистка тормозящего компьютера и максимальное ускорение? Подключение принтеров, сканеров и других устройств? Поможем максимально быстро!</span>
-      </p>
+      <ul class="audience-list">
+        <li>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg>
+          <span data-lang="ka" class="active">ნებისმიერი სირთულის პროგრამის ინსტალაცია</span>
+          <span data-lang="en">Installing software of any complexity</span>
+          <span data-lang="ru">Установка программ любой сложности</span>
+        </li>
+        <li>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg>
+          <span data-lang="ka" class="active">შენელებული კომპიუტერის გაწმენდა და აჩქარება</span>
+          <span data-lang="en">Cleaning up and speeding up a slow computer</span>
+          <span data-lang="ru">Очистка и ускорение медленного компьютера</span>
+        </li>
+        <li>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg>
+          <span data-lang="ka" class="active">პრინტერების, სკანერების და სხვა მოწყობილობების მიერთება</span>
+          <span data-lang="en">Connecting printers, scanners and other devices</span>
+          <span data-lang="ru">Подключение принтеров, сканеров и других устройств</span>
+        </li>
+      </ul>
       <div class="audience-actions">
         <a href="individuals.html" class="audience-link">
           <span data-lang="ka" class="active">გაიგე მეტი</span>
@@ -1358,11 +1375,26 @@
         <span data-lang="en">For Business</span>
         <span data-lang="ru">Для бизнеса</span>
       </h2>
-      <p class="audience-text">
-        <span data-lang="ka" class="active">გჭირდებათ კომპანიის IT ინფრასტრუქტურის შეუფერხებელი მუშაობა? სერვერების, ქსელისა და უსაფრთხოების სისტემების გამართვა? თანამშრომლებისთვის სწრაფი და მუდმივი ტექნიკური მხარდაჭერა? ვუზრუნველყოფთ თქვენი ბიზნესის ტექნოლოგიურ სიმშვიდეს!</span>
-        <span data-lang="en">Need uninterrupted IT infrastructure for your company? Configuration of servers, networks and security systems? Fast and continuous technical support for your employees? We ensure the technological peace of your business!</span>
-        <span data-lang="ru">Нужна бесперебойная работа IT-инфраструктуры компании? Настройка серверов, сети и систем безопасности? Быстрая и постоянная техническая поддержка сотрудников? Обеспечим технологическое спокойствие вашему бизнесу!</span>
-      </p>
+      <ul class="audience-list">
+        <li>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg>
+          <span data-lang="ka" class="active">სერვერების მხარდაჭერა და გამართვა</span>
+          <span data-lang="en">Server support and configuration</span>
+          <span data-lang="ru">Поддержка и настройка серверов</span>
+        </li>
+        <li>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg>
+          <span data-lang="ka" class="active">ქსელისა და უსაფრთხოების სისტემების მოწყობა</span>
+          <span data-lang="en">Network and security systems setup</span>
+          <span data-lang="ru">Настройка сети и систем безопасности</span>
+        </li>
+        <li>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg>
+          <span data-lang="ka" class="active">თანამშრომლებისთვის სწრაფი დისტანციური მხარდაჭერა</span>
+          <span data-lang="en">Fast remote support for your employees</span>
+          <span data-lang="ru">Быстрая удалённая поддержка сотрудников</span>
+        </li>
+      </ul>
       <div class="audience-actions">
         <a href="business.html" class="audience-link">
           <span data-lang="ka" class="active">გაიგე მეტი</span>
