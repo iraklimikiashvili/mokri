@@ -242,9 +242,15 @@
     position:relative;
     font-family:'Orbitron',sans-serif; font-weight:900;
     font-size: clamp(22px, 3.5vw, 42px);
-    letter-spacing:2px; line-height:1.1;
-    margin-bottom:28px;
+    letter-spacing:2.4px; line-height:1.08;
+    margin: 0;
+    text-align:center;
     text-shadow: 0 0 24px rgba(77,155,253,0.16), 0 10px 30px rgba(0,0,0,0.35);
+    display:block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 12px;
   }
   .hero-title > span { color:var(--white); }
   .hero-title > span > span { color:var(--blue); text-shadow: 0 0 14px rgba(77,155,253,0.45); }
@@ -316,14 +322,51 @@
   .section-eyebrow::after  { content:''; width:32px; height:1px; background:var(--blue); }
 
   .section-title {
+    position:relative;
     font-family:'Orbitron',sans-serif; font-weight:900;
-    font-size:clamp(20px, 2.8vw, 32px); letter-spacing:2px;
-    margin-bottom:52px; line-height:1.2;
+    font-size:clamp(20px, 2.8vw, 32px); letter-spacing:2.2px;
+    margin: 0; line-height:1.2;
     text-align:center;
+    text-transform:none;
     text-shadow: 0 0 20px rgba(77,155,253,0.14), 0 8px 24px rgba(0,0,0,0.3);
+    display:block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 16px;
   }
   .section-title > span { color:var(--white); }
   .section-title > span > span { color:var(--blue); text-shadow: 0 0 12px rgba(77,155,253,0.4); }
+
+  /* Section divider — line · dot · line (same style as splash) */
+  .section-title-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    margin-bottom: 52px;
+  }
+  .section-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: 100%;
+    max-width: 880px;
+  }
+  .section-divider-line {
+    flex: 1;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(77,155,253,0.55), transparent);
+  }
+  .section-divider-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 14px rgba(77,155,253,0.95);
+    flex-shrink: 0;
+  }
 
   .services-grid {
     display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;
@@ -599,16 +642,13 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-glow"></div>
-  <div class="hero-eyebrow">
-    <span data-lang="ka" class="active">იურიდიული პირები</span>
-    <span data-lang="en">Business IT Services</span>
-    <span data-lang="ru">IT для бизнеса</span>
+  <div class="section-title-wrap">
+    <h1 class="hero-title">
+      <span data-lang="ka" class="active">IT ინფრასტრუქტურა<br>თქვენი <span>ბიზნესისთვის</span></span>
+      <span data-lang="en">IT Infrastructure<br>for Your <span>Business</span></span>
+      <span data-lang="ru">IT-инфраструктура<br>для вашего <span>бизнеса</span></span>
+    </h1>
   </div>
-  <h1 class="hero-title">
-    <span data-lang="ka" class="active">IT ინფრასტრუქტურა<br>თქვენი <span>ბიზნესისთვის</span></span>
-    <span data-lang="en">IT Infrastructure<br>for Your <span>Business</span></span>
-    <span data-lang="ru">IT-инфраструктура<br>для вашего <span>бизнеса</span></span>
-  </h1>
   <p class="hero-desc">
     <span data-lang="ka" class="active">სერვერები, ქსელები, კამერები, კიბერუსაფრთხოება, Cloud-მიგრაცია — ყველაფერი რაც SMB ბიზნესს სჭირდება, ერთი სანდო პარტნიორისგან. ჩვენ ვართ თქვენი IT დეპარტამენტი.</span>
     <span data-lang="en">Servers, networking, CCTV, cybersecurity, cloud migration — everything your SMB needs from one trusted partner. We are your IT department.</span>
@@ -631,8 +671,19 @@
 
 <!-- SERVICES -->
 <section class="services">
-  <div class="section-eyebrow"><span data-lang="ka" class="active">ბიზნეს სერვისები</span><span data-lang="en">Business Services</span><span data-lang="ru">Бизнес-услуги</span></div>
-  <h2 class="section-title"><span data-lang="ka" class="active">სრული IT <span>ინფრასტრუქტურა</span></span><span data-lang="en">Complete IT <span>Infrastructure</span></span><span data-lang="ru">Полная IT <span>инфраструктура</span></span></h2>
+  <div class="section-title-wrap">
+    <div class="section-divider" aria-hidden="true">
+      <span class="section-divider-line"></span>
+      <span class="section-divider-dot"></span>
+      <span class="section-divider-line"></span>
+    </div>
+    <h2 class="section-title"><span data-lang="ka" class="active">სრული IT <span>ინფრასტრუქტურა</span></span><span data-lang="en">Complete IT <span>Infrastructure</span></span><span data-lang="ru">Полная IT <span>инфраструктура</span></span></h2>
+    <div class="section-divider" aria-hidden="true">
+      <span class="section-divider-line"></span>
+      <span class="section-divider-dot"></span>
+      <span class="section-divider-line"></span>
+    </div>
+  </div>
   <div class="services-grid">
 
     <div class="svc-card">
@@ -676,8 +727,19 @@
 
 <!-- WHY US -->
 <section class="why">
-  <div class="section-eyebrow"><span data-lang="ka" class="active">რატომ ჩვენ</span><span data-lang="en">Why Choose Us</span><span data-lang="ru">Почему мы</span></div>
-  <h2 class="section-title"><span data-lang="ka" class="active">რა გამოგვარჩევს <span>სხვებისგან</span></span><span data-lang="en">What Sets Us <span>Apart</span></span><span data-lang="ru">Что нас <span>отличает</span></span></h2>
+  <div class="section-title-wrap">
+    <div class="section-divider" aria-hidden="true">
+      <span class="section-divider-line"></span>
+      <span class="section-divider-dot"></span>
+      <span class="section-divider-line"></span>
+    </div>
+    <h2 class="section-title"><span data-lang="ka" class="active">რა გამოგვარჩევს <span>სხვებისგან</span></span><span data-lang="en">What Sets Us <span>Apart</span></span><span data-lang="ru">Что нас <span>отличает</span></span></h2>
+    <div class="section-divider" aria-hidden="true">
+      <span class="section-divider-line"></span>
+      <span class="section-divider-dot"></span>
+      <span class="section-divider-line"></span>
+    </div>
+  </div>
   <div class="why-grid">
     <div class="why-item">
       <div class="why-num">01</div>
