@@ -240,9 +240,15 @@
     position:relative;
     font-family:'Orbitron',sans-serif; font-weight:900;
     font-size: clamp(22px, 3.5vw, 42px);
-    letter-spacing:2px; line-height:1.1;
-    margin-bottom:28px;
+    letter-spacing:2.4px; line-height:1.08;
+    margin: 0;
+    text-align:center;
     text-shadow: 0 0 24px rgba(77,155,253,0.16), 0 10px 30px rgba(0,0,0,0.35);
+    display:block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 12px;
   }
   .hero-title > span { color:var(--white); }
   .hero-title > span > span { color:var(--blue); text-shadow: 0 0 14px rgba(77,155,253,0.45); }
@@ -267,14 +273,51 @@
   .section-eyebrow::after  { content:''; width:32px; height:1px; background:var(--blue); }
 
   .section-title {
+    position:relative;
     font-family:'Orbitron',sans-serif; font-weight:900;
-    font-size:clamp(20px, 2.8vw, 32px); letter-spacing:2px;
-    margin-bottom:48px; line-height:1.2;
+    font-size:clamp(20px, 2.8vw, 32px); letter-spacing:2.2px;
+    margin: 0; line-height:1.2;
     text-align:center;
+    text-transform:none;
     text-shadow: 0 0 20px rgba(77,155,253,0.14), 0 8px 24px rgba(0,0,0,0.3);
+    display:block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 16px;
   }
   .section-title > span { color:var(--white); }
   .section-title > span > span { color:var(--blue); text-shadow: 0 0 12px rgba(77,155,253,0.4); }
+
+  /* Section divider — line · dot · line (same style as splash) */
+  .section-title-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    margin-bottom: 52px;
+  }
+  .section-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: 100%;
+    max-width: 880px;
+  }
+  .section-divider-line {
+    flex: 1;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(77,155,253,0.55), transparent);
+  }
+  .section-divider-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 14px rgba(77,155,253,0.95);
+    flex-shrink: 0;
+  }
 
   /* ——— CONTACT METHODS ——— */
   .contacts { position:relative; z-index:1; background:var(--bg2); padding:80px 80px; text-align:center; }
@@ -528,12 +571,13 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-glow"></div>
-  <div class="hero-eyebrow"><span data-lang="ka" class="active">კონტაქტი</span><span data-lang="en">Contact</span><span data-lang="ru">Контакты</span></div>
-  <h1 class="hero-title">
-    <span data-lang="ka" class="active">დაგვიკავშირდით <span style="color:var(--blue)">დღესვე</span></span>
-    <span data-lang="en">Get in <span style="color:var(--blue)">Touch</span></span>
-    <span data-lang="ru">Свяжитесь <span style="color:var(--blue)">с Нами</span></span>
-  </h1>
+  <div class="section-title-wrap">
+    <h1 class="hero-title">
+      <span data-lang="ka" class="active">დაგვიკავშირდით <span style="color:var(--blue)">დღესვე</span></span>
+      <span data-lang="en">Get in <span style="color:var(--blue)">Touch</span></span>
+      <span data-lang="ru">Свяжитесь <span style="color:var(--blue)">с Нами</span></span>
+    </h1>
+  </div>
   <p class="hero-desc">
     <span data-lang="ka" class="active">ნებისმიერი IT საკითხის შესახებ — მოგვწერეთ, დაგვირეკეთ ან მოგვადექით WhatsApp-ზე. ≤30 წუთში გიპასუხებთ სამუშაო საათებში.</span>
     <span data-lang="en">For any IT question — message us, call us, or reach out on WhatsApp. We respond in ≤30 minutes during business hours.</span>
@@ -543,12 +587,23 @@
 
 <!-- CONTACT METHODS -->
 <section class="contacts">
-  <div class="section-eyebrow"><span data-lang="ka" class="active">კავშირის მეთოდები</span><span data-lang="en">Reach Us</span><span data-lang="ru">Способы связи</span></div>
-  <h2 class="section-title">
-    <span data-lang="ka" class="active">აირჩიეთ <span>თქვენთვის მოსახერხებელი</span></span>
-    <span data-lang="en">Choose What <span>Works for You</span></span>
-    <span data-lang="ru">Выберите <span>удобный способ</span></span>
-  </h2>
+  <div class="section-title-wrap">
+    <div class="section-divider" aria-hidden="true">
+      <span class="section-divider-line"></span>
+      <span class="section-divider-dot"></span>
+      <span class="section-divider-line"></span>
+    </div>
+    <h2 class="section-title">
+      <span data-lang="ka" class="active">აირჩიეთ <span>თქვენთვის მოსახერხებელი</span></span>
+      <span data-lang="en">Choose What <span>Works for You</span></span>
+      <span data-lang="ru">Выберите <span>удобный способ</span></span>
+    </h2>
+    <div class="section-divider" aria-hidden="true">
+      <span class="section-divider-line"></span>
+      <span class="section-divider-dot"></span>
+      <span class="section-divider-line"></span>
+    </div>
+  </div>
 
   <div class="contacts-grid">
     <!-- Phone -->
@@ -621,12 +676,23 @@
 <!-- CONTACT FORM -->
 <section class="form-section">
   <div class="form-wrap">
-    <div class="section-eyebrow"><span data-lang="ka" class="active">საკონტაქტო ფორმა</span><span data-lang="en">Contact Form</span><span data-lang="ru">Форма обратной связи</span></div>
-    <h2 class="section-title">
-      <span data-lang="ka" class="active">დაგვიწერეთ <span>შეტყობინება</span></span>
-      <span data-lang="en">Send Us a <span>Message</span></span>
-      <span data-lang="ru">Напишите <span>нам</span></span>
-    </h2>
+    <div class="section-title-wrap">
+      <div class="section-divider" aria-hidden="true">
+        <span class="section-divider-line"></span>
+        <span class="section-divider-dot"></span>
+        <span class="section-divider-line"></span>
+      </div>
+      <h2 class="section-title">
+        <span data-lang="ka" class="active">დაგვიწერეთ <span>შეტყობინება</span></span>
+        <span data-lang="en">Send Us a <span>Message</span></span>
+        <span data-lang="ru">Напишите <span>нам</span></span>
+      </h2>
+      <div class="section-divider" aria-hidden="true">
+        <span class="section-divider-line"></span>
+        <span class="section-divider-dot"></span>
+        <span class="section-divider-line"></span>
+      </div>
+    </div>
 
     <form id="contactForm" class="form-grid" novalidate>
       <div class="form-row">
